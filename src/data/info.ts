@@ -1,20 +1,20 @@
 export default {
-  title: "idealclover",
-  desc: "Stay simple, stay naive.",
+  title: "西瓜",
+  desc: "Stay Hungry. Stay Foolish.",
   imgUrl: "https://cdn.idealclover.cn/Projects/homepage/icon.png",
   location: "Beijing, China",
   titleCard: {
-    title: "翠翠 @idealclover",
-    desc: "产品经理/独立开发者/个人博主",
-    subdesc: "南京大学20届本科 & 清华大学MBA在读",
+    title: "西瓜 @shenwan",
+    desc: "PMP项目经理/全栈开发/个人博主",
+    subdesc: "南昌大学 本科 ",
     url: "https://idealclover.top/about.html",
     bgStyle:
       "bg-primary shadow-accent hover:bg-primary-focus hover:shadow-gray-500",
     btnText: "关于我 · 了解更多",
   },
   cvTitleCard: {
-    title: "翠翠 @idealclover",
-    desc: "Project Manager @Bytedance\n产品经理/独立开发者/个人博主/Vocaloid",
+    title: "西瓜 @shenwan",
+    desc: "PMP项目经理/全栈开发/个人博主",
     url: "https://idealclover.top/about.html",
     bgStyle:
       "bg-primary shadow-accent hover:bg-primary-focus hover:shadow-gray-500 whitespace-pre-line",

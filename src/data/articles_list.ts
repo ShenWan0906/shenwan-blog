@@ -1,6 +1,6 @@
 export default [
   {
-    title: "最新",
+    title: "思考",
     url: "https://idealclover.top/articles.html",
     articles: [
       {
@@ -31,7 +31,7 @@ export default [
     ],
   },
   {
-    title: "技术",
+    title: "简历",
     url: "https://idealclover.top/category/blog",
     articles: [
       {
@@ -62,7 +62,7 @@ export default [
     ],
   },
   {
-    title: "生活",
+    title: "面试",
     url: "https://idealclover.top/category/life",
     articles: [
       {
@@ -93,7 +93,7 @@ export default [
     ],
   },
   {
-    title: "随想",
+    title: "试用期",
     url: "https://idealclover.top/category/thinking",
     articles: [
       {
@@ -125,7 +125,7 @@ export default [
   },
 
   {
-    title: "测评",
+    title: "敏捷",
     url: "https://idealclover.top/category/testing",
     articles: [
       {
