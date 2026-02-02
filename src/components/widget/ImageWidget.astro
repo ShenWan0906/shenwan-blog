@@ -1,0 +1,19 @@
+---
+interface Props {
+    title: string;     // 标题
+    image: string;     // 图片路径
+    class?: string;    // 接收 SideBar 传来的样式
+    style?: string;    // 接收 SideBar 传来的动画延迟
+}
+
+const { title, image, style } = Astro.props;
+const className = Astro.props.class;
+---
+
+<div class:list={["card-base p-4 flex flex-col items-center gap-3 mb-4", className]} style={style}>
+    <div class="font-bold text-lg text-neutral-900 dark:text-neutral-100 self-start">
+        {title}
+    </div>
+    
+    <img src={image} alt={title} class="w-full h-auto rounded-lg" />
+</div>
