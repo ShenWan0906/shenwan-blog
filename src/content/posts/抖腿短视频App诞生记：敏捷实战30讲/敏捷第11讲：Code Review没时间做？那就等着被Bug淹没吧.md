@@ -1,7 +1,7 @@
 ---
 title: "敏捷第11讲：Code Review没时间做？那就等着被Bug淹没吧"
 published: 2025-07-20
-description: "敏捷第11讲：Code Review没时间做？那就等着被Bug淹没吧"
+description: "如何在不增加项目时长的前提下，将Code Review机制植入到开发流程中，让团队从“事后救火”转变为“事前预防”？"
 image: ""
 tags: [敏捷]
 category: "敏捷实战30讲"

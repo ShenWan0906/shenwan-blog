@@ -45,8 +45,18 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{
-			name: "GitHub",
-			url: "https://github.com/ShenWan0906/shenwan-blog", // Internal links should not include the base path, as it is automatically added
+			name: "Github",
+			url: "https://github.com/ShenWan0906/shenwan-blog", 
+			external: true, 
+		},
+		{
+			name: "CSDN",
+			url: "https://blog.csdn.net/qq_41055565", 
+			external: true, 
+		},
+		{
+			name: "稀土掘金",
+			url: "https://juejin.cn/user/3122268756257768", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},
 	],
@@ -58,21 +68,29 @@ export const profileConfig: ProfileConfig = {
 	bio: "PM项目经理 | 全栈开发 | 个人博主 ",
 	links: [
 		{
-			name: "Twitter",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://twitter.com",
+			name: "bilibili",
+			icon: "fa6-brands:bilibili",
+			url: "https://space.bilibili.com/126110059",
 		},
 		{
-			name: "Steam",
+			name: "qq",
+			icon: "fa6-brands:qq",
+			url: "tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1127763116&website=www.oicqzone.com",
+		},
+		{
+			name: "envelope",
+			icon: "fa6-solid:envelope", 
+			url: "mailto:1127763116@qq.com",
+		},
+		{
+			name: "zhihu",
+			icon: "fa6-brands:zhihu",
+			url: "https://www.zhihu.com/people/xi-xiu-qiang-wei-91-91",
+		},
+		{
+			name: "steam",
 			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
-		},
-		{
-			name: "GitHub",
-			icon: "fa6-brands:github",
-			url: "https://github.com/saicaca/fuwari",
+			url: "https://store.steampowered.com/search/?developer=ShenWan0906",
 		},
 	],
 };
