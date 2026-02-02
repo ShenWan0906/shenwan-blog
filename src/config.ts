@@ -68,11 +68,6 @@ export const profileConfig: ProfileConfig = {
 	bio: "PM项目经理 | 全栈开发 | 个人博主 ",
 	links: [
 		{
-			name: "bilibili",
-			icon: "fa6-brands:bilibili",
-			url: "https://space.bilibili.com/126110059",
-		},
-		{
 			name: "qq",
 			icon: "fa6-brands:qq",
 			url: "tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1127763116&website=www.oicqzone.com",
@@ -92,6 +87,11 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-brands:steam",
 			url: "https://store.steampowered.com/search/?developer=ShenWan0906",
 		},
+		{
+			name: "bilibili",
+			icon: "fa6-brands:bilibili",
+			url: "https://space.bilibili.com/126110059",
+		}
 	],
 };
 
