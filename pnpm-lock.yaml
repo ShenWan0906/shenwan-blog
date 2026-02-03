@@ -147,6 +147,15 @@ importers:
       '@biomejs/biome':
         specifier: 2.2.5
         version: 2.2.5
+      '@iconify-json/ri':
+        specifier: ^1.2.9
+        version: 1.2.9
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.69
+        version: 1.2.69
+      '@iconify/tailwind':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@rollup/plugin-yaml':
         specifier: ^4.1.2
         version: 4.1.2(rollup@2.79.2)
@@ -1097,10 +1106,19 @@ packages:
   '@iconify-json/material-symbols@1.2.53':
     resolution: {integrity: sha512-2jXBKFdNzL9zy6chnJqubykL9WZno7rEP6/isSzpp6fKJJMXXhRtVkaGw1Clle0RlXGWzVkd/eiYUH8f9/ILrQ==}
 
+  '@iconify-json/ri@1.2.9':
+    resolution: {integrity: sha512-r9z/Lh0f0At6O6AwO/fpmRAa8jHoL/wSqA188ognPL1whFIBXXbrp1IR4m6OcuPwa41jJdzjCNxLbg7uOt7kYg==}
+
+  '@iconify-json/simple-icons@1.2.69':
+    resolution: {integrity: sha512-T/rhy5n7pzE0ZOxQVlF68SNPCYYjRBpddjgjrJO5WWVRG8es5BQmvxIE9kKF+t2hhPGvuGQFpXmUyqbOtnxirQ==}
+
   '@iconify/svelte@4.2.0':
     resolution: {integrity: sha512-fEl0T7SAPonK7xk6xUlRPDmFDZVDe2Z7ZstlqeDS/sS8ve2uyU+Qa8rTWbIqzZJlRvONkK5kVXiUf9nIc+6OOQ==}
     peerDependencies:
       svelte: '>4.0.0'
+
+  '@iconify/tailwind@1.2.0':
+    resolution: {integrity: sha512-KgpIHWOTcRYw1XcoUqyNSrmYyfLLqZYu3AmP8zdfLk0F5TqRO8YerhlvlQmGfn7rJXgPeZN569xPAJnJ53zZxA==}
 
   '@iconify/tools@4.2.0':
     resolution: {integrity: sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA==}
@@ -6068,10 +6086,22 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/ri@1.2.9':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/simple-icons@1.2.69':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify/svelte@4.2.0(svelte@5.49.1)':
     dependencies:
       '@iconify/types': 2.0.0
       svelte: 5.49.1
+
+  '@iconify/tailwind@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/tools@4.2.0':
     dependencies:

@@ -3,52 +3,54 @@ name: Deploy to Aliyun/Tencent Server
 on:
   push:
     branches:
-      - main  # 监听 main 分支的提交，一旦提交就触发
+      - main # 监听 main 分支的提交，一旦提交就触发
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 使用 GitHub 提供的虚拟环境
 
     steps:
-    # 1. 拉取代码
-    - name: Checkout
-      uses: actions/checkout@v4
+      # 1. 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    # 2. 安装 Node.js 和 pnpm
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    
-    - name: Install pnpm
-      uses: pnpm/action-setup@v3
-      with:
-        version: 9
+      # 2. 安装 Node.js 和 pnpm
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    # 3. 安装依赖并构建
-    - name: Install Dependencies
-      run: pnpm install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
-    - name: Build
-      run: pnpm build
+      # 3. 安装依赖并构建
+      - name: Install Dependencies
+        run: pnpm install
 
-    # 4. 把 dist 目录推送到服务器 (使用 rsync)
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        ARGS: "-avzr --delete"
-        SOURCE: "dist/"
-        REMOTE_HOST: ${{ secrets.SERVER_IP }}
-        REMOTE_USER: ${{ secrets.SERVER_USER }}
-        # 👇 这里修改为你服务器上 Nginx 的网站目录
-        TARGET: "/www/shenwan-blog/" 
-        
-    # 5. (可选) 如果需要重启 Nginx，可以加这一步
-    # - name: Reload Nginx
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     host: ${{ secrets.SERVER_IP }}
-    #     username: ${{ secrets.SERVER_USER }}
-    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     script: nginx -s reload
+      - name: Build
+        run: pnpm build
+
+      - name: Build
+        run: |
+          pnpm build
+          if [ -d "dist/_pagefind" ]; then
+            echo "搜索索引已生成"
+            ls -F dist/_pagefind
+          else
+            echo "警告：未找到 _pagefind 文件夹，搜索功能将失效！"
+            exit 1
+          fi
+
+      # 4. 把 dist 目录推送到服务器 (使用 rsync)
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-avzr --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          # 👇 这里修改为你服务器上 Nginx 的网站目录
+          TARGET: "/www/shenwan-blog/"
