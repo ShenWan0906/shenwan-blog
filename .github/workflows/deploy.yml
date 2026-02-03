@@ -3,11 +3,11 @@ name: Deploy to Aliyun/Tencent Server
 on:
   push:
     branches:
-      - main # 监听 main 分支的提交，一旦提交就触发
+      - main # 监听 main 分支的提交
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest # 使用 GitHub 提供的虚拟环境
+    runs-on: ubuntu-latest
 
     steps:
       # 1. 拉取代码
@@ -25,32 +25,36 @@ jobs:
         with:
           version: 9
 
-      # 3. 安装依赖并构建
+      # 3. 安装依赖
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
-
-      - name: Build
+      # 4. 执行构建并校验搜索索引
+      # 这里将构建和检查合并，确保流程逻辑清晰
+      - name: Build and Verify Search Index
         run: |
+          # 执行 package.json 中的 build 脚本
           pnpm build
+
+          echo "------ 检查 dist 目录结构 ------"
+          ls -F dist/
+
+          # 校验 pagefind 文件夹是否存在
           if [ -d "dist/_pagefind" ]; then
-            echo "搜索索引已生成"
-            ls -F dist/_pagefind
+            echo "搜索索引已成功生成至 dist/_pagefind"
           else
-            echo "警告：未找到 _pagefind 文件夹，搜索功能将失效！"
+            echo "错误：未找到 dist/_pagefind 文件夹！"
+            echo "提示：请确保 package.json 中的 build 命令包含 --output-subdir _pagefind"
             exit 1
           fi
 
-      # 4. 把 dist 目录推送到服务器 (使用 rsync)
+      # 5. 使用 rsync 将构建结果推送到服务器
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avzr --delete"
-          SOURCE: "dist/"
+          ARGS: "-avzr --delete" # --delete 会删除服务器上多余的文件，保持同步
+          SOURCE: "dist/" # 注意末尾的斜杠，表示同步文件夹内的内容
           REMOTE_HOST: ${{ secrets.SERVER_IP }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
-          # 👇 这里修改为你服务器上 Nginx 的网站目录
-          TARGET: "/www/shenwan-blog/"
+          TARGET: "/www/shenwan-blog/" # 确保这里与 Nginx 配置中的 root 路径一致
