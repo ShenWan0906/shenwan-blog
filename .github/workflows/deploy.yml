@@ -30,21 +30,20 @@ jobs:
         run: pnpm install
 
       # 4. 执行构建并校验搜索索引
-      # 这里将构建和检查合并，确保流程逻辑清晰
       - name: Build and Verify Search Index
         run: |
-          # 执行 package.json 中的 build 脚本
+          # 1. 执行构建命令（已修改为输出至 pagefind 目录）
           pnpm build
 
           echo "------ 检查 dist 目录结构 ------"
           ls -F dist/
 
-          # 校验 pagefind 文件夹是否存在
-          if [ -d "dist/_pagefind" ]; then
-            echo "搜索索引已成功生成至 dist/_pagefind"
+          # 2. 校验 pagefind 文件夹是否存在（注意：这里已去掉了下划线）
+          if [ -d "dist/pagefind" ]; then
+            echo "搜索索引已成功生成至 dist/pagefind"
           else
-            echo "错误：未找到 dist/_pagefind 文件夹！"
-            echo "提示：请确保 package.json 中的 build 命令包含 --output-subdir _pagefind"
+            echo "错误：未找到 dist/pagefind 文件夹！"
+            echo "提示：请检查本地 pnpm build 是否能正常生成该目录。"
             exit 1
           fi
 
@@ -53,8 +52,8 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avzr --delete" # --delete 会删除服务器上多余的文件，保持同步
-          SOURCE: "dist/" # 注意末尾的斜杠，表示同步文件夹内的内容
+          ARGS: "-avzr --delete"
+          SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.SERVER_IP }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
-          TARGET: "/www/shenwan-blog/" # 确保这里与 Nginx 配置中的 root 路径一致
+          TARGET: "/www/shenwan-blog/"
