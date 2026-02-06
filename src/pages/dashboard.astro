@@ -1,0 +1,439 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title="仪表盘" description="系统运行状态监控">
+  <div
+    class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+  >
+    <div class="card-base z-10 px-6 py-6 relative w-full flex flex-col gap-5">
+      <div
+        class="relative w-full rounded-2xl p-6 overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 group flex flex-col justify-between min-h-[160px]"
+      >
+        <div
+          class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:scale-150 transition-transform duration-700"
+        >
+        </div>
+
+        <div
+          class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6"
+        >
+          <div class="flex items-start gap-3">
+            <div class="p-2 bg-white/20 rounded-lg backdrop-blur-sm mt-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"
+                ></path>
+                <path
+                  d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"
+                ></path>
+                <path d="M9.7 17l4.6 0"></path>
+              </svg>
+            </div>
+
+            <div class="flex flex-col">
+              <h1
+                class="text-2xl md:text-3xl font-bold tracking-tight leading-none"
+              >
+                站点运行监控
+              </h1>
+              <div class="text-xs opacity-70 font-mono mt-1.5 tracking-wider">
+                SYSTEM MONITOR v1.0
+              </div>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <div
+              id="clock"
+              class="text-3xl md:text-4xl font-mono font-bold tracking-widest text-white drop-shadow-md"
+            >
+              00:00:00
+            </div>
+            <div
+              id="date"
+              class="text-xs opacity-80 uppercase tracking-widest mt-1"
+            >
+              LOADING DATE
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="relative z-10 bg-white/10 border border-white/20 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 animate-fade-up"
+        >
+          <div
+            class="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center animate-pulse"
+          >
+            ❤️
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="text-[10px] opacity-60 uppercase tracking-wider leading-none mb-1"
+              >Current Status</span
+            >
+            <div
+              id="greeting"
+              class="text-sm md:text-base font-medium tracking-wide leading-none"
+            >
+              正在连接系统...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          class="bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 p-4 rounded-2xl flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform cursor-default relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-4 -top-4 text-9xl opacity-[0.05] text-red-600 rotate-12"
+          >
+            eye
+          </div>
+          <div
+            class="text-red-600 dark:text-red-400 font-bold text-sm uppercase tracking-wider flex items-center gap-2"
+          >
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> 总访问量
+            (PV)
+          </div>
+          <div
+            class="text-3xl font-mono font-bold text-gray-800 dark:text-gray-100 mt-2"
+          >
+            <span id="busuanzi_value_site_pv">--</span>
+          </div>
+          <div class="text-xs text-red-500/60 font-medium mt-auto">
+            持续增长中 ↗
+          </div>
+        </div>
+
+        <div
+          class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900/30 p-4 rounded-2xl flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform cursor-default relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-4 -top-4 text-9xl opacity-[0.05] text-emerald-600 rotate-12"
+          >
+            user
+          </div>
+          <div
+            class="text-emerald-600 dark:text-emerald-400 font-bold text-sm uppercase tracking-wider flex items-center gap-2"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+            ></span> 总访客数 (UV)
+          </div>
+          <div
+            class="text-3xl font-mono font-bold text-gray-800 dark:text-gray-100 mt-2"
+          >
+            <span id="busuanzi_value_site_uv">--</span>
+          </div>
+          <div class="text-xs text-emerald-500/60 font-medium mt-auto">
+            独立 IP 统计
+          </div>
+        </div>
+
+        <div
+          class="bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-900/30 p-4 rounded-2xl flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform cursor-default relative overflow-hidden"
+        >
+          <div
+            class="text-violet-600 dark:text-violet-400 font-bold text-sm uppercase tracking-wider"
+          >
+            🚀 安全运行
+          </div>
+          <div class="flex items-baseline gap-1 mt-2">
+            <span
+              id="run-days"
+              class="text-3xl font-mono font-bold text-gray-800 dark:text-gray-100"
+              >0</span
+            >
+            <span class="text-sm text-gray-500">天</span>
+          </div>
+          <div
+            class="text-xs text-violet-500/60 font-medium mt-auto text-nowrap"
+            id="start-date-display"
+          >
+            Since 2023
+          </div>
+        </div>
+
+        <div
+          class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/30 p-4 rounded-2xl flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform cursor-default"
+        >
+          <div
+            class="text-blue-600 dark:text-blue-400 font-bold text-sm uppercase tracking-wider"
+          >
+            您的设备
+          </div>
+          <div class="flex flex-col gap-1 mt-1">
+            <span
+              id="user-os"
+              class="text-sm font-bold text-gray-700 dark:text-gray-200"
+              >Detecting...</span
+            >
+            <span id="user-browser" class="text-xs text-gray-500">...</span>
+            <span id="user-screen" class="text-xs text-gray-400 font-mono"
+              >...</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-80">
+        <div
+          class="md:col-span-2 bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl p-4 flex flex-col"
+        >
+          <div class="flex justify-between items-center mb-2">
+            <h3
+              class="text-sm font-bold text-gray-500 uppercase tracking-wider"
+            >
+              实时流量监控 (模拟)
+            </h3>
+            <div class="flex gap-2">
+              <span class="flex h-3 w-3 relative">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-3 w-3 bg-green-500"
+                ></span>
+              </span>
+              <span class="text-xs text-green-500 font-mono">Live</span>
+            </div>
+          </div>
+          <div id="traffic-chart" class="w-full h-full min-h-[200px]"></div>
+        </div>
+
+        <div
+          class="bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl p-4 flex flex-col"
+        >
+          <h3
+            class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2 text-center"
+          >
+            系统能力值
+          </h3>
+          <div id="radar-chart" class="w-full h-full min-h-[200px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+  ></script>
+
+  <script is:inline>
+    // ✨ 核心修复：使用大括号包裹所有代码，限制作用域，防止 "Identifier has already been declared" 错误
+    {
+      // ================= 配置区域 =================
+      const START_DATE = "2023-10-24"; // 你的建站日期
+
+      // 定义局部变量存储定时器 ID，用于页面清理（可选优化）
+      let clockInterval;
+      let chartInterval;
+
+      // ================= 1. 基础逻辑 =================
+      const initBasicFeatures = () => {
+        // --- 时钟 & 问候 ---
+        const updateTime = () => {
+          const now = new Date();
+          const hour = now.getHours();
+          const greetingEl = document.getElementById("greeting");
+          const clockEl = document.getElementById("clock");
+          const dateEl = document.getElementById("date");
+
+          if (clockEl)
+            clockEl.innerText = now.toLocaleTimeString("en-GB", {
+              hour12: false,
+            });
+          if (dateEl)
+            dateEl.innerText = now.toLocaleDateString("zh-CN", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+
+          let greet = "你好！";
+          if (hour < 6) greet = "夜深了，注意休息 🌙";
+          else if (hour < 9) greet = "早上好，新的一天 ☀️";
+          else if (hour < 12) greet = "上午好，工作加油 ☕";
+          else if (hour < 14) greet = "中午好，记得午休 🍱";
+          else if (hour < 18) greet = "下午好，继续奋斗 🚀";
+          else if (hour < 22) greet = "晚上好，放松一下 🍷";
+          else greet = "深夜了，还在学习吗 📖";
+
+          if (greetingEl) greetingEl.innerText = greet;
+        };
+
+        // 清除可能存在的旧定时器并启动新的
+        if (clockInterval) clearInterval(clockInterval);
+        clockInterval = setInterval(updateTime, 1000);
+        updateTime();
+
+        // --- 建站时长 ---
+        const updateRunTime = () => {
+          const start = new Date(START_DATE);
+          const now = new Date();
+          const diff = now - start;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const dayEl = document.getElementById("run-days");
+          const dateDisplayEl = document.getElementById("start-date-display");
+          if (dayEl) dayEl.innerText = days;
+          if (dateDisplayEl) dateDisplayEl.innerText = `Since ${START_DATE}`;
+        };
+        updateRunTime();
+
+        // --- 环境检测 ---
+        const detectEnv = () => {
+          const ua = navigator.userAgent;
+          let os = "Unknown";
+          if (ua.indexOf("Win") != -1) os = "Windows";
+          if (ua.indexOf("Mac") != -1) os = "MacOS";
+          if (ua.indexOf("Linux") != -1) os = "Linux";
+          if (ua.indexOf("Android") != -1) os = "Android";
+          if (ua.indexOf("like Mac") != -1) os = "iOS";
+
+          let browser = "Unknown";
+          if (ua.indexOf("Chrome") != -1) browser = "Chrome";
+          if (ua.indexOf("Firefox") != -1) browser = "Firefox";
+          if (ua.indexOf("Safari") != -1 && ua.indexOf("Chrome") == -1)
+            browser = "Safari";
+          if (ua.indexOf("Edg") != -1) browser = "Edge";
+
+          const osEl = document.getElementById("user-os");
+          const browserEl = document.getElementById("user-browser");
+          const screenEl = document.getElementById("user-screen");
+
+          if (osEl) osEl.innerText = os + " System";
+          if (browserEl) browserEl.innerText = browser + " Browser";
+          if (screenEl)
+            screenEl.innerText = `${window.screen.width} x ${window.screen.height}`;
+        };
+        detectEnv();
+      };
+
+      initBasicFeatures();
+
+      // ================= 3. 图表逻辑 =================
+      const initCharts = () => {
+        // 防止容器不存在（切换页面时）
+        const trafficDom = document.getElementById("traffic-chart");
+        const radarDom = document.getElementById("radar-chart");
+        if (!trafficDom || !radarDom) return;
+
+        // 4.1 流量趋势图
+        // 检查是否已经初始化过，防止 echarts warning
+        const trafficChart =
+          echarts.getInstanceByDom(trafficDom) || echarts.init(trafficDom);
+        const trafficOption = {
+          grid: { top: 10, right: 0, bottom: 20, left: 0 },
+          xAxis: { type: "category", show: false, boundaryGap: false },
+          yAxis: { type: "value", show: false, min: 0, max: 100 },
+          series: [
+            {
+              data: Array.from(
+                { length: 20 },
+                () => Math.floor(Math.random() * 40) + 30,
+              ),
+              type: "line",
+              smooth: true,
+              showSymbol: false,
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "rgba(59, 130, 246, 0.5)" },
+                  { offset: 1, color: "rgba(59, 130, 246, 0.0)" },
+                ]),
+              },
+              lineStyle: { color: "#3b82f6", width: 3 },
+            },
+          ],
+          tooltip: { trigger: "axis", formatter: "实时负载: {c}%" },
+        };
+        trafficChart.setOption(trafficOption);
+
+        // 模拟动态更新
+        if (chartInterval) clearInterval(chartInterval);
+        chartInterval = setInterval(() => {
+          // 再次检查dom是否存在，防止切走后报错
+          if (!document.getElementById("traffic-chart")) {
+            clearInterval(chartInterval);
+            return;
+          }
+          const data = trafficOption.series[0].data;
+          data.shift();
+          data.push(Math.floor(Math.random() * 40) + 30 + Math.random() * 20);
+          trafficChart.setOption({ series: [{ data: data }] });
+        }, 2000);
+
+        // 4.2 能力雷达图
+        const radarChart =
+          echarts.getInstanceByDom(radarDom) || echarts.init(radarDom);
+        const radarOption = {
+          radar: {
+            indicator: [
+              { name: "文章产出", max: 100 },
+              { name: "代码质量", max: 100 },
+              { name: "活跃度", max: 100 },
+              { name: "技术栈", max: 100 },
+              { name: "甚至颜值", max: 100 },
+            ],
+            splitArea: { show: false },
+            axisName: { color: "#9ca3af", fontSize: 10 },
+          },
+          series: [
+            {
+              type: "radar",
+              data: [
+                {
+                  value: [85, 90, 75, 95, 100],
+                  name: "Capability",
+                  areaStyle: { color: "rgba(16, 185, 129, 0.2)" },
+                  lineStyle: { color: "#10b981" },
+                  itemStyle: { color: "#10b981" },
+                },
+              ],
+            },
+          ],
+        };
+        radarChart.setOption(radarOption);
+
+        // 监听窗口调整
+        const resizeHandler = () => {
+          trafficChart.resize();
+          radarChart.resize();
+        };
+        window.addEventListener("resize", resizeHandler);
+      };
+
+      // ================= 4. 脚本加载控制 =================
+      const loadECharts = () => {
+        // 如果全局已经有 echarts 了，直接画图，别再下载了
+        if (window.echarts) {
+          initCharts();
+          return;
+        }
+
+        // 防止重复插入 script 标签
+        if (document.getElementById("echarts-script")) return;
+
+        const script = document.createElement("script");
+        script.id = "echarts-script"; // 给个身份证
+        script.src =
+          "https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js";
+        script.onload = () => {
+          initCharts();
+        };
+        document.head.appendChild(script);
+      };
+
+      loadECharts();
+    }
+  </script>
+</MainGridLayout>

@@ -43,6 +43,7 @@ export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
     LinkPreset.Archive,
+    LinkPreset.Dashboard,
     LinkPreset.About,
     {
       name: "Github",
@@ -53,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
       name: "CSDN",
       url: "https://blog.csdn.net/qq_41055565",
       external: true,
-    },
+    }
   ],
 };
 
