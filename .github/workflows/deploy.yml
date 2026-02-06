@@ -31,6 +31,8 @@ jobs:
 
       # 4. 执行构建并校验搜索索引
       - name: Build and Verify Search Index
+        env:
+          PUBLIC_DIFY_URL: ${{ secrets.PUBLIC_DIFY_URL }}
         run: |
           # 1. 执行构建命令（已修改为输出至 pagefind 目录）
           pnpm build
