@@ -1,0 +1,105 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+// 1. 引入图片
+import coverImg from "../constants/images/cover.jpeg";
+---
+
+<MainGridLayout title="AI 分身" description="与西瓜的数字分身对话">
+  
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-[80vh]">
+    <div class="card-base z-10 w-full flex flex-col h-full relative">
+      
+      <div class="h-14 border-b border-black/5 dark:border-white/5 flex items-center justify-between px-4 bg-black/[0.02] dark:bg-white/[0.02]">
+        <div class="flex items-center gap-3">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <div class="flex flex-col">
+                <span class="font-bold text-sm text-gray-700 dark:text-gray-200 leading-none">西瓜的数字分身</span>
+                <span class="text-[10px] text-gray-400 mt-0.5 leading-none">DeepSeek V3 Model</span>
+            </div>
+        </div>
+        <button 
+            onclick="history.back()" 
+            class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-gray-500 dark:text-gray-400"
+            aria-label="关闭对话"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <div class="flex-1 w-full relative bg-white dark:bg-[#1a1a1a]">
+         
+         <div id="chat-loader" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white dark:bg-[#1a1a1a] transition-opacity duration-500">
+            <div class="relative w-16 h-16 mb-4">
+                <div class="absolute inset-0 rounded-full border-4 border-black/5 dark:border-white/10"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-emerald-500 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+                <div class="absolute inset-4 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center animate-pulse">
+                    <span class="text-xl">🤖</span>
+                </div>
+            </div>
+            <div class="text-sm font-bold text-gray-500 dark:text-gray-400 animate-pulse">
+                正在建立神经连接...
+            </div>
+            <div class="text-xs text-gray-400 mt-1 opacity-60">
+                Connecting to Neural Network
+            </div>
+         </div>
+
+         <iframe
+            id="dify-iframe"
+            src="https://udify.app/chatbot/GW5AKfPrDUpHEFJv"
+            style="width: 100%; height: 100%; min-height: 700px; border: none;"
+            allow="microphone">
+         </iframe>
+      </div>
+
+    </div>
+  </div>
+
+</MainGridLayout>
+
+<script is:inline>
+    // 立即执行一个安全检查
+    (function() {
+        const iframe = document.getElementById('dify-iframe');
+        const loader = document.getElementById('chat-loader');
+        
+        // 定义隐藏 Loader 的函数
+        const hideLoader = () => {
+            if (!loader) return;
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                loader.remove(); // 直接从 DOM 删掉，防止挡路
+            }, 500);
+        };
+
+        if (iframe && loader) {
+            // 正常监听
+            iframe.onload = () => {
+                hideLoader();
+            };
+
+            // ⚡️ 强力兜底：不管加载成没成功，2.5秒后必须把遮罩掀开
+            // 这样就算 Dify 报错，也不会影响用户看到界面
+            setTimeout(() => {
+                hideLoader();
+            }, 2500); 
+        }
+        
+        // 关闭按钮逻辑
+        const closeBtn = document.querySelector('button[aria-label="关闭对话"]');
+        if (closeBtn) {
+            closeBtn.onclick = (e) => {
+                e.preventDefault();
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = '/';
+                }
+            };
+        }
+    })();
+</script>
