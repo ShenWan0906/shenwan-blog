@@ -50,7 +50,7 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "海外千万级HES物联网中台",
+    title: "海外百万级HES物联网中台",
     description:
       "面向海外市场的全球化IoT平台，基于JetLinks二次开发。核心负责多语言动态配置中心与千万级GIS地图中台建设。",
     role: "后端开发",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     image: "https://placehold.co/800x450/3b82f6/ffffff?text=Global+IoT+HES",
     details: {
       background:
-        "基于JetLinks物联网平台二次开发，服务海外项目。主要解决千万级设备接入后的数据可视化与多语言适配问题。",
+        "基于JetLinks物联网平台二次开发，服务海外项目。主要解决百万级设备接入后的数据可视化与多语言适配问题。",
       tech: [
         "核心底座：JetLinks 物联网平台",
         "开发语言：Java",
@@ -68,12 +68,12 @@ export const projects: Project[] = [
       modules: [
         "动态报表：支持复杂业务数据的自定义报表生成。",
         "多语言配置中心：适配海外多国语言环境的动态切换。",
-        "全球地图中台：千万级设备点位的GIS可视化渲染。",
+        "全球地图中台：百万级设备点位的GIS可视化渲染。",
       ],
       responsibility: [
         "负责后端Java核心功能开发。",
         "设计并实现多语言动态配置中心。",
-        "攻克千万级地图数据渲染性能瓶颈。",
+        "攻克百万级地图数据渲染性能瓶颈。",
         "开发动态报表模块，支持灵活的业务数据展示。",
       ],
     },
