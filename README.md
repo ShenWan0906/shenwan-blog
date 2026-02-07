@@ -1,8 +1,8 @@
-# Shenwan Blog (深湾博客)
+# Shenwan Blog
 
 > 一个基于 Astro & Tailwind CSS 构建的现代化个人数字化名片与技术博客。 融合 **Bento 风格设计**、**AI 智能助手** 与 **沉浸式项目作品集**。
 
-**[在线预览 Live Demo](shenwan.life)** | **[报告 Bug](https://www.google.com/search?q=https://github.com/%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BD%A0%E7%9A%84%E4%BB%93%E5%BA%93%E5%90%8D/issues)**
+**[在线预览 Live Demo](shenwan.life)** | **[报告 Bug](https://github.com/ShenWan0906/ShenWan0906/issues)**
 
 * * *
 
@@ -55,11 +55,13 @@
 ## 📸 截图预览 (Screenshots)
 
 ### 首页与 Bento 布局
+![alt text](image.png)
 
 ### 项目作品集 (Modal 弹窗)
+![alt text](image-1.png)
 
 ### 深色模式 (Dark Mode)
-
+![alt text](image-2.png)
 * * *
 
 ## 🚀 本地运行 (Getting Started)
@@ -71,8 +73,8 @@
 Bash
 
 ```
-git clone https://github.com/你的用户名/你的仓库名.git
-cd 你的仓库名
+git clone https://github.com/ShenWan0906/shenwan-blog.git
+cd shenwan-blog
 ```
 
 ### 2. 安装依赖
