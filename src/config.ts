@@ -88,9 +88,9 @@ export const profileConfig: ProfileConfig = {
       url: "https://juejin.cn/user/3122268756257768",
     },
     {
-      name: "bilibili",
-      icon: "fa6-brands:bilibili",
-      url: "https://space.bilibili.com/126110059",
+      name: "github",
+      icon: "fa6-brands:github",
+      url: "https://shenwan0906.github.io/MyBlog/",
     },
     {
       name: "weibo",
@@ -106,6 +106,11 @@ export const profileConfig: ProfileConfig = {
       name: "steam",
       icon: "fa6-brands:steam",
       url: "https://store.steampowered.com/search/?developer=ShenWan0906",
+    },
+    {
+      name: "bilibili",
+      icon: "fa6-brands:bilibili",
+      url: "https://space.bilibili.com/126110059",
     },
   ],
 };
