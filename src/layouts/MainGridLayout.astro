@@ -152,26 +152,47 @@ const mainPanelTop = siteConfig.banner.enable
         <div
           class="hidden xl:flex flex-col gap-4 row-start-1 col-start-3 h-fit sticky top-4"
         >
-          <ImageWidget
-            title="微信公众号"
-            image={mpQrImg.src}
-            class="onload-animation"
-            style="animation-delay: 150ms"
-          />
+          {
+            setOGTypeArticle && (
+              <div class="card-base p-6">
+                {/* 标题区域 */}
+                <div class="font-bold text-lg mb-4 ml-1">文章目录</div>
 
-          <ImageWidget
-            title="微信小程序"
-            image={miniQrImg.src}
-            class="onload-animation"
-            style="animation-delay: 200ms"
-          />
+                {/* 1. max-h-[60vh]：限制高度，防止把卡片撑爆 */}
+                {/* 2. overflow-y-auto：内容多了自动出滚动条 */}
+                {/* 3. pr-2：右边留点空隙给滚动条，别贴着字 */}
+                <div class="max-h-[60vh] overflow-y-auto pr-2">
+                  <TOC headings={headings} />
+                </div>
+              </div>
+            )
+          }
+          {
+            !setOGTypeArticle && (
+              <>
+                <ImageWidget
+                  title="微信公众号"
+                  image={mpQrImg.src}
+                  class="onload-animation"
+                  style="animation-delay: 150ms"
+                />
 
+                <ImageWidget
+                  title="微信小程序"
+                  image={miniQrImg.src}
+                  class="onload-animation"
+                  style="animation-delay: 200ms"
+                />
+              </>
+            )
+          }
+
+          {/* 👇 AI 悬浮球 (一直保留) 👇 */}
           <a
             href="/chat/"
             class="fixed z-50 group transition-all duration-300 ease-out
     bottom-44 right-6 md:bottom-48 md:right-10
     flex items-center justify-center
-    /* 背景改为纯白/半透明，突出头像本身 */
     bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md
     border border-black/5 dark:border-white/10
     shadow-lg hover:shadow-xl dark:shadow-black/20
@@ -189,7 +210,6 @@ const mainPanelTop = siteConfig.banner.enable
                 class="w-full h-full object-cover"
               />
             </div>
-
             <div class="hidden md:flex flex-col items-start ml-2">
               <span
                 class="text-sm font-bold text-gray-800 dark:text-gray-100 leading-none"
@@ -202,7 +222,6 @@ const mainPanelTop = siteConfig.banner.enable
                 AI Assistant
               </span>
             </div>
-
             <div
               class="md:hidden absolute right-14 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 dark:bg-white/90 text-white dark:text-black text-xs py-1 px-2 rounded whitespace-nowrap pointer-events-none"
             >
@@ -210,56 +229,50 @@ const mainPanelTop = siteConfig.banner.enable
             </div>
           </a>
 
-          <a
-            href="http://113.44.69.3:8080/pay/"
-            target="_blank"
-            class="card-base /* Fuwari 核心类：自动处理圆角、背景色、阴影 */
-            group flex items-center gap-4 p-4
-            cursor-pointer transition-all duration-300
-            hover:scale-[1.02] hover:shadow-xl hover:border-orange-500/30
-            onload-animation"
-            style="animation-delay: 250ms; text-decoration: none;"
-          >
-            <div
-              class="relative flex items-center justify-center w-12 h-12 rounded-xl
-            bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/20
-            text-2xl group-hover:rotate-12 transition-transform duration-300"
-            >
-              🍬
-              <div
-                class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900"
+          {
+            /* 👇 投喂按钮：也只在【非文章页】显示 (因为目录比较长，为了不挤，文章页就把投喂藏起来) 👇 */
+          }
+          {
+            !setOGTypeArticle && (
+              <a
+                href="http://113.44.69.3:8080/pay/"
+                target="_blank"
+                class="card-base group flex items-center gap-4 p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-orange-500/30 onload-animation"
+                style="animation-delay: 250ms; text-decoration: none;"
               >
-              </div>
-            </div>
-
-            <div class="flex flex-col">
-              <span
-                class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-orange-500 transition-colors"
-              >
-                投喂西瓜
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                支持服务器 & 维护开发 ⚡️
-              </span>
-            </div>
-
-            <div
-              class="ml-auto text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-                  d="M9 6l6 6l-6 6"></path></svg
-              >
-            </div>
-          </a>
+                {/* ... 这里省略投喂按钮的内部代码 ... */}
+                <div class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/20 text-2xl group-hover:rotate-12 transition-transform duration-300">
+                  🍬
+                  <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900" />
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-orange-500 transition-colors">
+                    投喂西瓜
+                  </span>
+                  <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    支持服务器 & 维护开发 ⚡️
+                  </span>
+                </div>
+                <div class="ml-auto text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <>
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M9 6l6 6l-6 6" />
+                    </>
+                  </svg>
+                </div>
+              </a>
+            )
+          }
         </div>
 
         <div class="footer col-span-2 onload-animation block lg:hidden">
@@ -274,7 +287,10 @@ const mainPanelTop = siteConfig.banner.enable
   <div class="absolute w-full z-0 hidden 2xl:block">
     <div class="relative max-w-[var(--page-width)] mx-auto">
       {
-        siteConfig.toc.enable && (
+        /* 👇 修改：增加 && !setOGTypeArticle */
+        /* 意思是：只有在【非文章页】且是大屏幕时，才显示这个悬浮目录 */
+        /* 因为文章页我们已经把它搬到侧边栏里去了 */
+        siteConfig.toc.enable && !setOGTypeArticle && (
           <div
             id="toc-wrapper"
             class:list={[

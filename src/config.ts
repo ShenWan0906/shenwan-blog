@@ -46,6 +46,10 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Dashboard,
     LinkPreset.About,
     {
+      name: "作品集", // 菜单显示的名称
+      url: "/projects/", // 对应的页面路径
+    },
+    {
       name: "Github",
       url: "https://github.com/ShenWan0906/shenwan-blog",
       external: true,
@@ -54,7 +58,7 @@ export const navBarConfig: NavBarConfig = {
       name: "CSDN",
       url: "https://blog.csdn.net/qq_41055565",
       external: true,
-    }
+    },
   ],
 };
 
