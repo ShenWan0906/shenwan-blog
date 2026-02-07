@@ -1,0 +1,68 @@
+---
+// src/components/Comment.astro
+// 请将下面两个常量替换为你自己的 ID
+const REPO_ID = "R_kgDOQekxWQ";     // 例: R_kgDOK...
+const CATEGORY_ID = "DIC_kwDOQekxWc4C1_ge"; // 例: DIC_kwDOK...
+---
+
+<div id="giscus-container" class="mt-10">
+  </div>
+
+<script is:inline define:vars={{ REPO_ID, CATEGORY_ID }}>
+  function loadGiscus() {
+    const container = document.getElementById('giscus-container');
+    if (!container) return;
+
+    // 1. 判断当前主题颜色
+    // Fuwari/Astro 通常在 html 标签上有 class="dark" 或者 data-theme
+    const isDark = document.documentElement.classList.contains('dark') || 
+                   localStorage.getItem('theme') === 'dark';
+    
+    const theme = isDark ? 'dark' : 'light'; // 或者 'transparent_dark' / 'light'
+
+    // 2. 动态创建 Script
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'ShenWan0906/shenwan-blog'); // ⚠️ 这里也要改！格式: username/repo
+    script.setAttribute('data-repo-id', REPO_ID);
+    script.setAttribute('data-category', 'General'); // ⚠️ 跟你刚才选的分类保持一致
+    script.setAttribute('data-category-id', CATEGORY_ID);
+    script.setAttribute('data-mapping', 'title'); // 使用路径作为映射
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', theme); // 动态主题
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  // 3. 监听主题切换 (实现不刷新页面换肤)
+  // 这是为了适配博客右上角的日夜切换按钮
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        const isDark = document.documentElement.classList.contains('dark');
+        const theme = isDark ? 'dark' : 'light';
+        
+        // 发送消息给 Giscus iframe 通知它换肤
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            'https://giscus.app'
+          );
+        }
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+
+  // 启动
+  loadGiscus();
+</script>

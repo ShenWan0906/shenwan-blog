@@ -166,10 +166,9 @@ const mainPanelTop = siteConfig.banner.enable
             style="animation-delay: 200ms"
           />
 
-           <a
-  href="/chat/"
-  class="
-    fixed z-50 group transition-all duration-300 ease-out
+          <a
+            href="/chat/"
+            class="fixed z-50 group transition-all duration-300 ease-out
     bottom-44 right-6 md:bottom-48 md:right-10
     flex items-center justify-center
     /* 背景改为纯白/半透明，突出头像本身 */
@@ -178,31 +177,38 @@ const mainPanelTop = siteConfig.banner.enable
     shadow-lg hover:shadow-xl dark:shadow-black/20
     hover:-translate-y-1 hover:scale-105
     w-12 h-12 rounded-full
-    md:w-auto md:h-auto md:rounded-full md:pl-1 md:pr-4 md:py-1
-  "
-  aria-label="召唤西瓜"
->
-  <div class="relative w-10 h-10 md:w-9 md:h-9 overflow-hidden rounded-full border border-black/10 dark:border-white/10 group-hover:rotate-12 transition-transform duration-300">
-    <img 
-        src={coverImg.src} 
-        alt="Avatar" 
-        class="w-full h-full object-cover" 
-    />
-  </div>
+    md:w-auto md:h-auto md:rounded-full md:pl-1 md:pr-4 md:py-1"
+            aria-label="召唤西瓜"
+          >
+            <div
+              class="relative w-10 h-10 md:w-9 md:h-9 overflow-hidden rounded-full border border-black/10 dark:border-white/10 group-hover:rotate-12 transition-transform duration-300"
+            >
+              <img
+                src={coverImg.src}
+                alt="Avatar"
+                class="w-full h-full object-cover"
+              />
+            </div>
 
-  <div class="hidden md:flex flex-col items-start ml-2">
-    <span class="text-sm font-bold text-gray-800 dark:text-gray-100 leading-none">
-      西瓜助手
-    </span>
-    <span class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5 leading-none">
-      AI Assistant
-    </span>
-  </div>
-  
-  <div class="md:hidden absolute right-14 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 dark:bg-white/90 text-white dark:text-black text-xs py-1 px-2 rounded whitespace-nowrap pointer-events-none">
-    AI对话
-  </div>
-</a>
+            <div class="hidden md:flex flex-col items-start ml-2">
+              <span
+                class="text-sm font-bold text-gray-800 dark:text-gray-100 leading-none"
+              >
+                西瓜助手
+              </span>
+              <span
+                class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5 leading-none"
+              >
+                AI Assistant
+              </span>
+            </div>
+
+            <div
+              class="md:hidden absolute right-14 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 dark:bg-white/90 text-white dark:text-black text-xs py-1 px-2 rounded whitespace-nowrap pointer-events-none"
+            >
+              AI对话
+            </div>
+          </a>
 
           <a
             href="http://113.44.69.3:8080/pay/"
