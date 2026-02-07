@@ -2,7 +2,7 @@
 
 > 一个基于 Astro & Tailwind CSS 构建的现代化个人数字化名片与技术博客。 融合 **Bento 风格设计**、**AI 智能助手** 与 **沉浸式项目作品集**。
 
-**[在线预览 Live Demo](shenwan.life)** | **[报告 Bug](https://github.com/ShenWan0906/ShenWan0906/issues)**
+**[在线预览 Live Demo](https://shenwan.life/)** | **[报告 Bug](https://github.com/ShenWan0906/shenwan-blog/issues)**
 
 * * *
 
@@ -127,8 +127,10 @@ pnpm build
 
 ## 📄 开源协议 (License)
 
-本项目基于 MIT 协议开源。 部分设计与代码基于 [Fuwari](https://github.com/saicaca/fuwari) 主题，感谢原作者的开源贡献。
+本项目基于 MIT 协议开源。 基于 [Fuwari](https://github.com/saicaca/fuwari) 主题二次开发，感谢原作者的开源贡献。
 
 * * *
 
-<div align="center"> <p>Made with ❤️ by <b>Shenwan</b></p> <p>👇 扫码关注我的公众号 👇</p> <img src="你的公众号二维码图片链接" width="150" /> </div>
+<div align="center"> <p>Made with ❤️ by <b>Shenwan</b></p> <p>👇 扫码关注我的公众号 👇</p> </div>
+
+![alt text](image-3.png)
