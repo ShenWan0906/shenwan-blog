@@ -2,7 +2,7 @@
 
 > 一个基于 Astro & Tailwind CSS 构建的现代化个人数字化名片与技术博客。 融合 **Bento 风格设计**、**AI 智能助手** 与 **沉浸式项目作品集**。
 
-**[在线预览 Live Demo](https://shenwan.life/)** | **[报告 Bug](https://github.com/ShenWan0906/shenwan-blog/issues)**
+**[在线预览 Live Demo](http://shenwan.life/)** | **[报告 Bug](https://github.com/ShenWan0906/shenwan-blog/issues)**
 
 * * *
 
