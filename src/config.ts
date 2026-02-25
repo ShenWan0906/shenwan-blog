@@ -54,7 +54,11 @@ export const navBarConfig: NavBarConfig = {
       url: "/food/",
     },
     {
-      name: "Github",
+      name: "生活碎片", 
+      url: "/red/",
+    },
+    {
+      name: "GitHub",
       url: "https://github.com/ShenWan0906/shenwan-blog",
       external: true,
     },
