@@ -50,6 +50,10 @@ export const navBarConfig: NavBarConfig = {
       url: "/projects/", // 对应的页面路径
     },
     {
+      name: "美食日记",
+      url: "/food/",
+    },
+    {
       name: "Github",
       url: "https://github.com/ShenWan0906/shenwan-blog",
       external: true,

@@ -1,0 +1,227 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { foods } from "../constants/foods";
+import { Icon } from "astro-icon/components";
+
+const title = "美食日记";
+const description = "写代码填饱的是银行账户，做美食填饱的是灵魂。这里记录了我在厨房里的奇思妙想和人间烟火。";
+---
+
+<MainGridLayout title={title} description={description}>
+  
+  {/* 1. 头部介绍 */}
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-6">
+    <div class="card-base z-10 px-6 md:px-9 pt-8 pb-8 relative w-full">
+        <Icon name="material-symbols:restaurant-rounded" 
+              class="absolute right-6 top-6 text-9xl -rotate-12 pointer-events-none text-orange-500 opacity-5 dark:opacity-[0.05]" />
+        
+        <h1 class="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-3 text-orange-500 dark:text-orange-400">
+            <Icon name="material-symbols:local-dining-rounded" /> 西瓜的深夜食堂
+        </h1>
+        <p class="text-sm md:text-base leading-relaxed max-w-2xl text-[var(--content)] dark:text-gray-300 opacity-80">
+            写代码填饱的是银行账户，做美食填饱的是灵魂。这里记录了我在厨房里的奇思妙想和人间烟火。<br/>
+            点击卡片查看我的 <span class="text-orange-500 font-bold">独家菜谱</span> 与 <span class="text-orange-500 font-bold">制作心得</span>。
+        </p>
+    </div>
+  </div>
+
+  {/* 2. 美食照片墙 */}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+    {foods.map((food, index) => (
+      <button 
+        onclick={`document.getElementById('food-dialog-${index}').showModal()`}
+        class="group relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:-translate-y-1.5 text-left w-full"
+      >
+        <div class="card-base h-full flex flex-col overflow-hidden relative z-10 rounded-2xl transform-gpu transition-all duration-300 group-hover:shadow-xl group-hover:border-orange-500/30">
+            
+            {/* 封面图区域 */}
+            <div class="relative w-full aspect-square overflow-hidden bg-[var(--btn-content)]/5">
+                <img 
+                    src={food.image} 
+                    alt={food.title} 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform dark:brightness-90 dark:group-hover:brightness-100"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                
+                <div class="absolute top-3 left-3 flex items-center gap-1 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full border border-white/10">
+                    <Icon name="material-symbols:calendar-month-rounded" class="text-xs" />
+                    {food.date}
+                </div>
+
+                <div class="absolute bottom-3 left-3 flex text-yellow-400 text-sm drop-shadow-md">
+                   {Array.from({ length: food.rating }).map(() => (
+                      <Icon name="material-symbols:star-rounded" />
+                   ))}
+                </div>
+            </div>
+
+            {/* 简要描述 */}
+            <div class="p-4 flex flex-col flex-1 relative">
+                <h3 class="text-lg font-bold mb-1.5 line-clamp-1 transition-colors text-[var(--content)] dark:text-gray-100 group-hover:text-orange-500">
+                    {food.title}
+                </h3>
+                <p class="text-xs line-clamp-2 mb-3 leading-relaxed text-[var(--content)] opacity-60 dark:text-gray-400 dark:opacity-100">
+                    {food.description}
+                </p>
+                
+                <div class="mt-auto pt-3 border-t border-[var(--line-divider)]">
+                    <div class="flex flex-wrap gap-1.5">
+                        {food.tags.map(tag => (
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-300 border border-orange-100 dark:border-orange-800/50">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </button>
+    ))}
+  </div>
+
+  {/* 3. 食谱详情弹窗 (Modals) */}
+  {foods.map((food, index) => (
+    <>
+      <dialog id={`food-dialog-${index}`} class="modal p-0 rounded-3xl backdrop:bg-black/70 backdrop:backdrop-blur-sm w-[90vw] max-w-2xl max-h-[85vh] overflow-hidden bg-white dark:bg-[#1e1e1e] shadow-2xl">
+        <div class="flex flex-col h-full max-h-[85vh]">
+          
+          {/* ✨ 优化：详情弹窗头部 (整个区域可点击放大) */}
+          <div class="relative h-48 md:h-56 shrink-0 w-full overflow-hidden group">
+            
+            {/* 全图点击层：z-0，鼠标变成放大镜，图片加了 hover 轻微放大动效 */}
+            <button 
+              type="button"
+              onclick={`document.getElementById('lightbox-${index}').showModal()`}
+              class="absolute inset-0 w-full h-full cursor-zoom-in z-0 text-left outline-none"
+              title="点击查看高清大图"
+            >
+              <img src={food.image} class="absolute inset-0 w-full h-full object-cover dark:brightness-75 transition-transform duration-700 group-hover:scale-105" alt={food.title} />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+            </button>
+            
+            {/* 关闭按钮：z-20，必须在最上层，防止点它时变成看原图 */}
+            <form method="dialog" class="absolute top-4 right-4 z-20">
+              <button class="p-1.5 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md transition-colors border border-white/20">
+                <Icon name="material-symbols:close-rounded" class="text-xl" />
+              </button>
+            </form>
+
+            {/* 文字信息层：z-10，设置 pointer-events-none 让点击操作“穿透”下去触发图片放大 */}
+            <div class="absolute bottom-4 left-6 right-16 z-10 pointer-events-none">
+              <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">{food.title}</h2>
+              <div class="flex items-center gap-3">
+                  <div class="flex text-yellow-400 text-sm">
+                     {Array.from({ length: food.rating }).map(() => (
+                        <Icon name="material-symbols:star-rounded" />
+                     ))}
+                  </div>
+                  <span class="text-xs text-white/80 bg-black/30 px-2 py-0.5 rounded-full backdrop-blur-sm border border-white/10">
+                      出锅日期: {food.date}
+                  </span>
+              </div>
+            </div>
+
+            {/* 右下角小圆角按钮 (依然保留作为视觉提示) z-20 */}
+            <button 
+              type="button"
+              onclick={`document.getElementById('lightbox-${index}').showModal()`}
+              class="absolute bottom-4 right-4 z-20 p-2 rounded-full bg-black/40 hover:bg-orange-500 text-white backdrop-blur-md transition-all duration-300 border border-white/20 hover:scale-110 shadow-lg cursor-zoom-in"
+              title="查看原图"
+            >
+              <Icon name="material-symbols:zoom-in-rounded" class="text-xl" />
+            </button>
+          </div>
+
+          {/* 菜谱内容区 */}
+          <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar">
+            
+            {/* 食材清单 */}
+            <div class="mb-8">
+              <h3 class="text-base font-bold text-orange-500 dark:text-orange-400 mb-4 flex items-center gap-2">
+                <Icon name="material-symbols:kitchen-rounded" class="text-xl" /> 准备食材
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {food.recipe?.ingredients.map(item => (
+                  <span class="text-sm px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-zinc-700">
+                    {item}
+                 </span>
+                ))}
+              </div>
+            </div>
+
+            {/* 制作步骤 */}
+            <div class="mb-8">
+              <h3 class="text-base font-bold text-orange-500 dark:text-orange-400 mb-4 flex items-center gap-2">
+                <Icon name="material-symbols:soup-kitchen-rounded" class="text-xl" /> 制作步骤
+              </h3>
+              <div class="space-y-4">
+                {food.recipe?.steps.map((step, stepIndex) => (
+                  <div class="flex gap-4 items-start">
+                    <div class="flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold border border-orange-200 dark:border-orange-800/50 mt-0.5">
+                      {stepIndex + 1}
+                    </div>
+                    <p class="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 大厨心得 */}
+            <div class="bg-orange-50 dark:bg-orange-900/10 p-5 rounded-2xl border border-orange-100 dark:border-orange-500/20 relative overflow-hidden">
+              <Icon name="material-symbols:format-quote-rounded" class="absolute -top-2 -right-2 text-6xl text-orange-500/10" />
+              <h3 class="text-sm font-bold text-orange-600 dark:text-orange-400 mb-2 flex items-center gap-2 relative z-10">
+                <Icon name="material-symbols:tips-and-updates-rounded" /> 西瓜大厨的 Secret Tips
+              </h3>
+              <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed relative z-10">
+                {food.recipe?.tips}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </dialog>
+
+      {/* 全屏看图弹窗 (Lightbox) */}
+      <dialog id={`lightbox-${index}`} class="modal p-0 m-0 w-full h-full max-w-none max-h-none bg-transparent backdrop:bg-black/90 backdrop:backdrop-blur-md overflow-hidden">
+        <div class="flex items-center justify-center w-full h-full p-4 relative cursor-zoom-out">
+          
+          <form method="dialog" class="absolute top-6 right-6 z-50">
+            <button class="p-2 rounded-full bg-white/10 hover:bg-white/30 text-white backdrop-blur-md transition-colors border border-white/20 cursor-pointer">
+              <Icon name="material-symbols:close-rounded" class="text-3xl" />
+            </button>
+          </form>
+          
+          <img 
+            src={food.image} 
+            alt={food.title} 
+            class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl pointer-events-none"
+          />
+        </div>
+      </dialog>
+    </>
+  ))}
+
+  {/* 弹窗背景点击关闭的通用逻辑 */}
+  <script is:inline>
+    const dialogs = document.querySelectorAll('dialog');
+    dialogs.forEach(dialog => {
+      dialog.addEventListener('click', (event) => {
+        // 关闭主弹窗或看图弹窗
+        if (event.target === dialog || (event.target.tagName.toLowerCase() === 'div' && event.target.classList.contains('items-center'))) {
+          dialog.close();
+        }
+      });
+    });
+  </script>
+
+  <style>
+    dialog[open] {
+      animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slide-up {
+      from { transform: translateY(20px) scale(0.98); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+  </style>
+
+</MainGridLayout>
