@@ -78,7 +78,7 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "企业级数字化运营与智慧养老平台",
+    title: "企业级数字化转型与运营",
     description:
       "统筹建设公司级数字化运营平台，集成MES与IoT数据，利用智能水表构建独居老人行为模型，实现智慧养老安全预警。",
     role: "项目经理 | 负责人",
