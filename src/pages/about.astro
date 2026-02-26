@@ -13,56 +13,7 @@ const description =
     src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
     is:inline></script>
 
-  <div class="w-full flex flex-col gap-6 mt-6 relative z-10">
-    {/* 模块一：动态 Hero 宣言卡片 (左文右图) */}
-    <div
-      class="bg-[var(--card-bg)] rounded-[2rem] p-8 md:p-10 border border-[var(--line-divider)] shadow-sm relative overflow-hidden flex flex-col-reverse md:flex-row items-center gap-8 justify-between"
-    >
-      {/* 背景光晕装饰 */}
-      <div
-        class="absolute -top-20 -right-20 w-72 h-72 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none"
-      >
-      </div>
-
-      {/* 左侧文字区 */}
-      <div class="flex-1 relative z-10 text-center md:text-left">
-        <div
-          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 mb-5 shadow-sm"
-        >
-          <Icon name="fa6-solid:handshake" class="text-sm animate-pulse" />
-          <span class="text-xs font-bold tracking-wider">CONNECT WITH ME</span>
-        </div>
-
-        <h1
-          class="text-3xl md:text-4xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300 drop-shadow-sm tracking-tight"
-        >
-          让链接产生价值
-        </h1>
-
-        <p
-          class="text-[var(--content)] opacity-85 text-sm md:text-base leading-relaxed text-balance font-medium"
-        >
-          无论你是前端大佬、后端极客、产品大牛，还是正在迷茫的行业新人。在这里，我们不谈职场
-          PUA，只做纯粹的技术交流与搞钱搭子。
-        </p>
-      </div>
-
-      {/* 右侧动态插画区 (喝咖啡敲代码的极客) */}
-      <div
-        class="w-48 h-48 md:w-56 md:h-56 shrink-0 relative z-10 drop-shadow-xl hover:scale-105 transition-transform duration-500"
-      >
-        <lottie-player
-          src="https://assets3.lottiefiles.com/packages/lf20_kkflmtur.json"
-          background="transparent"
-          speed="1"
-          style="width: 100%; height: 100%;"
-          loop
-          autoplay
-        >
-        </lottie-player>
-      </div>
-    </div>
-
+  <div class="w-full flex flex-col gap-6 relative z-10">
     {/* 模块二：深度故事长文卡片 (走心文案区) */}
     <div
       class="bg-[var(--card-bg)] p-8 md:p-12 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden"

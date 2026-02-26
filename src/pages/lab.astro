@@ -2,87 +2,118 @@
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
 
-const title = "西瓜实验室 | 施工中";
-const description = "这里是存放灵感与实验性项目的秘密基地，目前正在紧张装修中...";
+const title = "实验室 | 西瓜的数字空间";
+const description = "探索西瓜的独立项目、子系统与生活记录。";
+
+// 1. 实验室数据：仅保留三个核心功能，优化色调与图片
+const projects = [
+  {
+    name: "美食日记",
+    desc: "记录生活中的每一次美味相遇，用温暖的视角捕捉食物的故事。",
+    link: "http://shenwan.life/fooddiary/",
+    icon: "material-symbols:local-dining",
+    // 琥珀金：适配暖白色调
+    iconColor: "text-amber-600 dark:text-amber-500",
+    iconBg: "bg-amber-50 dark:bg-amber-950/30",
+    image: "/foodimages/food.jpg", 
+    gradient: "from-amber-400 to-orange-500",
+    delay: "100ms"
+  },
+  {
+    name: "光影浮生",
+    desc: "用镜头记录人间烟火，定格那些不经意的瞬间。",
+    link: "http://shenwan.life/gallery/",
+    icon: "material-symbols:photo-camera",
+    // 冰蓝色：适配冷黑色调
+    iconColor: "text-blue-600 dark:text-blue-400",
+    iconBg: "bg-blue-50 dark:bg-blue-950/30",
+    image: "/foodimages/photo.jpg",
+    gradient: "from-blue-500 to-indigo-600",
+    delay: "150ms"
+  }
+];
 ---
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" is:inline></script>
 
 <MainGridLayout title={title} description={description}>
   
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" is:inline></script>
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-8 animate-fade-in-up">
+    <div class="card-base z-10 px-6 md:px-12 pt-8 pb-8 relative w-full flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="relative z-20 md:w-1/2">
+            <Icon name="material-symbols:science" class="absolute -left-6 -top-6 text-9xl -rotate-12 pointer-events-none text-purple-500 opacity-5 dark:opacity-[0.05]" />
+            <div class="flex items-center gap-4 mb-5">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30">
+                    <Icon name="material-symbols:rocket-launch" class="text-2xl" />
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black tracking-tight text-neutral-900 dark:text-zinc-100">西瓜实验室</h1>
+            </div>
+            <p class="text-base leading-relaxed text-neutral-600 dark:text-zinc-400 mb-6">
+                欢迎来到我的数字神经中枢。这里有我的独立开发项目、子系统以及生活切片。
+            </p>
+            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500"></div>
+        </div>
 
-  {/* 主体容器 */}
-  <div class="flex flex-col items-center justify-center w-full min-h-[75vh] rounded-[var(--radius-large)] bg-[var(--card-bg)] border border-[var(--line-divider)] relative overflow-hidden p-6 md:p-10 text-center z-0">
-      
-      {/* 背景装饰元素 */}
-      <Icon name="material-symbols:settings-suggest-rounded" class="absolute top-10 left-10 text-6xl text-[var(--primary)] opacity-5 animate-spin-slow pointer-events-none" />
-      <Icon name="material-symbols:code-blocks-rounded" class="absolute bottom-10 right-10 text-7xl text-[var(--primary)] opacity-5 -rotate-12 pointer-events-none" />
-      <Icon name="material-symbols:bug-report-rounded" class="absolute top-20 right-20 text-5xl text-orange-400 opacity-5 pointer-events-none" />
-
-      {/* 动画区域 (保持高度不变) */}
-      <div class="relative w-full max-w-2xl mx-auto h-[280px] md:h-[350px] mb-8">
-          <lottie-player 
-              src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" 
-              background="transparent"  
-              speed="1"  
-              style="width: 100%; height: 100%;"  
-              loop  
-              autoplay>
-          </lottie-player>
-
-          <div class="absolute -bottom-6 left-0 w-32 h-32 md:w-40 md:h-40 z-10 pointer-events-none">
-             <lottie-player 
-                  src="https://assets9.lottiefiles.com/packages/lf20_zw0djhar.json" 
-                  background="transparent"  
-                  speed="1.2" 
-                  style="width: 100%; height: 100%;"  
-                  loop  
-                  autoplay>
-            </lottie-player>
-          </div>
-
-          <div class="absolute bottom-4 left-1/4 bg-yellow-400 text-black text-xs font-bold px-4 py-1 -rotate-6 shadow-md border-2 border-black z-20">
-              CAUTION: GEEK AT WORK
-          </div>
-          <div class="absolute top-6 right-10 bg-orange-500 text-white text-xs font-bold px-4 py-1 rotate-12 shadow-md border-2 border-white z-20">
-               灵感迸发区
-          </div>
-      </div>
-
-      {/* ✨ 优化 1：标题使用与插画呼应的渐变色，增加视觉分量 */}
-      <h1 class="text-3xl md:text-5xl font-extrabold mb-6 flex items-center gap-3 justify-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 relative z-30 drop-shadow-sm">
-        <Icon name="material-symbols:construction-rounded" class="text-blue-500 animate-bounce" /> 西瓜实验室装修中 
-      </h1>
-
-      {/* ✨ 优化 2：把文字放进一个淡淡的虚线“图纸”容器里，并使用 text-balance 优化换行 */}
-      <div class="relative z-30 max-w-2xl mx-auto mb-10 bg-blue-50/30 dark:bg-blue-900/10 border border-dashed border-blue-200 dark:border-blue-800/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-          <p class="text-[var(--content)] opacity-90 text-base md:text-lg leading-loose font-medium mb-3 text-balance">
-              这里的想法正在疯狂碰撞！💥
-          </p>
-          <p class="text-[var(--content)] opacity-70 text-sm md:text-base leading-relaxed text-balance">
-              西瓜主管正在指挥这群虚拟小工，把脑洞里的奇怪点子、实验性的代码，统统在这里组装起来。
-          </p>
-          
-          {/* 警告小贴士单独做成一个模块 */}
-          <div class="mt-5 inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-[#1e1e1e]/60 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
-               <Icon name="material-symbols:warning-outline-rounded" class="text-orange-500 text-lg" />
-               <span class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-mono">
-                   工地上有点乱，请注意脚下的 Bug 🐛
-               </span>
-          </div>
-      </div>
-
-      {/* 引导按钮 */}
-      <div class="flex gap-4 justify-center relative z-30">
-        <a href="/" class="px-8 py-3.5 rounded-full flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50">
-            <Icon name="material-symbols:arrow-back-rounded" class="text-xl" /> 先回主页看看
-        </a>
-      </div>
+        <div class="relative z-20 md:w-1/2 flex items-center justify-center">
+            <div class="relative w-full max-w-md mx-auto h-[250px] md:h-[300px] flex items-center">
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+                <div class="absolute -bottom-2 -left-6 md:-bottom-4 md:-left-12 w-36 h-36 md:w-48 md:h-48 z-10 pointer-events-none drop-shadow-2xl">
+                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_zw0djhar.json" background="transparent" speed="1.2" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 
-  <style>
-    .animate-spin-slow {
-        animation: spin 10s linear infinite;
-    }
-  </style>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+    {projects.map((project) => (
+      <a 
+        href={project.link} 
+        target="_blank" 
+        class="group flex flex-col card-base bg-[var(--card-bg)] rounded-[var(--radius-large)] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl relative border border-[var(--line-divider)]"
+        style={`animation-delay: ${project.delay}; text-decoration: none;`}
+      >
+        <div class="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-zinc-900 border-b border-[var(--line-divider)]">
+          <img 
+            src={project.image} 
+            alt={project.name} 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform dark:brightness-75 dark:group-hover:brightness-90"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+
+        <div class="p-6 flex flex-col flex-1 relative">
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-3">
+              <div class={`w-11 h-11 rounded-xl flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:scale-110 ${project.iconBg} ${project.iconColor}`}>
+                <Icon name={project.icon} class="text-[22px]" />
+              </div>
+              <h3 class="text-xl font-bold text-neutral-800 dark:text-zinc-100 group-hover:text-[var(--primary)] transition-colors m-0 leading-none">
+                {project.name}
+              </h3>
+            </div>
+            <Icon name="material-symbols:open-in-new" class="text-gray-300 dark:text-zinc-600 group-hover:text-[var(--primary)] transition-colors text-lg" />
+          </div>
+          
+          <p class="text-[14px] text-neutral-500 dark:text-zinc-400 line-clamp-2 leading-relaxed mt-1">
+            {project.desc}
+          </p>
+        </div>
+
+        <div class={`absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r ${project.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
+      </a>
+    ))}
+  </div>
 
 </MainGridLayout>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

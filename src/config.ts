@@ -45,21 +45,12 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Archive,
     LinkPreset.Dashboard,
     {
-      name: "作品集", // 菜单显示的名称
-      url: "/projects/", // 对应的页面路径
+      name: "作品集", 
+      url: "/projects/", 
     },
     {
-      name: "实验室", // 菜单显示的名称
-      url: "/lab/", // 对应的页面路径
-    },
-    {
-      name: "美食日记",
-      url: "/food/",
-    },
-    {
-      name: "光影浮生",
-      url: "http://shenwan.life/gallery/",
-      external: true, 
+      name: "实验室", 
+      url: "/lab/", 
     },
     {
       name: "生活碎片",
