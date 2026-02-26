@@ -1,0 +1,100 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+const title = "西瓜实验室 | 施工中";
+const description = "这里是存放灵感与实验性项目的秘密基地，目前正在紧张装修中...";
+---
+
+<MainGridLayout title={title} description={description}>
+  
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" is:inline></script>
+
+  {/* 主体容器 */}
+  <div class="flex flex-col items-center justify-center w-full min-h-[75vh] rounded-[var(--radius-large)] bg-[var(--card-bg)] border border-[var(--line-divider)] relative overflow-hidden p-6 md:p-10 text-center z-0">
+      
+      {/* 背景装饰元素 */}
+      <Icon name="material-symbols:settings-suggest-rounded" class="absolute top-10 left-10 text-6xl text-[var(--primary)] opacity-5 animate-spin-slow pointer-events-none" />
+      <Icon name="material-symbols:code-blocks-rounded" class="absolute bottom-10 right-10 text-7xl text-[var(--primary)] opacity-5 -rotate-12 pointer-events-none" />
+      <Icon name="material-symbols:bug-report-rounded" class="absolute top-20 right-20 text-5xl text-orange-400 opacity-5 pointer-events-none" />
+
+      {/* 动画区域 (保持高度不变) */}
+      <div class="relative w-full max-w-2xl mx-auto h-[280px] md:h-[350px] mb-8">
+          <lottie-player 
+              src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" 
+              background="transparent"  
+              speed="1"  
+              style="width: 100%; height: 100%;"  
+              loop  
+              autoplay>
+          </lottie-player>
+
+          <div class="absolute -bottom-6 left-0 w-32 h-32 md:w-40 md:h-40 z-10 pointer-events-none">
+             <lottie-player 
+                  src="https://assets9.lottiefiles.com/packages/lf20_zw0djhar.json" 
+                  background="transparent"  
+                  speed="1.2" 
+                  style="width: 100%; height: 100%;"  
+                  loop  
+                  autoplay>
+            </lottie-player>
+          </div>
+
+          <div class="absolute bottom-4 left-1/4 bg-yellow-400 text-black text-xs font-bold px-4 py-1 -rotate-6 shadow-md border-2 border-black z-20">
+              CAUTION: GEEK AT WORK
+          </div>
+          <div class="absolute top-6 right-10 bg-orange-500 text-white text-xs font-bold px-4 py-1 rotate-12 shadow-md border-2 border-white z-20">
+               灵感迸发区
+          </div>
+      </div>
+
+      {/* ✨ 优化 1：标题使用与插画呼应的渐变色，增加视觉分量 */}
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-6 flex items-center gap-3 justify-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 relative z-30 drop-shadow-sm">
+        <Icon name="material-symbols:construction-rounded" class="text-blue-500 animate-bounce" /> 西瓜实验室装修中 
+      </h1>
+
+      {/* ✨ 优化 2：把文字放进一个淡淡的虚线“图纸”容器里，并使用 text-balance 优化换行 */}
+      <div class="relative z-30 max-w-2xl mx-auto mb-10 bg-blue-50/30 dark:bg-blue-900/10 border border-dashed border-blue-200 dark:border-blue-800/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+          <p class="text-[var(--content)] opacity-90 text-base md:text-lg leading-loose font-medium mb-3 text-balance">
+              这里的想法正在疯狂碰撞！💥
+          </p>
+          <p class="text-[var(--content)] opacity-70 text-sm md:text-base leading-relaxed text-balance">
+              西瓜主管正在指挥这群虚拟小工，把脑洞里的奇怪点子、实验性的代码，统统在这里组装起来。
+          </p>
+          
+          {/* 警告小贴士单独做成一个模块 */}
+          <div class="mt-5 inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-[#1e1e1e]/60 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
+               <Icon name="material-symbols:warning-outline-rounded" class="text-orange-500 text-lg" />
+               <span class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-mono">
+                   工地上有点乱，请注意脚下的 Bug 🐛
+               </span>
+          </div>
+      </div>
+
+      {/* 引导按钮 */}
+      <div class="flex gap-4 justify-center relative z-30">
+        <a href="/" class="px-8 py-3.5 rounded-full flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50">
+            <Icon name="material-symbols:arrow-back-rounded" class="text-xl" /> 先回主页看看
+        </a>
+      </div>
+
+      {/* ✨ 优化 3：底部状态条做成极客风的 Console / Terminal 药丸样式 */}
+      <div class="mt-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gray-50/80 dark:bg-zinc-800/80 border border-gray-200 dark:border-zinc-700 shadow-inner relative z-30">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          </span>
+          <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400 font-mono tracking-tight">
+             System_Status: 施工队全速运转，CPU温度升高 🔥
+          </span>
+      </div>
+
+  </div>
+
+  <style>
+    .animate-spin-slow {
+        animation: spin 10s linear infinite;
+    }
+  </style>
+
+</MainGridLayout>

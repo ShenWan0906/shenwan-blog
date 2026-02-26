@@ -44,29 +44,32 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Archive,
     LinkPreset.Dashboard,
-    LinkPreset.About,
     {
       name: "作品集", // 菜单显示的名称
       url: "/projects/", // 对应的页面路径
+    },
+    {
+      name: "实验室", // 菜单显示的名称
+      url: "/lab/", // 对应的页面路径
     },
     {
       name: "美食日记",
       url: "/food/",
     },
     {
-      name: "生活碎片", 
+      name: "生活碎片",
       url: "/red/",
     },
     {
-      name: "GitHub",
-      url: "https://github.com/ShenWan0906/shenwan-blog",
-      external: true,
+      name: "加入我们",
+      url: "/join/",
     },
-    {
-      name: "CSDN",
-      url: "https://blog.csdn.net/qq_41055565",
-      external: true,
-    },
+    LinkPreset.About,
+    // {
+    //   name: "CSDN",
+    //   url: "https://blog.csdn.net/qq_41055565",
+    //   external: true,
+    // },
   ],
 };
 
@@ -76,6 +79,31 @@ export const profileConfig: ProfileConfig = {
   bio: "项目经理 | 独立开发者 | 个人博主",
   links: [
     {
+      name: "github",
+      icon: "fa6-brands:github",
+      url: "https://shenwan0906.github.io/MyBlog/",
+    },
+    {
+      name: "zhihu",
+      icon: "fa6-brands:zhihu",
+      url: "https://www.zhihu.com/people/xi-xiu-qiang-wei-91-91",
+    },
+    {
+      name: "CSDN",
+      icon: "fa6-solid:terminal",
+      url: "https://blog.csdn.net/qq_41055565",
+    },
+    {
+      name: "juejin",
+      icon: "simple-icons:juejin",
+      url: "https://juejin.cn/user/3122268756257768",
+    },
+    {
+      name: "bilibili",
+      icon: "fa6-brands:bilibili",
+      url: "https://space.bilibili.com/126110059",
+    },
+    {
       name: "qq",
       icon: "fa6-brands:qq",
       url: "tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1127763116&website=www.oicqzone.com",
@@ -84,21 +112,6 @@ export const profileConfig: ProfileConfig = {
       name: "envelope",
       icon: "fa6-solid:envelope",
       url: "mailto:1127763116@qq.com",
-    },
-    {
-      name: "zhihu",
-      icon: "fa6-brands:zhihu",
-      url: "https://www.zhihu.com/people/xi-xiu-qiang-wei-91-91",
-    },
-    {
-      name: "juejin",
-      icon: "simple-icons:juejin",
-      url: "https://juejin.cn/user/3122268756257768",
-    },
-    {
-      name: "github",
-      icon: "fa6-brands:github",
-      url: "https://shenwan0906.github.io/MyBlog/",
     },
     {
       name: "weibo",
@@ -114,11 +127,6 @@ export const profileConfig: ProfileConfig = {
       name: "steam",
       icon: "fa6-brands:steam",
       url: "https://store.steampowered.com/search/?developer=ShenWan0906",
-    },
-    {
-      name: "bilibili",
-      icon: "fa6-brands:bilibili",
-      url: "https://space.bilibili.com/126110059",
     },
   ],
 };

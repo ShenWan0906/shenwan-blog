@@ -1,25 +1,175 @@
 ---
-
-import { getEntry, render } from "astro:content";
-import Markdown from "@components/misc/Markdown.astro";
-import I18nKey from "../i18n/i18nKey";
-import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
 
-const aboutPost = await getEntry("spec", "about");
-
-if (!aboutPost) {
-	throw new Error("About page content not found");
-}
-
-const { Content } = await render(aboutPost);
+const title = "关于西瓜 | 了解这个有趣的灵魂";
+const description =
+  "代码手艺人、PMP项目经理、深夜食堂大厨。在这里，了解最真实的我。";
 ---
-<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
-            <Markdown class="mt-2">
-                <Content />
-            </Markdown>
+
+<MainGridLayout title={title} description={description}>
+  {/* 引入 Lottie 动画播放器 */}
+  <script
+    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
+    is:inline></script>
+
+  <div class="w-full flex flex-col gap-6 mt-6 relative z-10">
+    {/* 模块一：动态 Hero 宣言卡片 (左文右图) */}
+    <div
+      class="bg-[var(--card-bg)] rounded-[2rem] p-8 md:p-10 border border-[var(--line-divider)] shadow-sm relative overflow-hidden flex flex-col-reverse md:flex-row items-center gap-8 justify-between"
+    >
+      {/* 背景光晕装饰 */}
+      <div
+        class="absolute -top-20 -right-20 w-72 h-72 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none"
+      >
+      </div>
+
+      {/* 左侧文字区 */}
+      <div class="flex-1 relative z-10 text-center md:text-left">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 mb-5 shadow-sm"
+        >
+          <Icon name="fa6-solid:handshake" class="text-sm animate-pulse" />
+          <span class="text-xs font-bold tracking-wider">CONNECT WITH ME</span>
         </div>
+
+        <h1
+          class="text-3xl md:text-4xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300 drop-shadow-sm tracking-tight"
+        >
+          让链接产生价值
+        </h1>
+
+        <p
+          class="text-[var(--content)] opacity-85 text-sm md:text-base leading-relaxed text-balance font-medium"
+        >
+          无论你是前端大佬、后端极客、产品大牛，还是正在迷茫的行业新人。在这里，我们不谈职场
+          PUA，只做纯粹的技术交流与搞钱搭子。
+        </p>
+      </div>
+
+      {/* 右侧动态插画区 (喝咖啡敲代码的极客) */}
+      <div
+        class="w-48 h-48 md:w-56 md:h-56 shrink-0 relative z-10 drop-shadow-xl hover:scale-105 transition-transform duration-500"
+      >
+        <lottie-player
+          src="https://assets3.lottiefiles.com/packages/lf20_kkflmtur.json"
+          background="transparent"
+          speed="1"
+          style="width: 100%; height: 100%;"
+          loop
+          autoplay
+        >
+        </lottie-player>
+      </div>
     </div>
+
+    {/* 模块二：深度故事长文卡片 (走心文案区) */}
+    <div
+      class="bg-[var(--card-bg)] p-8 md:p-12 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden"
+    >
+      {/* 超大背景水印文字 */}
+      <div
+        class="absolute top-6 right-8 text-[100px] md:text-[140px] font-black text-gray-100 dark:text-zinc-800/40 leading-none select-none pointer-events-none opacity-50"
+      >
+        WHY
+      </div>
+
+      <div class="relative z-10 max-w-3xl">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-6 border border-emerald-200 dark:border-emerald-800/50"
+        >
+          <Icon name="fa6-solid:book-open" class="text-xs" /> MY STORY
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-8">
+          我为什么开始写博客、建圈子？
+        </h2>
+
+        {/* 走心长文排版区 */}
+        <div
+          class="space-y-6 text-sm md:text-base text-[var(--content)] opacity-85 leading-loose"
+        >
+          <p>
+            嗨，我是西瓜。白天写代码、开会、盯进度，偶尔在群里回复一句“收到”；晚上回到家，做饭、折腾小程序、想点自己的事情。
+          </p>
+
+          <p>
+            有一段时间，我也和很多人一样，把自己困在“公司评价体系”里。项目做完了，下一个呢？职级涨了，然后呢？忙是真的忙，但成长感却越来越模糊。
+          </p>
+
+          {/* 金句高亮引用框 */}
+          <blockquote
+            class="p-5 my-6 bg-blue-50/60 dark:bg-blue-900/10 border-l-4 border-blue-500 rounded-r-xl font-bold text-blue-700 dark:text-blue-300 shadow-sm relative overflow-hidden"
+          >
+            <Icon
+              name="fa6-solid:quote-right"
+              class="absolute -top-3 -right-2 text-5xl text-blue-500/10 rotate-12"
+            />
+            建博客，不是为了表达观点，而是为了不让自己停下来。
+          </blockquote>
+
+          <p>
+            我开始写，是因为不想把经验只留在脑子里。写项目管理，是给过去踩过的坑一个交代；记录转型、跳槽和考试，是给未来的自己留条线索；分享做饭和生活，是提醒自己——人不能只为
+            KPI 活着。
+          </p>
+
+          <p>
+            慢慢地，我发现写博客不只是输出内容，
+            而是把同频的人吸引过来。有人交流岗位信息，有人聊技术栈，有人聊职业焦虑，也有人单纯说一句：“原来我不是一个人在迷茫。”
+          </p>
+
+          <p>
+            所以这里不只是一个网站， 更像一个长期存在的小圈子。
+            不喧闹，不内卷，只是认真工作，也认真生活。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* ✨ 模块三：开源项目引流卡片 (独立出来的高亮横幅) */}
+    <div
+      class="bg-gradient-to-r from-[var(--card-bg)] to-blue-50/30 dark:to-blue-900/10 p-8 md:p-10 rounded-[2rem] border border-[var(--line-divider)] shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden"
+    >
+      {/* 背景装饰：一个隐隐约约的巨大 GitHub 图标 */}
+      <Icon
+        name="fa6-brands:github"
+        class="absolute -bottom-10 -right-10 text-[180px] text-gray-100 dark:text-zinc-800/30 rotate-12 pointer-events-none"
+      />
+
+      {/* 左侧引导文案 */}
+      <div class="flex-1 relative z-10">
+        <h3
+          class="text-xl md:text-2xl font-bold text-[var(--content)] mb-3 flex items-center gap-2"
+        >
+          <Icon name="fa6-solid:code-branch" class="text-[var(--primary)]" /> 喜欢这个博客的设计？
+        </h3>
+        <p
+          class="text-sm md:text-base text-[var(--content)] opacity-75 leading-relaxed max-w-xl"
+        >
+          本站点的完整源码已在 GitHub
+          彻底开源。如果你也想拥有一个同款的高颜值数字名片，欢迎去赏个 Star
+          ⭐️，5 分钟开启你的极客博客搭建之旅！
+        </p>
+      </div>
+
+      {/* 右侧吸睛按钮 */}
+      <a
+        href="https://github.com/ShenWan0906/shenwan-blog"
+        target="_blank"
+        class="relative z-10 shrink-0 px-8 py-4 rounded-full bg-zinc-900 dark:bg-gray-100 text-white dark:text-zinc-900 font-bold flex items-center gap-3 hover:scale-105 active:scale-95 transition-transform shadow-2xl shadow-black/20 dark:shadow-white/10 text-base group"
+      >
+        <Icon
+          name="fa6-brands:github"
+          class="text-2xl group-hover:animate-wiggle"
+        />
+        <span>获取源码 & 搭建</span>
+
+        <div
+          class="flex items-center gap-1.5 text-yellow-400 dark:text-yellow-600 text-xs bg-white/20 dark:bg-black/10 px-2.5 py-1 rounded-full ml-1 border border-white/10 dark:border-black/10"
+        >
+          <Icon name="fa6-solid:star" class="text-[10px]" /> Star
+        </div>
+      </a>
+    </div>
+  </div>
 </MainGridLayout>
