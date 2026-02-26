@@ -45,11 +45,11 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Archive,
     LinkPreset.Dashboard,
     {
-      name: "项目集", 
+      name: "项目案例", 
       url: "/projects/", 
     },
     {
-      name: "实验室", 
+      name: "个人项目", 
       url: "/lab/", 
     },
     {
