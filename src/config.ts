@@ -57,6 +57,11 @@ export const navBarConfig: NavBarConfig = {
       url: "/food/",
     },
     {
+      name: "光影浮生",
+      url: "http://shenwan.life/gallery/",
+      external: true, 
+    },
+    {
       name: "生活碎片",
       url: "/red/",
     },
@@ -65,11 +70,6 @@ export const navBarConfig: NavBarConfig = {
       url: "/join/",
     },
     LinkPreset.About,
-    // {
-    //   name: "CSDN",
-    //   url: "https://blog.csdn.net/qq_41055565",
-    //   external: true,
-    // },
   ],
 };
 
