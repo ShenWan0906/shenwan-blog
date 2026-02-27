@@ -34,36 +34,54 @@ const projects = [
 ];
 ---
 
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" is:inline></script>
-
 <MainGridLayout title={title} description={description}>
-  
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-8 animate-fade-in-up">
-    <div class="card-base z-10 px-6 md:px-12 pt-8 pb-8 relative w-full flex flex-col md:flex-row items-center justify-between gap-8">
-        <div class="relative z-20 md:w-1/2">
-            <Icon name="material-symbols:science" class="absolute -left-6 -top-6 text-9xl -rotate-12 pointer-events-none text-purple-500 opacity-5 dark:opacity-[0.05]" />
-            <div class="flex items-center gap-4 mb-5">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30">
-                    <Icon name="material-symbols:rocket-launch" class="text-2xl" />
-                </div>
-                <h1 class="text-3xl md:text-4xl font-black tracking-tight text-neutral-900 dark:text-zinc-100">西瓜实验室</h1>
-            </div>
-            <p class="text-base leading-relaxed text-neutral-600 dark:text-zinc-400 mb-6">
-                独立开发、项目实践和生活观察，都在这里慢慢发生，用项目验证想法，用生活确认自己。
-            </p>
-            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500"></div>
-        </div>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" is:inline data-astro-rerun></script>
 
-        <div class="relative z-20 md:w-1/2 flex items-center justify-center">
-            <div class="relative w-full max-w-md mx-auto h-[250px] md:h-[300px] flex items-center">
-              
-                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
-                <div class="absolute -bottom-2 -left-6 md:-bottom-4 md:-left-12 w-36 h-36 md:w-48 md:h-48 z-10 pointer-events-none drop-shadow-2xl">
-                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_zw0djhar.json" background="transparent" speed="1.2" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
-                </div>
-            </div>
-        </div>
+  {/* ✨ 西瓜实验室 Banner：深色极简动画版 */}
+{/* ✨ 西瓜实验室 Banner：吉祥物猫咪版 */}
+  <div class="w-full bg-gradient-to-br from-[#0f172a] to-[#16213e] rounded-[var(--radius-large)] overflow-hidden relative mb-12 border border-[var(--line-divider)] shadow-2xl group animate-fade-in-up flex flex-col md:flex-row items-center">
+    
+    {/* 1. 背景装饰：极简网格和微光 (不干扰猫咪) */}
+    <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(currentColor 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+    {/* 2. 左侧：核心内容层 */}
+    <div class="relative z-20 w-full md:w-3/5 p-8 md:p-12 flex flex-col items-center md:items-start text-center md:text-left">
+      
+      {/* 顶部小标签 */}
+      <div class="mb-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-bold tracking-[0.2em] border border-blue-500/20 backdrop-blur-md">
+        <Icon name="material-symbols:science-outline" class="text-sm" /> 
+        ENGINEERING LAB
+      </div>
+
+      {/* 核心金句 */}
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-black tracking-widest text-white leading-relaxed drop-shadow-md">
+        用项目验证想法，<br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+          用生活确认自己。
+        </span>
+      </h2>
+
+      {/* 底部短线 */}
+      <div class="mt-6 w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-80 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
     </div>
+
+    {/* 3. 右侧：猫咪 Lottie 动画层 */}
+    <div class="relative z-20 w-full md:w-2/5 h-[200px] md:h-[300px] flex items-center justify-center pb-6 md:pb-0">
+      {/* 💡 注意：请把这里的 src 替换成你复制的猫咪 json 链接！
+        style 控制了猫咪的大小，如果你觉得猫咪太小，可以把 width 和 height 改成 250px 或 300px 
+      */}
+      <lottie-player 
+        src="https://lottie.host/b974a275-dbfb-4e71-b247-9ada0e69dc80/bY9318hJv5.json" 
+        background="transparent" 
+        speed="1" 
+        style="width: 220px; height: 220px;" 
+        class="drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2"
+        loop 
+        autoplay
+      ></lottie-player>
+    </div>
+
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
