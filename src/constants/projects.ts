@@ -24,7 +24,7 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Astro", "Tailwind CSS", "AI Agent", "React", "SSG"],
     // 🎨 保持蓝白风格
-    image:"/src/assets/images/demo-banner.png",
+    image:"/images/demo-banner.png",
     details: { 
       background:
         "灵感来源于 bento.me，旨在打造一个聚合个人技术沉淀与社交影响力的数字化名片。不仅是博客，更是连接微信生态（公众号/小程序）的枢纽，并通过 AI 技术解决传统博客检索难的问题。",
