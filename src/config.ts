@@ -43,12 +43,12 @@ export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
     LinkPreset.Archive,
-    LinkPreset.Dashboard,
     {
       name: "图谱",
       url: "/graph/",
       external: true,
     },
+    LinkPreset.Dashboard,
     {
       name: "项目案例", 
       url: "/projects/", 
@@ -62,7 +62,7 @@ export const navBarConfig: NavBarConfig = {
       url: "/red/",
     },
     {
-      name: "资源下载",
+      name: "资源工坊",
       url: "/resources/",
       external: true,
     },
