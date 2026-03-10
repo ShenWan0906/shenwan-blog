@@ -24,8 +24,8 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Astro", "Tailwind CSS", "AI Agent", "React", "SSG"],
     // 🎨 保持蓝白风格
-    image:"/images/demo-banner.png",
-    details: { 
+    image: "/images/demo-banner.png",
+    details: {
       background:
         "灵感来源于 bento.me，旨在打造一个聚合个人技术沉淀与社交影响力的数字化名片。不仅是博客，更是连接微信生态（公众号/小程序）的枢纽，并通过 AI 技术解决传统博客检索难的问题。",
       tech: [
@@ -45,6 +45,38 @@ export const projects: Project[] = [
         "训练私有知识库模型，提升 AI 回答的准确性与相关性。",
         "持续优化网站性能（Lighthouse 跑分 95+）与 SEO 策略。",
         "打通微信生态，实现私域流量的有效沉淀与转化。",
+      ],
+    },
+  },
+  {
+    title: "蓝焰助手 - AI Agent 调度中台",
+    description:
+      "一个基于 Agent 架构的智能化中台系统。通过独立构建的会话管理中心，实现了大模型（LLM）与企业私有工具（MCP/SqlBot）的深度协同，支撑全设备端（PC/H5/小程序）的智能交互。",
+    role: "核心开发者 | 模块设计",
+    year: "2026",
+    tags: ["AI助手", "AI Agent", "Dify", "SqlBot", "Spring Cloud"],
+    // 🎨 建议使用仪表盘截图作为 Banner，突出“会话管理中心”的专业感
+    image: "/images/blue-flame-dashboard.png",
+    details: {
+      background:
+        "旨在解决企业级 AI 应用在复杂业务场景下的“记忆断层”与“权限失控”问题。项目通过构建独立的会话管理层，将大模型的推理能力与底层业务系统的执行能力（Action）解耦，打造一个可审计、可感知、具备长期记忆的智能体集群。",
+      tech: [
+        "核心框架：基于 Spring Cloud 微服务架构，集成 Nacos 注册中心与 Redis 状态管理。",
+        "Agent 能力：深度应用 Dify 工作流编排、MCP 标准协议及 SqlBot (Text-to-SQL) 技术。",
+        "安全治理：实现基于 OAuth2.0 与 OIDC 的会话级鉴权，支持字段级脱敏与 RBAC/ABAC 权限裁决。",
+        "链路追踪：全链路 TraceID 注入，实现从前端UI到后端微服务、再到外部工具调用的监控。",
+      ],
+      modules: [
+        "会话生命周期管理：负责会话从初始化、活跃、闲置到异步归档的完整闭环管理。",
+        "上下文工程：采用滑动窗口与摘要压缩技术，结合向量库实现用户长期偏好的精准召回。",
+        "多端接入适配器：提供统一的 API 与 Iframe 嵌入方案，支持 PC 业务系统与移动端应用的快速接入 。",
+        "零信任安全网关：内置双向权限握手机制，对 AI 输出结果进行后置审查与结果治理。",
+      ],
+      responsibility: [
+        "负责会话管理中心（Session Center）核心模块的研发，打通Dify平台与业务执行层的数据流向 。",
+        "实现用户全局记忆库与意图追踪逻辑，显著提升了多轮对话中 Agent 的响应准确度。",
+        "参与设计 MCP Server 身份识别方案，确保“连接级凭证”与“执行级凭证”之间的安全隔离。",
+        "参与DevOps流程下的组件自动化部署，并基于 Prometheus+Grafana 构建AI调用监控体系。",
       ],
     },
   },

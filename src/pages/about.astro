@@ -14,21 +14,30 @@ const description =
     is:inline></script>
 
   <div class="w-full flex flex-col gap-6 relative z-10">
-
-    {/* ✨ 模块一：版本更新动态卡片 (新增) */}
-{/* ✨ 模块一：版本更新动态卡片 */}
+    {/* ✨ 模块一：版本更新动态卡片 */}
     <div
       class="bg-[var(--card-bg)] p-8 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center gap-8 group"
     >
       {/* 背景光效微调 */}
-      <div class="absolute -top-20 -left-20 w-40 h-40 bg-emerald-500/10 dark:bg-emerald-400/5 blur-3xl rounded-full pointer-events-none"></div>
+      <div
+        class="absolute -top-20 -left-20 w-40 h-40 bg-emerald-500/10 dark:bg-emerald-400/5 blur-3xl rounded-full pointer-events-none"
+      >
+      </div>
 
       {/* 左侧：Lottie 动画区域 (带呼吸波纹) */}
-      <div class="w-28 h-28 md:w-36 md:h-36 shrink-0 relative flex items-center justify-center">
+      <div
+        class="w-28 h-28 md:w-36 md:h-36 shrink-0 relative flex items-center justify-center"
+      >
         {/* 呼吸波纹特效 */}
-        <div class="absolute inset-0 rounded-full bg-emerald-400/20 dark:bg-emerald-500/20 animate-ping opacity-50"></div>
-        <div class="absolute inset-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/50 z-0"></div>
-        
+        <div
+          class="absolute inset-0 rounded-full bg-emerald-400/20 dark:bg-emerald-500/20 animate-ping opacity-50"
+        >
+        </div>
+        <div
+          class="absolute inset-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/50 z-0"
+        >
+        </div>
+
         {/* Lottie 播放器 (使用了官方稳定源的雷达动画) */}
         <lottie-player
           src="https://assets3.lottiefiles.com/packages/lf20_kkflmtur.json"
@@ -37,8 +46,7 @@ const description =
           style="width: 120%; height: 120%;"
           class="relative z-10 drop-shadow-lg"
           loop
-          autoplay
-        ></lottie-player>
+          autoplay></lottie-player>
       </div>
 
       {/* 右侧：版本信息区域 */}
@@ -46,56 +54,195 @@ const description =
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-4 border border-emerald-200 dark:border-emerald-800/50"
         >
-          <Icon name="fa6-solid:satellite-dish" class="text-xs animate-pulse" /> SYSTEM STATUS
+          <Icon name="fa6-solid:satellite-dish" class="text-xs animate-pulse" /> SYSTEM
+          STATUS
         </div>
-        
-        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4 mb-2">
-          <h2 class="text-4xl md:text-5xl font-black text-[var(--content)] tracking-tight">
+
+        <div
+          class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4 mb-2"
+        >
+          <h2
+            class="text-4xl md:text-5xl font-black text-[var(--content)] tracking-tight"
+          >
             v2.0.0
           </h2>
           {/* 这里换成了“西瓜”，并配上了西瓜配色的渐变 */}
-          <span class="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400">
+          <span
+            class="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400"
+          >
             "西瓜"
           </span>
         </div>
 
-        <p class="text-sm text-[var(--content)] opacity-60 font-mono mb-5 flex items-center justify-center md:justify-start gap-2">
+        <p
+          class="text-sm text-[var(--content)] opacity-60 font-mono mb-5 flex items-center justify-center md:justify-start gap-2"
+        >
           <Icon name="fa6-regular:clock" /> 最后更新于：2026-02-27
         </p>
 
         {/* 更新特性小标签 */}
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-          <span class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5">
+        <div
+          class="flex flex-wrap items-center justify-center md:justify-start gap-2.5"
+        >
+          <span
+            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
+          >
             🚀 性能提升 40%
           </span>
-          <span class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5">
+          <span
+            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
+          >
             🎨 UI 全面重构
           </span>
-          <span class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5">
+          <span
+            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
+          >
             ✨ 新增动态仪表盘
           </span>
         </div>
       </div>
-      
+
       {/* 右侧：纯 CSS 状态律动动画 (无点击事件，纯装饰) */}
-      <div class="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 items-center gap-3 opacity-40 group-hover:opacity-100 transition-opacity duration-500 select-none pointer-events-none">
+      <div
+        class="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 items-center gap-3 opacity-40 group-hover:opacity-100 transition-opacity duration-500 select-none pointer-events-none"
+      >
         <div class="flex items-end gap-1.5 h-6">
-          <div class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-full animate-[bounce_1s_infinite_0.1s]"></div>
-          <div class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-1/2 animate-[bounce_1s_infinite_0.2s]"></div>
-          <div class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-4/5 animate-[bounce_1s_infinite_0.3s]"></div>
-          <div class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-1/3 animate-[bounce_1s_infinite_0.4s]"></div>
-          <div class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-2/3 animate-[bounce_1s_infinite_0.5s]"></div>
+          <div
+            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-full animate-[bounce_1s_infinite_0.1s]"
+          >
+          </div>
+          <div
+            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-1/2 animate-[bounce_1s_infinite_0.2s]"
+          >
+          </div>
+          <div
+            class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-4/5 animate-[bounce_1s_infinite_0.3s]"
+          >
+          </div>
+          <div
+            class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-1/3 animate-[bounce_1s_infinite_0.4s]"
+          >
+          </div>
+          <div
+            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-2/3 animate-[bounce_1s_infinite_0.5s]"
+          >
+          </div>
         </div>
         <div class="flex flex-col">
-          <span class="text-[10px] text-zinc-400 font-mono tracking-widest leading-none mb-1">STATUS</span>
-          <span class="text-xs font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400 tracking-widest leading-none">
+          <span
+            class="text-[10px] text-zinc-400 font-mono tracking-widest leading-none mb-1"
+            >STATUS</span
+          >
+          <span
+            class="text-xs font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400 tracking-widest leading-none"
+          >
             ACTIVE
           </span>
         </div>
       </div>
     </div>
+    {/* 模块二：专业技能与经验展示区 (Bento 内部网格版) */}
+    <div
+      class="bg-[var(--card-bg)] p-8 md:p-12 rounded-[2rem] border border-[var(--line-divider)] shadow-sm"
+    >
+      {/* 头部标题区 */}
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4"
+      >
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-3">
+            专业技能与经验
+          </h2>
+          <p
+            class="text-[var(--content)] opacity-70 text-sm md:text-base max-w-2xl leading-relaxed"
+          >
+            7年互联网及物联网从业经验，全栈开发出身的 PMP
+            认证项目经理。擅长将模糊业务需求转化为端到端数字化解决方案，以技术深度预判管理风险。
+          </p>
+        </div>
+        <div
+          class="inline-flex self-start items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-widest border border-indigo-200 dark:border-indigo-800/50 whitespace-nowrap"
+        >
+          <Icon name="fa6-solid:laptop-code" class="text-xs" /> EXPERTISE
+        </div>
+      </div>
 
-    {/* 模块二：深度故事长文卡片 (走心文案区) */}
+      {/* 核心技能 4 宫格 */}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        {/* 卡片 1：项目交付 */}
+        <div
+          class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+        >
+          <div
+            class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-5 text-blue-600 dark:text-blue-400"
+          >
+            <Icon name="fa6-solid:list-check" class="text-2xl" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--content)] mb-3">
+            全生命周期交付
+          </h3>
+          <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+            拥有国内与海外（中东）项目经验，负责过智慧建筑、智慧医疗、智能硬件等软硬件一体化项目，确保高标准验收。
+          </p>
+        </div>
+
+        {/* 卡片 2：AI与全栈 */}
+        <div
+          class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+        >
+          <div
+            class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-5 text-emerald-600 dark:text-emerald-400"
+          >
+            <Icon name="fa6-solid:microchip" class="text-2xl" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--content)] mb-3">
+            AI 赋能与全栈开发
+          </h3>
+          <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+            上市公司重点项目开发背景。熟悉主流 AI 平台，集成 LLM
+            与向量检索技术，训练私有知识库 AI 模型。
+          </p>
+        </div>
+
+        {/* 卡片 3：复合型管理 */}
+        <div
+          class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+        >
+          <div
+            class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-5 text-amber-600 dark:text-amber-400"
+          >
+            <Icon name="fa6-solid:people-arrows" class="text-2xl" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--content)] mb-3">
+            技术驱动型管理
+          </h3>
+          <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+            PMP 认证。作为懂技术的
+            PM，能有效打破研发与业务沟通壁垒，提升跨部门协同效率与核心资源调度能力。
+          </p>
+        </div>
+
+        {/* 卡片 4：技术影响力 */}
+        <div
+          class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+        >
+          <div
+            class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-5 text-purple-600 dark:text-purple-400"
+          >
+            <Icon name="fa6-solid:pen-nib" class="text-2xl" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--content)] mb-3">
+            技术影响力建设
+          </h3>
+          <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+            GitHub 开源作者，活跃于 CSDN、掘金、知乎等社区。产出博客 100+
+            篇，全网累计阅读量 20万+，形成可持续的方法论沉淀。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* 模块三：深度故事长文卡片 (走心文案区) */}
     <div
       class="bg-[var(--card-bg)] p-8 md:p-12 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden"
     >
@@ -158,7 +305,7 @@ const description =
       </div>
     </div>
 
-    {/* ✨ 模块三：开源项目引流卡片 (独立出来的高亮横幅) */}
+    {/* ✨ 模块四：开源项目引流卡片 (独立出来的高亮横幅) */}
     <div
       class="bg-gradient-to-r from-[var(--card-bg)] to-blue-50/30 dark:to-blue-900/10 p-8 md:p-10 rounded-[2rem] border border-[var(--line-divider)] shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden"
     >
@@ -179,8 +326,8 @@ const description =
           class="text-sm md:text-base text-[var(--content)] opacity-75 leading-relaxed max-w-xl"
         >
           本站点的完整源码已在 GitHub
-          开源。如果你也想拥有一个同款的高颜值数字名片，欢迎去赏个 Star
-          ⭐️，5 分钟开启你的极客博客搭建之旅！
+          开源。如果你也想拥有一个同款的高颜值数字名片，欢迎去赏个 Star ⭐️，5
+          分钟开启你的极客博客搭建之旅！
         </p>
       </div>
 
