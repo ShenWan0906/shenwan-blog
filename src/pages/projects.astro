@@ -71,9 +71,11 @@ const description = "西瓜主管的项目经验与技术成果展示";
                     {project.title}
                 </h3>
                 {/* 描述：深色模式强制浅灰 */}
-                <p class="text-sm line-clamp-2 mb-4 leading-relaxed text-[var(--content)] opacity-60 dark:text-gray-400 dark:opacity-100">
-                    {project.description}
-                </p>
+            <div class="relative mb-4 h-11 group-hover:h-auto group-hover:max-h-24 overflow-hidden group-hover:overflow-y-auto custom-scrollbar transition-all duration-300">
+    <p class="text-sm leading-relaxed text-[var(--content)] opacity-60 dark:text-gray-400 dark:opacity-100 line-clamp-2 group-hover:line-clamp-none">
+        {project.description}
+    </p>
+</div>
                 <div class="mt-auto pt-4 border-t border-[var(--line-divider)]">
                     <div class="flex flex-wrap gap-2">
                         {project.tags.map(tag => (
@@ -201,6 +203,18 @@ const description = "西瓜主管的项目经验与技术成果展示";
       from { transform: scale(0.95); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+    /* 隐藏滚动条但保留滚动功能 (针对描述区域) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+    opacity: 0.5;
+  }
   </style>
 
 </MainGridLayout>
