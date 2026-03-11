@@ -393,7 +393,7 @@ const description =
   </div>
 </MainGridLayout>
 
-{/* Tab 切换逻辑脚本 (完美兼容 Astro View Transitions) */}
+{/* Tab 切换逻辑脚本 (完美兼容 Fuwari 的 Swup 页面跳转) */}
 <script is:inline>
   function initTabs() {
     const tabBtns = document.querySelectorAll(".tab-btn");
@@ -402,54 +402,56 @@ const description =
     // 如果当前页面没有找到 Tab，直接 return，避免在其他页面报错
     if (tabBtns.length === 0) return;
 
+    // 独立出点击事件的处理函数，方便后续解绑
+    function handleTabClick(event) {
+      const btn = event.currentTarget;
+
+      // 1. 重置所有按钮样式
+      tabBtns.forEach((b) => {
+        b.classList.remove("active", "text-indigo-600", "dark:text-indigo-400");
+        b.classList.add("text-gray-400", "dark:text-gray-500");
+        const indicator = b.querySelector(".tab-indicator");
+        if (indicator) {
+          indicator.classList.remove("scale-x-100");
+          indicator.classList.add("scale-x-0");
+        }
+      });
+
+      // 2. 激活当前按钮样式
+      btn.classList.add("active", "text-indigo-600", "dark:text-indigo-400");
+      btn.classList.remove("text-gray-400", "dark:text-gray-500");
+      const activeIndicator = btn.querySelector(".tab-indicator");
+      if (activeIndicator) {
+        activeIndicator.classList.remove("scale-x-0");
+        activeIndicator.classList.add("scale-x-100");
+      }
+
+      // 3. 切换内容
+      const targetId = btn.getAttribute("data-target");
+      tabContents.forEach((content) => {
+        if (content.id === `tab-${targetId}`) {
+          content.classList.remove("hidden");
+          content.classList.add("block");
+        } else {
+          content.classList.remove("block");
+          content.classList.add("hidden");
+        }
+      });
+    }
+
+    // 遍历绑定事件
     tabBtns.forEach((btn) => {
-      // 使用 onclick 赋值，可以防止在 Astro 路由来回切换时重复绑定事件
-      btn.onclick = () => {
-        // 1. 重置所有按钮样式
-        tabBtns.forEach((b) => {
-          b.classList.remove(
-            "active",
-            "text-indigo-600",
-            "dark:text-indigo-400",
-          );
-          b.classList.add("text-gray-400", "dark:text-gray-500");
-          b.querySelector(".tab-indicator").classList.replace(
-            "scale-x-100",
-            "scale-x-0",
-          );
-        });
-
-        // 2. 激活当前按钮样式
-        btn.classList.add("active", "text-indigo-600", "dark:text-indigo-400");
-        btn.classList.remove("text-gray-400", "dark:text-gray-500");
-        btn
-          .querySelector(".tab-indicator")
-          .classList.replace("scale-x-0", "scale-x-100");
-
-        // 3. 切换内容
-        const targetId = btn.getAttribute("data-target");
-        tabContents.forEach((content) => {
-          if (content.id === `tab-${targetId}`) {
-            content.classList.remove("hidden");
-            content.classList.add("block");
-          } else {
-            content.classList.remove("block");
-            content.classList.add("hidden");
-          }
-        });
-      };
+      // ⚠️ 关键修复：先移除旧的事件监听，防止在 Swup 切换来回时重复绑定导致冲突
+      btn.removeEventListener("click", handleTabClick);
+      btn.addEventListener("click", handleTabClick);
     });
   }
 
-  // 监听 Astro 的路由切换事件（兼容首次加载和后续无刷新跳转）
-  document.addEventListener("astro:page-load", initTabs);
+  // 1. 首次加载时立刻执行初始化
+  initTabs();
 
-  // 为了保险起见（万一禁用了 View Transitions），依然保留原生加载监听
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initTabs);
-  } else {
-    initTabs();
-  }
+  // 2. ⚠️ 关键修复：监听 Fuwari 默认的 Swup 页面替换事件
+  document.addEventListener("swup:content_replaced", initTabs);
 </script>
 
 {/* 为 Tailwind 添加自定义 fadeIn 动画 */}

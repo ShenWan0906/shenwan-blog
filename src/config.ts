@@ -50,21 +50,21 @@ export const navBarConfig: NavBarConfig = {
     },
     LinkPreset.Dashboard,
     {
-      name: "项目案例", 
-      url: "/projects/", 
+      name: "项目案例",
+      url: "/projects/",
     },
     {
-      name: "个人项目", 
-      url: "/lab/", 
-    },
-    {
-      name: "生活碎片",
-      url: "/red/",
+      name: "个人项目",
+      url: "/lab/",
     },
     {
       name: "资源工坊",
       url: "/resources/",
       external: true,
+    },
+    {
+      name: "生活碎片",
+      url: "/red/",
     },
     {
       name: "加入我们",
