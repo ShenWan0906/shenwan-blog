@@ -65,7 +65,7 @@ export const projects: Project[] = [
     }
   },
   {
-    title: "蓝焰助手 - AI Agent 调度中台",
+    title: "蓝焰助手 - AI Agent 智能客服",
     description: "一个基于 Agent 架构的智能化中台系统。通过独立构建的会话管理中心，实现了大模型与企业私有工具的深度协同。",
     role: "核心开发者 | 模块设计",
     year: "2026",
