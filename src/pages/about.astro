@@ -2,7 +2,7 @@
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
 
-const title = "关于西瓜 | 了解这个有趣的灵魂";
+const title = "关于作者 | 了解这个有趣的灵魂";
 const description =
   "代码手艺人、PMP项目经理、深夜食堂大厨。在这里，了解最真实的我。";
 ---
@@ -14,416 +14,171 @@ const description =
     is:inline></script>
 
   <div class="w-full flex flex-col gap-6 relative z-10">
-    {/* ✨ 模块一：版本更新动态卡片 (常驻头部) */}
-    <div
-      class="bg-[var(--card-bg)] p-8 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center gap-8 group"
-    >
-      <div
-        class="absolute -top-20 -left-20 w-40 h-40 bg-emerald-500/10 dark:bg-emerald-400/5 blur-3xl rounded-full pointer-events-none"
-      >
-      </div>
+    {/* ✨ 模块一：站点内核状态卡 (Site Engine Status) - 宽屏极简版 */}
+    <div class="bg-[var(--card-bg)] p-8 md:p-10 rounded-[2rem] border border-[var(--line-divider)] shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center gap-10 group">
+      {/* 背景光晕：蓝色调，范围稍微扩大一点增加通透感 */}
+      <div class="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/10 dark:bg-blue-400/5 blur-3xl rounded-full pointer-events-none"></div>
 
-      {/* 左侧 Lottie */}
-      <div
-        class="w-28 h-28 md:w-36 md:h-36 shrink-0 relative flex items-center justify-center"
-      >
-        <div
-          class="absolute inset-0 rounded-full bg-emerald-400/20 dark:bg-emerald-500/20 animate-ping opacity-50"
-        >
-        </div>
-        <div
-          class="absolute inset-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/50 z-0"
-        >
-        </div>
+      {/* 左侧 Lottie：保持蓝色调 */}
+      <div class="w-28 h-28 md:w-40 md:h-40 shrink-0 relative flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full bg-blue-400/20 dark:bg-blue-500/20 animate-ping opacity-50"></div>
+        <div class="absolute inset-3 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50 z-0"></div>
         <lottie-player
-          src="https://assets3.lottiefiles.com/packages/lf20_kkflmtur.json"
+          src="https://lottie.host/f81c0083-ace5-4092-b459-1d552690b393/28clYlH2lf.json"
           background="transparent"
           speed="1"
           style="width: 120%; height: 120%;"
-          class="relative z-10 drop-shadow-lg"
+          class="relative z-10 drop-shadow-lg hue-rotate-90" 
           loop
           autoplay></lottie-player>
       </div>
 
-      {/* 右侧信息 */}
+      {/* 右侧信息：现在拥有完整的水平宽度，彻底告别拥挤 */}
       <div class="flex-1 text-center md:text-left relative z-10">
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-4 border border-emerald-200 dark:border-emerald-800/50"
-        >
-          <Icon name="fa6-solid:satellite-dish" class="text-xs animate-pulse" /> SYSTEM
-          STATUS
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold tracking-widest mb-6 border border-blue-200 dark:border-blue-800/50 shadow-sm">
+          <Icon name="fa6-solid:microchip" class="text-xs animate-pulse" /> SITE ENGINE KERNEL
         </div>
-        <div
-          class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4 mb-2"
-        >
-          <h2
-            class="text-4xl md:text-5xl font-black text-[var(--content)] tracking-tight"
-          >
-            v2.0.0
+        
+        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-5 mb-3">
+          <h2 class="text-3xl md:text-5xl font-black text-[var(--content)] tracking-tight">
+            ShenWan.Life
           </h2>
-          <span
-            class="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400"
-            >"西瓜"</span
-          >
+          <span class="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-400 dark:from-blue-400 dark:to-indigo-300">
+            Astro v4.0+ 驱动
+          </span>
         </div>
-        <p
-          class="text-sm text-[var(--content)] opacity-60 font-mono mb-5 flex items-center justify-center md:justify-start gap-2"
-        >
-          <Icon name="fa6-regular:clock" /> 最后更新于：2026-02-27
-        </p>
-        <div
-          class="flex flex-wrap items-center justify-center md:justify-start gap-2.5"
-        >
-          <span
-            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
-            >🚀 性能提升 40%</span
-          >
-          <span
-            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
-            >🎨 UI 全面重构</span
-          >
-          <span
-            class="px-3 py-1.5 text-xs font-bold font-mono rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-transform hover:-translate-y-0.5"
-            >✨ 新增动态仪表盘</span
-          >
+        
+        {/* 系统日志：字体稍微调大一点，增加阅读舒适度 */}
+        <div class="flex items-center justify-center md:justify-start gap-2 mb-8 text-[11px] sm:text-xs md:text-sm text-[var(--content)] opacity-60 font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+          <Icon name="fa6-solid:terminal" class="text-xs shrink-0" /> 
+          <span>[INFO]: Build Success | SSG Engine Active | TTI < 100ms</span>
         </div>
-      </div>
-
-      {/* 纯 CSS 状态律动动画 (隐藏于移动端) */}
-      <div
-        class="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 items-center gap-3 opacity-40 group-hover:opacity-100 transition-opacity duration-500 select-none pointer-events-none"
-      >
-        <div class="flex items-end gap-1.5 h-6">
-          <div
-            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-full animate-[bounce_1s_infinite_0.1s]"
-          >
-          </div>
-          <div
-            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-1/2 animate-[bounce_1s_infinite_0.2s]"
-          >
-          </div>
-          <div
-            class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-4/5 animate-[bounce_1s_infinite_0.3s]"
-          >
-          </div>
-          <div
-            class="w-1.5 bg-rose-400/80 dark:bg-rose-300/80 rounded-t-sm h-1/3 animate-[bounce_1s_infinite_0.4s]"
-          >
-          </div>
-          <div
-            class="w-1.5 bg-emerald-500/80 dark:bg-emerald-400/80 rounded-t-sm h-2/3 animate-[bounce_1s_infinite_0.5s]"
-          >
-          </div>
-        </div>
-        <div class="flex flex-col">
-          <span
-            class="text-[10px] text-zinc-400 font-mono tracking-widest leading-none mb-1"
-            >STATUS</span
-          >
-          <span
-            class="text-xs font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-400 tracking-widest leading-none"
-            >ACTIVE</span
-          >
+        
+        {/* 核心卖点标签 */}
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+          {[
+            { label: 'Bento 风格排版', icon: '🍱' },
+            { label: '内置 AI 智能助手', icon: '🤖' },
+            { label: '100% 源码开源', icon: '📂' }
+          ].map(tag => (
+            <span class="px-4 py-2 text-xs md:text-sm font-bold font-mono rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/80 shadow-sm transition-all hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-700 cursor-default">
+              {tag.icon} {tag.label}
+            </span>
+          ))}
         </div>
       </div>
     </div>
 
-    {/* ✨ 模块二 & 三组合：内嵌 Tab 的聚合大卡片 */}
-    <div
-      class="bg-[var(--card-bg)] rounded-[2rem] border border-[var(--line-divider)] shadow-sm flex flex-col overflow-hidden relative z-10"
-    >
-      {/* 🚀 卡片内嵌的 Tab 头部区域 */}
-      <div
-        class="flex items-center gap-8 px-8 pt-6 md:px-12 md:pt-8 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/20"
-      >
-        {/* Tab 1 */}
-        <button
-          class="tab-btn active relative pb-4 text-base md:text-lg font-bold transition-all duration-300 text-indigo-600 dark:text-indigo-400 group"
-          data-target="skills"
-        >
-          <div class="flex items-center gap-2">
-            <Icon name="fa6-solid:laptop-code" class="text-sm" /> 专业技能
-          </div>
-          <div
-            class="tab-indicator absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 dark:bg-indigo-400 rounded-t-full transition-transform duration-300 origin-left scale-x-100"
-          >
-          </div>
-        </button>
-
-        {/* Tab 2 */}
-        <button
-          class="tab-btn relative pb-4 text-base md:text-lg font-bold transition-all duration-300 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 group"
-          data-target="story"
-        >
-          <div class="flex items-center gap-2">
-            <Icon name="fa6-solid:book-open" class="text-sm" /> 我的故事
-          </div>
-          <div
-            class="tab-indicator absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 dark:bg-indigo-400 rounded-t-full transition-transform duration-300 origin-left scale-x-0"
-          >
-          </div>
-        </button>
-      </div>
-
-      {/* 🚀 Tab 动态内容展示区 */}
-      <div class="relative p-8 md:p-12 min-h-[450px]">
-        {/* ==================== 内容 1：专业技能 ==================== */}
-        <div
-          id="tab-skills"
-          class="tab-content block animate-[fadeIn_0.5s_ease-out]"
-        >
-          <div
-            class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4"
-          >
-            <div>
-              <h2
-                class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-3"
-              >
-                技术底座 × 管理思维
-              </h2>
-              <p
-                class="text-[var(--content)] opacity-70 text-sm md:text-base max-w-2xl leading-relaxed"
-              >
-                7年互联网及物联网从业经验，全栈开发出身的 PMP
-                认证项目经理。擅长将模糊业务需求转化为端到端数字化解决方案，以技术深度预判管理风险。
-              </p>
-            </div>
-            <div
-              class="inline-flex self-start items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-widest border border-indigo-200 dark:border-indigo-800/50 whitespace-nowrap"
-            >
-              <Icon name="fa6-solid:laptop-code" class="text-xs" /> EXPERTISE
-            </div>
-          </div>
-
-          {/* 4宫格 */}
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-            {/* 卡片 1 */}
-            <div
-              class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              {/* ✨ 注意这里：强制水平排列容器 */}
-              <div class="flex flex-row items-center gap-4 mb-4">
-                <div
-                  class="w-12 h-12 shrink-0 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400"
-                >
-                  <Icon name="fa6-solid:list-check" class="text-2xl" />
-                </div>
-                <h3
-                  class="text-lg font-bold text-[var(--content)] m-0 leading-none"
-                >
-                  全生命周期交付
-                </h3>
-              </div>
-              <p
-                class="text-sm text-[var(--content)] opacity-80 leading-relaxed"
-              >
-                拥有国内与海外（中东）项目经验，负责过智慧建筑、医疗、智能硬件等软硬件一体化项目，确保高标准验收。
-              </p>
-            </div>
-
-            {/* 卡片 2 */}
-            <div
-              class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              <div class="flex flex-row items-center gap-4 mb-4">
-                <div
-                  class="w-12 h-12 shrink-0 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400"
-                >
-                  <Icon name="fa6-solid:microchip" class="text-2xl" />
-                </div>
-                <h3
-                  class="text-lg font-bold text-[var(--content)] m-0 leading-none"
-                >
-                  AI 赋能与全栈开发
-                </h3>
-              </div>
-              <p
-                class="text-sm text-[var(--content)] opacity-80 leading-relaxed"
-              >
-                熟悉主流 AI 平台，深度参与企业级 AI Agent 调度中台。集成 LLM
-                与向量检索技术，训练私有知识库 AI 模型。
-              </p>
-            </div>
-
-            {/* 卡片 3 */}
-            <div
-              class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              <div class="flex flex-row items-center gap-4 mb-4">
-                <div
-                  class="w-12 h-12 shrink-0 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400"
-                >
-                  <Icon name="fa6-solid:people-arrows" class="text-2xl" />
-                </div>
-                <h3
-                  class="text-lg font-bold text-[var(--content)] m-0 leading-none"
-                >
-                  技术驱动型管理
-                </h3>
-              </div>
-              <p
-                class="text-sm text-[var(--content)] opacity-80 leading-relaxed"
-              >
-                PMP 认证。作为懂技术的
-                PM，能有效打破研发与业务沟通壁垒，提升跨部门协同效率与核心资源调度能力。
-              </p>
-            </div>
-
-            {/* 卡片 4 */}
-            <div
-              class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-            >
-              <div class="flex flex-row items-center gap-4 mb-4">
-                <div
-                  class="w-12 h-12 shrink-0 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400"
-                >
-                  <Icon name="fa6-solid:pen-nib" class="text-2xl" />
-                </div>
-                <h3
-                  class="text-lg font-bold text-[var(--content)] m-0 leading-none"
-                >
-                  技术影响力建设
-                </h3>
-              </div>
-              <p
-                class="text-sm text-[var(--content)] opacity-80 leading-relaxed"
-              >
-                GitHub 开源作者，CSDN、掘金、知乎作者。产出博客 100+
-                篇，全网累计阅读量 20万+，形成可持续方法论沉淀。
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ==================== 内容 2：我的故事 ==================== */}
-        <div
-          id="tab-story"
-          class="tab-content hidden animate-[fadeIn_0.5s_ease-out]"
-        >
-          <div
-            class="absolute top-6 right-8 text-[100px] md:text-[140px] font-black text-gray-100 dark:text-zinc-800/40 leading-none select-none pointer-events-none opacity-50"
-          >
-            WHY
-          </div>
-          <div class="relative z-10 max-w-3xl">
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-6 border border-emerald-200 dark:border-emerald-800/50"
-            >
-              <Icon name="fa6-solid:book-open" class="text-xs" /> MY STORY
-            </div>
-            <h2
-              class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-8"
-            >
-              我为什么开始写博客、建圈子？
+    {/* ✨ 模块二：聚合大卡片 (瀑布流展示) */}
+    <div class="bg-[var(--card-bg)] rounded-[2rem] border border-[var(--line-divider)] shadow-sm flex flex-col relative z-10 p-8 md:p-12">
+      
+      {/* ==================== 区域 1：专业技能 ==================== */}
+      <div>
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-3">
+              技术底座 × 管理思维
             </h2>
-            <div
-              class="space-y-6 text-sm md:text-base text-[var(--content)] opacity-85 leading-loose"
-            >
-              <p>
-                嗨，我是西瓜。白天写代码、开会、盯进度，偶尔在群里回复一句“收到”；晚上回到家，做饭、折腾小程序、想点自己的事情。
-              </p>
-              <p>
-                有一段时间，我也和很多人一样，把自己困在“公司评价体系”里。项目做完了，下一个呢？职级涨了，然后呢？忙是真的忙，但成长感却越来越模糊。
-              </p>
-              <blockquote
-                class="p-5 my-6 bg-blue-50/60 dark:bg-blue-900/10 border-l-4 border-blue-500 rounded-r-xl font-bold text-blue-700 dark:text-blue-300 shadow-sm relative overflow-hidden"
-              >
-                <Icon
-                  name="fa6-solid:quote-right"
-                  class="absolute -top-3 -right-2 text-5xl text-blue-500/10 rotate-12"
-                />
-                建博客，只是想在忙碌的日子里，给自己留下一点痕迹。
-              </blockquote>
-              <p>
-                我开始写，是因为不想把经验只留在脑子里。写项目管理，是给过去踩过的坑一个交代；记录转型、跳槽和考试，是给未来的自己留条线索；分享做饭和生活，是提醒自己——人不能只为
-                KPI 活着。
-              </p>
-              <p>
-                慢慢地，我发现写博客不只是输出内容，而是把同频的人吸引过来。有人交流岗位信息，有人聊技术栈，有人聊职业焦虑，也有人单纯说一句：“原来我不是一个人在迷茫。”
-              </p>
-              <p>
-                所以这里不只是一个网站，
-                更像一个长期存在的小圈子。不喧闹，不内卷，只是认真工作，也认真生活。
-              </p>
+            <p class="text-[var(--content)] opacity-70 text-sm md:text-base max-w-2xl leading-relaxed">
+              7年互联网及物联网从业经验，全栈开发出身的 PMP 认证项目经理。擅长将模糊业务需求转化为端到端数字化解决方案，以技术深度预判管理风险。
+            </p>
+          </div>
+          <div class="inline-flex self-start items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-widest border border-indigo-200 dark:border-indigo-800/50 whitespace-nowrap">
+            <Icon name="fa6-solid:laptop-code" class="text-xs" /> EXPERTISE
+          </div>
+        </div>
+
+        {/* 4宫格 */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <div class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-row items-center gap-4 mb-4">
+              <div class="w-12 h-12 shrink-0 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <Icon name="fa6-solid:list-check" class="text-2xl" />
+              </div>
+              <h3 class="text-lg font-bold text-[var(--content)] m-0 leading-none">全生命周期交付</h3>
             </div>
+            <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+              拥有国内与海外（中东）项目经验，负责过智慧建筑、医疗、智能硬件等软硬件一体化项目，确保高标准验收。
+            </p>
+          </div>
+
+          <div class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-row items-center gap-4 mb-4">
+              <div class="w-12 h-12 shrink-0 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <Icon name="fa6-solid:microchip" class="text-2xl" />
+              </div>
+              <h3 class="text-lg font-bold text-[var(--content)] m-0 leading-none">AI 赋能与全栈开发</h3>
+            </div>
+            <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+              熟悉主流 AI 平台，深度参与企业级 AI Agent 调度中台。集成 LLM 与向量检索技术，训练私有知识库 AI 模型。
+            </p>
+          </div>
+
+          <div class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-row items-center gap-4 mb-4">
+              <div class="w-12 h-12 shrink-0 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                <Icon name="fa6-solid:people-arrows" class="text-2xl" />
+              </div>
+              <h3 class="text-lg font-bold text-[var(--content)] m-0 leading-none">技术驱动型管理</h3>
+            </div>
+            <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+              PMP 认证。作为懂技术的 PM，能有效打破研发与业务沟通壁垒，提升跨部门协同效率与核心资源调度能力。
+            </p>
+          </div>
+
+          <div class="p-6 md:p-8 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-700/50 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-row items-center gap-4 mb-4">
+              <div class="w-12 h-12 shrink-0 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                <Icon name="fa6-solid:pen-nib" class="text-2xl" />
+              </div>
+              <h3 class="text-lg font-bold text-[var(--content)] m-0 leading-none">技术影响力建设</h3>
+            </div>
+            <p class="text-sm text-[var(--content)] opacity-80 leading-relaxed">
+              GitHub 开源作者，CSDN、掘金、知乎作者。产出博客 100+ 篇，全网累计阅读量 20万+，形成可持续方法论沉淀。
+            </p>
           </div>
         </div>
       </div>
+
+      {/* ==================== 优雅的分割线 ==================== */}
+      <div class="w-full h-px bg-[var(--line-divider)] my-12 md:my-16"></div>
+
+      {/* ==================== 区域 2：我的故事 ==================== */}
+      <div class="relative">
+        <div class="absolute -top-10 right-0 text-[100px] md:text-[140px] font-black text-gray-100 dark:text-zinc-800/40 leading-none select-none pointer-events-none opacity-50">
+          WHY
+        </div>
+        <div class="relative z-10 max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-6 border border-emerald-200 dark:border-emerald-800/50">
+            <Icon name="fa6-solid:book-open" class="text-xs" /> MY STORY
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-[var(--content)] mb-8">
+            我为什么开始写博客、建圈子？
+          </h2>
+          <div class="space-y-6 text-sm md:text-base text-[var(--content)] opacity-85 leading-loose">
+            <p>
+              嗨，我是ShenWan。白天写代码、开会、盯进度，偶尔在群里回复一句“收到”；晚上回到家，做饭、折腾小程序、想点自己的事情。
+            </p>
+            <p>
+              有一段时间，我也和很多人一样，把自己困在“公司评价体系”里。项目做完了，下一个呢？职级涨了，然后呢？忙是真的忙，但成长感却越来越模糊。
+            </p>
+            <blockquote class="p-5 my-6 bg-blue-50/60 dark:bg-blue-900/10 border-l-4 border-blue-500 rounded-r-xl font-bold text-blue-700 dark:text-blue-300 shadow-sm relative overflow-hidden">
+              <Icon name="fa6-solid:quote-right" class="absolute -top-3 -right-2 text-5xl text-blue-500/10 rotate-12" />
+              建博客，只是想在忙碌的日子里，给自己留下一点痕迹。
+            </blockquote>
+            <p>
+              我开始写，是因为不想把经验只留在脑子里。写项目管理，是给过去踩过的坑一个交代；记录转型、跳槽和考试，是给未来的自己留条线索；分享做饭和生活，是提醒自己——人不能只为 KPI 活着。
+            </p>
+            <p>
+              慢慢地，我发现写博客不只是输出内容，而是把同频的人吸引过来。有人交流岗位信息，有人聊技术栈，有人聊职业焦虑，也有人单纯说一句：“原来我不是一个人在迷茫。”
+            </p>
+            <p>
+              所以这里不只是一个网站，更像一个长期存在的小圈子。不喧闹，不内卷，只是认真工作，也认真生活。
+            </p>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </MainGridLayout>
-
-{/* Tab 切换逻辑脚本 (完美兼容 Fuwari 的 Swup 页面跳转) */}
-<script is:inline>
-  function initTabs() {
-    const tabBtns = document.querySelectorAll(".tab-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    // 如果当前页面没有找到 Tab，直接 return，避免在其他页面报错
-    if (tabBtns.length === 0) return;
-
-    // 独立出点击事件的处理函数，方便后续解绑
-    function handleTabClick(event) {
-      const btn = event.currentTarget;
-
-      // 1. 重置所有按钮样式
-      tabBtns.forEach((b) => {
-        b.classList.remove("active", "text-indigo-600", "dark:text-indigo-400");
-        b.classList.add("text-gray-400", "dark:text-gray-500");
-        const indicator = b.querySelector(".tab-indicator");
-        if (indicator) {
-          indicator.classList.remove("scale-x-100");
-          indicator.classList.add("scale-x-0");
-        }
-      });
-
-      // 2. 激活当前按钮样式
-      btn.classList.add("active", "text-indigo-600", "dark:text-indigo-400");
-      btn.classList.remove("text-gray-400", "dark:text-gray-500");
-      const activeIndicator = btn.querySelector(".tab-indicator");
-      if (activeIndicator) {
-        activeIndicator.classList.remove("scale-x-0");
-        activeIndicator.classList.add("scale-x-100");
-      }
-
-      // 3. 切换内容
-      const targetId = btn.getAttribute("data-target");
-      tabContents.forEach((content) => {
-        if (content.id === `tab-${targetId}`) {
-          content.classList.remove("hidden");
-          content.classList.add("block");
-        } else {
-          content.classList.remove("block");
-          content.classList.add("hidden");
-        }
-      });
-    }
-
-    // 遍历绑定事件
-    tabBtns.forEach((btn) => {
-      // ⚠️ 关键修复：先移除旧的事件监听，防止在 Swup 切换来回时重复绑定导致冲突
-      btn.removeEventListener("click", handleTabClick);
-      btn.addEventListener("click", handleTabClick);
-    });
-  }
-
-  // 1. 首次加载时立刻执行初始化
-  initTabs();
-
-  // 2. ⚠️ 关键修复：监听 Fuwari 默认的 Swup 页面替换事件
-  document.addEventListener("swup:content_replaced", initTabs);
-</script>
-
-{/* 为 Tailwind 添加自定义 fadeIn 动画 */}
-<style is:global>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
