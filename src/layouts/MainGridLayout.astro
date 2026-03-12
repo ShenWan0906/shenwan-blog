@@ -15,11 +15,10 @@ import {
 } from "../constants/constants";
 import Layout from "./Layout.astro";
 
-/* ✅ 1. 新增引用：引入图片组件和图片文件 */
+/* ✅ 引入图片组件和图片文件 */
 import ImageWidget from "../components/widget/ImageWidget.astro";
 import mpQrImg from "../constants/images/mp_qr.jpg";
 import miniQrImg from "../constants/images/mini_qr.jpg";
-
 import coverImg from "../constants/images/cover.jpeg";
 
 interface Props {
@@ -56,10 +55,11 @@ const mainPanelTop = siteConfig.banner.enable
   setOGTypeArticle={setOGTypeArticle}
 >
   <slot slot="head" name="head" />
+
+  {/* 顶部导航栏 */}
   <div
     id="top-row"
     class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto"
-    class:list={[""]}
   >
     <div
       id="navbar-wrapper"
@@ -69,6 +69,7 @@ const mainPanelTop = siteConfig.banner.enable
     </div>
   </div>
 
+  {/* Banner 区域 */}
   {
     siteConfig.banner.enable && (
       <div
@@ -89,6 +90,7 @@ const mainPanelTop = siteConfig.banner.enable
     )
   }
 
+  {/* 主体网格布局 */}
   <div
     class="absolute w-full z-30 pointer-events-none"
     style={`top: ${mainPanelTop}`}
@@ -132,183 +134,166 @@ const mainPanelTop = siteConfig.banner.enable
           )
         }
 
+        {/* 左侧边栏：沉浸模式下会自动隐藏（由全局CSS控制） */}
         <SideBar
           class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation"
           headings={headings}
         />
 
+        {/* 核心内容区 */}
         <main
           id="swup-container"
           class="transition-swup-fade col-span-2 lg:col-span-1 xl:col-span-1 overflow-hidden"
         >
           <div id="content-wrapper" class="onload-animation">
             <slot />
+            {/* 底部 Footer */}
             <div class="footer col-span-2 onload-animation hidden lg:block">
               <Footer />
             </div>
           </div>
         </main>
 
+        {/* 右侧边栏 */}
         <div
-          class="hidden xl:flex flex-col gap-4 row-start-1 col-start-3 h-fit sticky top-4"
+          id="right-sidebar"
+          class="hidden xl:flex flex-col gap-4 row-start-1 col-start-3 h-fit sticky top-4 transition-all duration-500"
         >
+          {/* 文章目录 (TOC)：沉浸模式下需要保留，赋予特定 ID 方便控制 */}
           {
             setOGTypeArticle && (
-              <div class="card-base p-6">
-                {/* 标题区域 */}
+              <div class="card-base p-6" id="zen-toc">
                 <div class="font-bold text-lg mb-4 ml-1">文章目录</div>
-
-                {/* 1. max-h-[60vh]：限制高度，防止把卡片撑爆 */}
-                {/* 2. overflow-y-auto：内容多了自动出滚动条 */}
-                {/* 3. pr-2：右边留点空隙给滚动条，别贴着字 */}
                 <div class="max-h-[60vh] overflow-y-auto pr-2">
                   <TOC headings={headings} />
                 </div>
               </div>
             )
           }
-          {/* ✨ 助手卡片 (由悬浮球转为侧边栏模块) */}
-          <a
-            href="/chat/"
-            class="card-base group flex items-center gap-4 p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-blue-500/30 onload-animation"
-            style="animation-delay: 220ms; text-decoration: none;"
+
+          {/* 👇 新增 div 包裹干扰项，统一添加 zen-hide 类名 👇 */}
+          <div
+            class="zen-hide flex flex-col gap-4 transition-opacity duration-300"
           >
-            <div
-              class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/20 text-2xl group-hover:rotate-12 transition-transform duration-300 overflow-hidden border border-white/50 dark:border-white/10"
+            {/* ✨ 助手卡片 */}
+            <a
+              href="/chat/"
+              class="card-base group flex items-center gap-4 p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-blue-500/30 onload-animation"
+              style="animation-delay: 220ms; text-decoration: none;"
             >
-              <img
-                src={coverImg.src}
-                alt="AI Avatar"
-                class="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500"
-              />
-              {/* 在线状态小绿点 */}
               <div
-                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-zinc-900"
+                class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/20 text-2xl group-hover:rotate-12 transition-transform duration-300 overflow-hidden border border-white/50 dark:border-white/10"
               >
-              </div>
-            </div>
-
-            <div class="flex flex-col">
-              <div class="flex items-center gap-1.5">
-                <span class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-blue-500 transition-colors">
-                  西瓜AI助手
-                </span>
-                <span class="px-1.5 py-0.5 rounded-md bg-indigo-500/10 text-[10px] text-indigo-600 dark:text-indigo-400 font-bold tracking-widest uppercase">
-                  BETA
-                </span>
-              </div>
-              <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                我有问必答，不信你试试
-              </span>
-            </div>
-
-            <div
-              class="ml-auto text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M9 6l6 6l-6 6"></path>
-              </svg>
-            </div>
-          </a>
-
-          {
-            !setOGTypeArticle && (
-              <>
-                <ImageWidget
-                  title="微信公众号"
-                  image={mpQrImg.src}
-                  class="onload-animation"
-                  style="animation-delay: 150ms"
+                <img
+                  src={coverImg.src}
+                  alt="AI Avatar"
+                  class="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500"
                 />
-
-                <ImageWidget
-                  title="微信小程序"
-                  image={miniQrImg.src}
-                  class="onload-animation"
-                  style="animation-delay: 200ms"
-                />
-              </>
-            )
-          }
-
-          <a
-            href="http://shenwan.life/pay/"
-            target="_blank"
-            class="card-base group flex items-center gap-4 p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-orange-500/30 onload-animation"
-            style="animation-delay: 250ms; text-decoration: none;"
-          >
-            {/* ... 这里省略投喂按钮的内部代码 ... */}
-            <div
-              class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/20 text-2xl group-hover:rotate-12 transition-transform duration-300"
-            >
-              🍬
+                <div
+                  class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-zinc-900"
+                >
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-1.5">
+                  <span
+                    class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-blue-500 transition-colors"
+                  >
+                    西瓜AI助手
+                  </span>
+                  <span
+                    class="px-1.5 py-0.5 rounded-md bg-indigo-500/10 text-[10px] text-indigo-600 dark:text-indigo-400 font-bold tracking-widest uppercase"
+                  >
+                    BETA
+                  </span>
+                </div>
+                <span class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                  >我有问必答，不信你试试</span
+                >
+              </div>
               <div
-                class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900"
+                class="ml-auto text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all"
               >
+                <Icon name="fa6-solid:chevron-right" class="w-4 h-4" />
               </div>
-            </div>
-            <div class="flex flex-col">
-              <span
-                class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-orange-500 transition-colors"
-              >
-                投喂作者
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                支持服务器 & 维护开发
-              </span>
-            </div>
-            <div
-              class="ml-auto text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+            </a>
+
+            {/* 公众号 & 小程序 */}
+            {
+              !setOGTypeArticle && (
                 <>
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M9 6l6 6l-6 6"></path>
+                  <ImageWidget
+                    title="微信公众号"
+                    image={mpQrImg.src}
+                    class="onload-animation"
+                    style="animation-delay: 150ms"
+                  />
+                  <ImageWidget
+                    title="微信小程序"
+                    image={miniQrImg.src}
+                    class="onload-animation"
+                    style="animation-delay: 200ms"
+                  />
                 </>
-              </svg>
-            </div>
-          </a>
+              )
+            }
+
+            {/* 投喂作者 */}
+            <a
+              href="http://shenwan.life/pay/"
+              target="_blank"
+              class="card-base group flex items-center gap-4 p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-orange-500/30 onload-animation"
+              style="animation-delay: 250ms; text-decoration: none;"
+            >
+              <div
+                class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/20 text-2xl group-hover:rotate-12 transition-transform duration-300"
+              >
+                🍬
+                <div
+                  class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900"
+                >
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-bold text-base text-gray-900 dark:text-gray-50 leading-tight group-hover:text-orange-500 transition-colors"
+                  >投喂作者</span
+                >
+                <span class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                  >支持服务器 & 维护开发</span
+                >
+              </div>
+              <div
+                class="ml-auto text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
+              >
+                <Icon name="fa6-solid:chevron-right" class="w-4 h-4" />
+              </div>
+            </a>
+          </div>
+          {/* 👆 干扰项包裹结束 👆 */}
         </div>
 
-        <div class="footer col-span-2 onload-animation block lg:hidden">
+        {/* 移动端 Footer */}
+        <div
+          class="footer col-span-2 onload-animation block lg:hidden zen-hide"
+        >
           <Footer />
         </div>
       </div>
 
-      <BackToTop />
+      <BackToTop class="zen-hide" />
     </div>
   </div>
 
+  {/* 悬浮目录 (针对非文章页的大屏展示) */}
   <div class="absolute w-full z-0 hidden 2xl:block">
     <div class="relative max-w-[var(--page-width)] mx-auto">
       {
-        /* 👇 修改：增加 && !setOGTypeArticle */
-        /* 意思是：只有在【非文章页】且是大屏幕时，才显示这个悬浮目录 */
-        /* 因为文章页我们已经把它搬到侧边栏里去了 */
         siteConfig.toc.enable && !setOGTypeArticle && (
           <div
             id="toc-wrapper"
             class:list={[
-              "hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center",
+              "hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center zen-hide",
               { "toc-hide": siteConfig.banner.enable },
             ]}
           >
@@ -325,8 +310,163 @@ const mainPanelTop = siteConfig.banner.enable
           </div>
         )
       }
-
       {!siteConfig.toc.enable && <div id="toc" />}
     </div>
   </div>
+
+  {/* 🔍 新增：全局退出沉浸模式悬浮按钮 (默认隐藏) */}
+  <button
+    id="exit-zen-btn"
+    onclick="window.toggleZenMode()"
+    class="fixed top-6 right-6 z-[999] hidden items-center gap-2 px-5 py-2.5 bg-black/50 hover:bg-black/70 text-white backdrop-blur-md rounded-full shadow-2xl transition-all duration-300 hover:scale-105 group"
+  >
+    <Icon
+      name="fa6-solid:compress"
+      class="text-sm group-hover:scale-90 transition-transform"
+    />
+    <span class="text-sm font-bold tracking-wide">退出沉浸 (Esc)</span>
+  </button>
 </Layout>
+
+{/* 🎨 沉浸阅读核心 CSS 魔法 */}
+<style is:global>
+  /* 强制改变全局 CSS 变量，从根源解决阴阳色漏底问题 */
+  html.zen-mode {
+    --page-bg: #f8f4e6 !important;
+    background-color: var(--page-bg) !important;
+  }
+  html.dark.zen-mode {
+    --page-bg: #1a1c20 !important;
+    background-color: var(--page-bg) !important;
+  }
+
+  body.zen-mode {
+    background-color: var(--page-bg) !important;
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+  }
+
+  /* 隐藏所有干扰项 */
+  body.zen-mode #top-row,
+  body.zen-mode #banner-wrapper,
+  body.zen-mode .zen-hide,
+  body.zen-mode #sidebar {
+    opacity: 0;
+    pointer-events: none;
+    display: none !important;
+  }
+
+  /* 强制改变 Main Grid 布局，将文章区域 C位居中放大 */
+  body.zen-mode #main-grid {
+    display: flex !important;
+    justify-content: center;
+    max-width: 1000px !important;
+    margin: 0 auto;
+    padding-top: 8vh;
+    padding-bottom: 10vh;
+  }
+
+  /* 让核心内容区占据绝大部分空间 */
+  body.zen-mode #swup-container {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* 覆盖默认卡片背景，让文字直接浮在羊皮纸上，消除割裂感 */
+  body.zen-mode #content-wrapper .card-base {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* 文字颜色强制转为深色护眼灰 */
+  body.zen-mode #content-wrapper {
+    color: #333333 !important;
+  }
+  html.dark body.zen-mode #content-wrapper {
+    color: #d4d4d4 !important;
+  }
+
+  /* 右侧目录 (TOC) 重新定位，安静悬浮在右边缘 */
+  body.zen-mode #right-sidebar {
+    position: fixed;
+    right: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+  }
+
+  /* 沉浸模式下给目录加上高斯模糊的毛玻璃效果，显得极度优雅 */
+  body.zen-mode #zen-toc {
+    background: rgba(248, 244, 230, 0.6) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  }
+  html.dark body.zen-mode #zen-toc {
+    background: rgba(26, 28, 32, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 显示退出按钮 */
+  body.zen-mode #exit-zen-btn {
+    display: flex !important;
+  }
+</style>
+
+{/* ⚙️ 沉浸模式 JS 逻辑 (极简稳定版：解绑全屏与样式状态) */}
+<script is:inline>
+  // 1. 核心切换逻辑
+  window.toggleZenMode = function(forceExit = false) {
+    const html = document.documentElement;
+    const body = document.body;
+    const isZen = body.classList.contains('zen-mode');
+
+    if (!isZen && !forceExit) {
+      // ✅ 进入沉浸：添加护眼样式，记录状态，并尝试全屏
+      html.classList.add('zen-mode');
+      body.classList.add('zen-mode');
+      sessionStorage.setItem('zenMode', 'true');
+      
+      try {
+        if (html.requestFullscreen) html.requestFullscreen();
+        else if (html.webkitRequestFullscreen) html.webkitRequestFullscreen();
+      } catch (err) { console.warn("浏览器拦截了全屏请求", err); }
+      
+    } else {
+      // ❌ 退出沉浸：移除护眼样式，清除状态，并退出全屏
+      html.classList.remove('zen-mode');
+      body.classList.remove('zen-mode');
+      sessionStorage.setItem('zenMode', 'false');
+      
+      try {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          if (document.exitFullscreen) document.exitFullscreen();
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+      } catch (err) {}
+    }
+  };
+
+  // 2. 状态恢复逻辑 (适配 Swup 跳转)
+  window.restoreZenMode = function() {
+    if (sessionStorage.getItem('zenMode') === 'true') {
+      document.documentElement.classList.add('zen-mode');
+      document.body.classList.add('zen-mode');
+    }
+  };
+
+  // 3. 监听 Esc 键：按 Esc 键时，彻底退出沉浸模式的护眼样式
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
+      window.toggleZenMode(true); // 强制执行退出逻辑
+    }
+  });
+
+  // 4. 生命周期绑定
+  // 页面首次加载时检查
+  window.restoreZenMode();
+  // 每次点击“上一篇/下一篇”加载完新内容后，重新应用护眼样式
+  document.addEventListener('swup:content_replaced', window.restoreZenMode);
+</script>
