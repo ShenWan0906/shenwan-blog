@@ -37,7 +37,7 @@ const description =
       </div>
     </div>
 
-    {/* ✨ 模块二：价值主张 (图标与标题已水平对齐) */}
+    {/* ✨ 模块二：价值主张 */}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {/* 交流学习 */}
       <div class="bg-[var(--card-bg)] p-6 rounded-[2rem] border border-[var(--line-divider)] shadow-sm hover:-translate-y-1 hover:shadow-md transition-all group">
@@ -84,84 +84,120 @@ const description =
       </div>
     </div>
 
-    {/* ✨ 模块三：两大社区入口 */}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+{/* ✨ 模块三：三大核心连接入口 (三栏对称网格) */}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
       
-      {/* 左侧：微信生态 */}
-      <div class="bg-[var(--card-bg)] rounded-[2rem] p-8 md:p-10 border border-[var(--line-divider)] shadow-sm flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-b from-transparent to-emerald-50/30 dark:to-emerald-900/5">
-        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-emerald-500/10 dark:bg-emerald-400/5 rounded-full blur-3xl pointer-events-none"></div>
-        
-        <div class="text-center mb-6 relative z-10">
-          <span class="inline-block px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold tracking-widest mb-3 border border-emerald-200 dark:border-emerald-800/50">
-            WECHAT COMMUNITY
-          </span>
-          <h2 class="text-2xl font-bold text-[var(--content)] flex items-center justify-center gap-2">
-            <Icon name="fa6-brands:weixin" class="text-[#07C160]" /> 微信圈子
-          </h2>
-        </div>
-
-        {/* 二维码区域：增加了点击放大交互 */}
-        <div class="relative group mb-6 z-10">
-          <div class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
-          <img src={qrCodeImg.src} alt="西瓜的微信二维码" class="relative w-44 h-44 object-contain rounded-2xl shadow-lg border-2 border-white dark:border-zinc-700 bg-white p-2 transition-transform duration-500 group-hover:scale-105" />
-          
-          {/* 点击放大按钮 */}
-          <button 
-            onclick="openQrModal()" 
-            class="absolute -bottom-3 -right-3 bg-white dark:bg-zinc-800 rounded-full p-2.5 shadow-xl border border-gray-100 dark:border-zinc-700 z-10 hover:scale-110 hover:text-emerald-600 transition-all cursor-pointer group/btn flex items-center justify-center"
-            title="点击放大查看"
-          >
-            <Icon name="fa6-solid:qrcode" class="text-xl text-emerald-500 transition-transform group-hover/btn:scale-110" />
-          </button>
-        </div>
-
-        <div class="flex flex-col items-center w-full max-w-[260px] z-10">
-          <button id="copy-btn" class="group relative flex items-center gap-3 px-5 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl hover:border-emerald-500 transition-all shadow-sm w-full justify-between overflow-hidden" onclick="copyWechatId()">
-            <span class="font-mono font-bold text-lg text-[var(--content)] group-hover:text-emerald-600 transition-colors">shenwan96</span>
-            <Icon name="fa6-solid:copy" class="text-gray-400 group-hover:text-emerald-500 transition-colors" />
-            <div id="copy-success" class="absolute inset-0 bg-emerald-500 flex items-center justify-center text-white font-bold text-sm translate-y-full transition-transform duration-300">已复制微信号 🎉</div>
-          </button>
-        </div>
-
-        <p class="text-xs text-emerald-600/80 dark:text-emerald-400/80 mt-5 font-medium bg-emerald-50 dark:bg-emerald-900/20 px-4 py-2 rounded-lg border border-emerald-100 dark:border-emerald-800/30 z-10">
-          <Icon name="fa6-solid:pen" class="inline text-[10px] mr-1" /> 添加时备注来意哦 (如"博客粉丝")
-        </p>
+  {/* 1. 微信生态卡片 */}
+  <div class="bg-[var(--card-bg)] rounded-[2rem] p-6 lg:p-8 border border-[var(--line-divider)] shadow-sm flex flex-col items-center justify-between relative overflow-hidden bg-gradient-to-b from-transparent to-emerald-50/30 dark:to-emerald-900/5 group">
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-emerald-500/10 dark:bg-emerald-400/5 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="w-full flex flex-col items-center">
+      <div class="text-center mb-6 relative z-10">
+        <span class="inline-block px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] md:text-xs font-bold tracking-widest mb-3 border border-emerald-200 dark:border-emerald-800/50">
+          WECHAT COMMUNITY
+        </span>
+        <h2 class="text-lg md:text-xl font-bold text-[var(--content)] flex items-center justify-center gap-2">
+          <Icon name="fa6-brands:weixin" class="text-[#07C160] text-2xl" /> 微信圈子
+        </h2>
       </div>
 
-      {/* 右侧：Discord 生态 */}
-      <div class="bg-[var(--card-bg)] rounded-[2rem] p-8 md:p-10 border border-[var(--line-divider)] shadow-sm flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-b from-transparent to-[#5865F2]/5 dark:to-[#5865F2]/10">
-        <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#5865F2]/10 dark:bg-[#5865F2]/20 rounded-full blur-3xl pointer-events-none"></div>
+      {/* 二维码区域 */}
+      <div class="relative group/qr mb-6 z-10">
+        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-2xl blur opacity-25 group-hover/qr:opacity-50 transition duration-500"></div>
+        <img src={qrCodeImg.src} alt="西瓜的微信二维码" class="relative w-36 h-36 lg:w-44 lg:h-44 object-contain rounded-2xl shadow-lg border-2 border-white dark:border-zinc-700 bg-white p-2 transition-transform duration-500 group-hover/qr:scale-105" />
         
-        <div class="text-center mb-6 relative z-10">
-          <span class="inline-block px-3 py-1 rounded-full bg-[#5865F2]/10 text-[#5865F2] dark:text-[#5865F2] text-xs font-bold tracking-widest mb-3 border border-[#5865F2]/20">
-            INTERNATIONAL & GEEKS
-          </span>
-          <h2 class="text-2xl font-bold text-[var(--content)] flex items-center justify-center gap-2">
-            <Icon name="fa6-brands:discord" class="text-[#5865F2]" /> Discord 频道
-          </h2>
-        </div>
+        <button 
+          onclick="openQrModal()" 
+          class="absolute -bottom-3 -right-3 bg-white dark:bg-zinc-800 rounded-full p-2.5 shadow-xl border border-gray-100 dark:border-zinc-700 z-10 hover:scale-110 hover:text-emerald-600 transition-all cursor-pointer group/btn flex items-center justify-center"
+          title="点击放大查看"
+        >
+          <Icon name="fa6-solid:qrcode" class="text-xl text-emerald-500 transition-transform group-hover/btn:scale-110" />
+        </button>
+      </div>
 
-        <div class="relative group mb-8 mt-2 z-10">
-          <div class="absolute -inset-4 bg-gradient-to-r from-[#5865F2] to-indigo-400 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition duration-500 animate-pulse"></div>
-          <div class="relative w-32 h-32 bg-[#5865F2] rounded-3xl flex items-center justify-center shadow-[0_8px_30px_rgb(88,101,242,0.4)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
-            <Icon name="fa6-brands:discord" class="text-white text-7xl" />
-            <div class="absolute bottom-1.5 right-1.5 w-6 h-6 bg-green-500 border-4 border-[#5865F2] rounded-full"></div>
-          </div>
-        </div>
-
-        <p class="text-sm text-[var(--content)] opacity-75 text-center leading-relaxed mb-8 max-w-[260px] z-10">
-          代码高亮分享、多端语音闲聊、机器人自动化通知。更纯粹的极客交流基地。
-        </p>
-
-        <a href="https://discord.gg/gqxeFx5H" target="_blank" class="relative z-10 w-full max-w-[260px] group flex items-center justify-center gap-3 px-6 py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(88,101,242,0.39)] hover:shadow-[0_6px_20px_rgba(88,101,242,0.23)] hover:-translate-y-0.5 active:scale-95">
-          <Icon name="fa6-solid:paper-plane" class="text-lg group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-          <span>点击一键加入频道</span>
-        </a>
+      <div class="flex flex-col items-center w-full max-w-[240px] z-10 mb-4">
+        <button id="copy-btn" class="group/copy relative flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl hover:border-emerald-500 transition-all shadow-sm w-full justify-between overflow-hidden" onclick="copyWechatId()">
+          <span class="font-mono font-bold text-sm lg:text-base text-[var(--content)] group-hover/copy:text-emerald-600 transition-colors">shenwan96</span>
+          <Icon name="fa6-solid:copy" class="text-gray-400 group-hover/copy:text-emerald-500 transition-colors" />
+          <div id="copy-success" class="absolute inset-0 bg-emerald-500 flex items-center justify-center text-white font-bold text-sm translate-y-full transition-transform duration-300">已复制 🎉</div>
+        </button>
       </div>
     </div>
+
+    <p class="text-[11px] text-emerald-600/80 dark:text-emerald-400/80 font-medium bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-100 dark:border-emerald-800/30 z-10 w-full text-center mt-auto">
+      <Icon name="fa6-solid:pen" class="inline text-[9px] mr-1" /> 添加时备注"博客粉丝"哦
+    </p>
   </div>
 
-  {/* 🔍 新增：二维码放大弹窗 (Lightbox) */}
+  {/* 2. Discord 频道卡片 */}
+  <div class="bg-[var(--card-bg)] rounded-[2rem] p-6 lg:p-8 border border-[var(--line-divider)] shadow-sm flex flex-col items-center justify-between relative overflow-hidden bg-gradient-to-b from-transparent to-[#5865F2]/5 dark:to-[#5865F2]/10 group">
+    <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#5865F2]/10 dark:bg-[#5865F2]/20 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="w-full flex flex-col items-center">
+      <div class="text-center mb-6 relative z-10">
+        <span class="inline-block px-3 py-1 rounded-full bg-[#5865F2]/10 text-[#5865F2] dark:text-[#5865F2] text-[10px] md:text-xs font-bold tracking-widest mb-3 border border-[#5865F2]/20">
+          INTERNATIONAL
+        </span>
+        <h2 class="text-lg md:text-xl font-bold text-[var(--content)] flex items-center justify-center gap-2">
+          <Icon name="fa6-brands:discord" class="text-[#5865F2] text-2xl" /> Discord
+        </h2>
+      </div>
+
+      <div class="relative group/logo mb-8 mt-2 z-10">
+        <div class="absolute -inset-4 bg-gradient-to-r from-[#5865F2] to-indigo-400 rounded-full blur-xl opacity-40 group-hover/logo:opacity-70 transition duration-500 animate-pulse"></div>
+        <div class="relative w-28 h-28 lg:w-32 lg:h-32 bg-[#5865F2] rounded-3xl flex items-center justify-center shadow-[0_8px_30px_rgb(88,101,242,0.4)] group-hover/logo:scale-110 group-hover/logo:-rotate-3 transition-transform duration-500">
+          <Icon name="fa6-brands:discord" class="text-white text-6xl lg:text-7xl" />
+          <div class="absolute bottom-1.5 right-1.5 w-5 h-5 lg:w-6 lg:h-6 bg-green-500 border-4 border-[#5865F2] rounded-full"></div>
+        </div>
+      </div>
+
+      <p class="text-[13px] text-[var(--content)] opacity-75 text-center leading-relaxed mb-6 max-w-[240px] z-10">
+        代码高亮分享、多端语音闲聊、机器人自动化通知。纯粹的极客交流基地。
+      </p>
+    </div>
+
+    <a href="https://discord.gg/gqxeFx5H" target="_blank" class="relative z-10 w-full max-w-[240px] flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(88,101,242,0.39)] hover:-translate-y-0.5 active:scale-95 mt-auto">
+      <Icon name="fa6-solid:paper-plane" class="text-base" />
+      <span class="text-sm">加入频道</span>
+    </a>
+  </div>
+
+  {/* 3. GitHub 开源共建卡片 */}
+  <div class="bg-[var(--card-bg)] rounded-[2rem] p-6 lg:p-8 border border-[var(--line-divider)] shadow-sm flex flex-col items-center justify-between relative overflow-hidden bg-gradient-to-b from-transparent to-gray-100 dark:to-zinc-800/30 group">
+    <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-gray-500/10 dark:bg-gray-400/5 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="w-full flex flex-col items-center">
+      <div class="text-center mb-6 relative z-10">
+        <span class="inline-block px-3 py-1 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 text-[10px] md:text-xs font-bold tracking-widest mb-3 border border-gray-200 dark:border-zinc-700">
+          OPEN SOURCE
+        </span>
+        <h2 class="text-lg md:text-xl font-bold text-[var(--content)] flex items-center justify-center gap-2">
+          <Icon name="fa6-brands:github" class="text-[var(--content)] text-2xl" /> 获取源码
+        </h2>
+      </div>
+
+      <div class="relative group/logo mb-8 mt-2 z-10">
+        <div class="absolute -inset-4 bg-gradient-to-r from-gray-300 to-gray-400 dark:from-zinc-700 dark:to-zinc-600 rounded-full blur-xl opacity-30 group-hover/logo:opacity-60 transition duration-500"></div>
+        <div class="relative w-28 h-28 lg:w-32 lg:h-32 bg-white dark:bg-zinc-800 rounded-3xl flex items-center justify-center shadow-lg border border-gray-100 dark:border-zinc-700 group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-transform duration-500">
+          <Icon name="fa6-brands:github" class="text-[var(--content)] text-6xl lg:text-7xl" />
+        </div>
+      </div>
+
+      <p class="text-[13px] text-[var(--content)] opacity-75 text-center leading-relaxed mb-6 max-w-[240px] z-10">
+        喜欢本站点的设计？源码已完全开源。欢迎提交 PR 共同维护，或赏个 Star ⭐️。
+      </p>
+    </div>
+
+    <a href="https://github.com/ShenWan0906/shenwan-blog" target="_blank" class="relative z-10 w-full max-w-[240px] flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-gray-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 font-bold rounded-xl transition-all shadow-md hover:-translate-y-0.5 active:scale-95 mt-auto">
+      <Icon name="fa6-brands:github" class="text-base" />
+      <span class="text-sm">获取源码 & Star</span>
+    </a>
+  </div>
+
+</div>
+</div>
+
+{/* 🔍 二维码放大弹窗 (保持不变) */}
   <div id="qr-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 transition-opacity opacity-0" onclick="closeQrModal()">
     <div id="qr-modal-content" class="relative bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-2xl scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
       <button class="absolute -top-4 -right-4 w-10 h-10 bg-white dark:bg-zinc-800 rounded-full shadow-lg flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors z-10 border border-gray-100 dark:border-zinc-700" onclick="closeQrModal()">
@@ -174,7 +210,7 @@ const description =
     </div>
   </div>
 
-  {/* 脚本逻辑区域：绑定在 window 上兼容无刷新跳转 */}
+  {/* 脚本逻辑区域 */}
   <script is:inline>
     // 微信 ID 复制逻辑
     window.copyWechatId = function() {
@@ -200,7 +236,6 @@ const description =
       const content = document.getElementById("qr-modal-content");
       
       modal.classList.remove("hidden");
-      // 触发一次重绘以确保动画生效
       void modal.offsetWidth; 
       
       modal.classList.remove("opacity-0");
@@ -217,7 +252,6 @@ const description =
       content.classList.remove("scale-100");
       content.classList.add("scale-95");
       
-      // 等待 CSS 动画结束后隐藏
       setTimeout(() => {
         modal.classList.add("hidden");
       }, 300);
