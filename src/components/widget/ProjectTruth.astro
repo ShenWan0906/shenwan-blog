@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon/components';
+import { projectTruths } from '../../constants/projectTruths';
+import WidgetLayout from './WidgetLayout.astro';
+---
+
+<WidgetLayout name="今日项目真相" id="project-truth">
+    <div class="flex flex-col px-4 pb-4 pt-2">
+        
+        {/* ✨ 真相文本区：恢复温柔的浅蓝底色，去掉生硬的边框和纯黑 */}
+        <div class="relative bg-blue-50/60 dark:bg-blue-900/10 rounded-2xl p-5 flex flex-col items-center justify-center min-h-[110px] border border-blue-100/50 dark:border-blue-800/20">
+            
+            {/* 顶部居中装饰小引号：改用非常清透的浅蓝色，只做点缀不抢戏 */}
+            <Icon 
+                name="fa6-solid:quote-left" 
+                class="text-3xl text-blue-300/40 dark:text-blue-500/30 mb-2" 
+            />
+            
+            {/* 居中文本：放弃纯黑与过度加粗，使用 slate-600（柔和深灰）和 medium 字重 */}
+            <p 
+                id="truth-text" 
+                class="text-[13px] md:text-sm text-center text-slate-600 dark:text-slate-300 font-medium leading-relaxed transition-opacity duration-300 text-balance relative z-10"
+            >
+                {projectTruths[0]}
+            </p>
+        </div>
+
+        {/* ✨ 底部操作区：清爽的浅蓝底色 + 蓝色文字按钮 */}
+        <button 
+            id="change-truth-btn"
+            class="mt-3 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-50/80 hover:bg-blue-100 dark:bg-zinc-800/50 dark:hover:bg-blue-900/20 text-blue-500 dark:text-blue-400 text-xs font-bold transition-all active:scale-[0.98] group/btn"
+        >
+            <Icon name="fa6-solid:rotate-right" class="text-[12px] group-hover/btn:animate-spin" />
+            <span class="tracking-widest">再来一条</span>
+        </button>
+        
+    </div>
+</WidgetLayout>
+
+<script define:vars={{ projectTruths }}>
+    function initTruthCard() {
+        const textEl = document.getElementById('truth-text');
+        const btnEl = document.getElementById('change-truth-btn');
+        let currentIndex = 0;
+
+        const getRandomTruth = () => {
+            if (projectTruths.length <= 1) return projectTruths[0];
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * projectTruths.length);
+            } while (newIndex === currentIndex);
+            
+            currentIndex = newIndex;
+            return projectTruths[currentIndex];
+        };
+
+        const updateText = () => {
+            if (!textEl) return;
+            textEl.style.opacity = '0';
+            
+            setTimeout(() => {
+                textEl.innerText = getRandomTruth();
+                textEl.style.opacity = '1';
+            }, 300);
+        };
+
+        // 首次加载覆盖默认文本
+        updateText();
+
+        if (btnEl) {
+            btnEl.removeEventListener('click', updateText);
+            btnEl.addEventListener('click', updateText);
+        }
+    }
+
+    initTruthCard();
+    document.addEventListener('swup:content_replaced', initTruthCard);
+</script>
