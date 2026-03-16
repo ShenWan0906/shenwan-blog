@@ -65,7 +65,7 @@ export const projects: Project[] = [
     }
   },
   {
-    title: "蓝焰助手 - AI Agent 智能客服",
+    title: "AI Agent 智能客服",
     description: "一个基于 Agent 架构的智能化中台系统。通过独立构建的会话管理中心，实现了大模型与企业私有工具的深度协同。",
     role: "核心开发者 | 会话管理",
     year: "2026",
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     }
   },
   {
-    title: "海外百万级HES物联网中台",
+    title: "海外IoT物联网中台",
     description: "面向海外市场的全球化IoT平台，基于JetLinks二次开发。核心负责多语言动态配置中心与千万级GIS地图中台建设。",
     role: "后端开发 | 核心模块设计",
     year: "2025",
