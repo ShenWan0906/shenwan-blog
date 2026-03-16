@@ -6,6 +6,7 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
   <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-4 sm:px-6 py-6 relative w-full flex flex-col gap-6 bg-transparent">
       
+      {/* --- 1. 顶部全景控制台 --- */}
       <div class="relative w-full rounded-3xl p-6 sm:p-8 overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 group flex flex-col justify-between min-h-[180px]">
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
         <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/10 blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
@@ -50,6 +51,7 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
         </div>
       </div>
 
+      {/* --- 2. 核心数据六宫格 --- */}
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         
         <div class="bg-white/50 dark:bg-zinc-900/50 border border-black/5 dark:border-white/5 p-5 rounded-3xl flex flex-col justify-between h-36 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
@@ -168,8 +170,8 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
         </div>
       </div>
 
+      {/* --- 3. 图表区域：流量与雷达 --- */}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto min-h-[350px]">
-        
         <div class="md:col-span-2 bg-white/50 dark:bg-zinc-900/50 border border-black/5 dark:border-white/5 rounded-3xl p-6 flex flex-col relative overflow-hidden">
           <div class="flex justify-between items-center mb-4 z-10">
             <div>
@@ -197,6 +199,33 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
           <div id="radar-chart" class="w-full h-full min-h-[250px]"></div>
         </div>
       </div>
+
+      {/* --- 4. 新增：创作热力图 (GitHub Style) --- */}
+      <div class="bg-white/50 dark:bg-zinc-900/50 border border-black/5 dark:border-white/5 rounded-3xl p-6 flex flex-col mt-2 relative overflow-x-auto custom-scrollbar">
+        <div class="flex justify-between items-center mb-6 min-w-[700px]">
+          <div>
+            <h3 class="text-sm font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-widest flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-orange-500"></i> 创作热力图
+            </h3>
+            <p class="text-[10px] text-zinc-500 mt-1 font-mono">ANNUAL WRITING FREQUENCY</p>
+          </div>
+          <div class="flex items-center gap-2 text-[10px] font-bold text-zinc-500 dark:text-zinc-400">
+            <span>Less</span>
+            <div class="flex gap-1">
+              {/* 深浅模式图例 */}
+              <div class="w-3 h-3 rounded-sm bg-zinc-100 dark:bg-zinc-800"></div>
+              <div class="w-3 h-3 rounded-sm bg-orange-200 dark:bg-orange-900/40"></div>
+              <div class="w-3 h-3 rounded-sm bg-orange-300 dark:bg-orange-700/60"></div>
+              <div class="w-3 h-3 rounded-sm bg-orange-400 dark:bg-orange-600/80"></div>
+              <div class="w-3 h-3 rounded-sm bg-orange-500 dark:bg-orange-500"></div>
+            </div>
+            <span>More</span>
+          </div>
+        </div>
+        {/* 热力图容器 */}
+        <div id="heatmap-chart" class="w-full min-w-[700px] h-[180px]"></div>
+      </div>
+
     </div>
   </div>
 
@@ -205,8 +234,8 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
 
   <script is:inline>
     {
-      const START_DATE = "2025-02-03"; // 替换为你的真实建站日期
-      const TOTAL_ARTICLES = 100;      // 替换为你的真实文章总数 (可以从Astro前端传进来，这里演示写死)
+      const START_DATE = "2025-02-03"; 
+      const TOTAL_ARTICLES = 100;      
       
       let clockInterval;
       let chartInterval;
@@ -229,12 +258,8 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
       };
 
       const initBasicFeatures = () => {
-        // --- 触发数字动画 ---
-        setTimeout(() => {
-           animateValue("article-count", 0, TOTAL_ARTICLES, 2000);
-        }, 500); // 稍微延迟体验更好
+        setTimeout(() => animateValue("article-count", 0, TOTAL_ARTICLES, 2000), 500); 
 
-        // --- 时钟 & 问候 ---
         const updateTime = () => {
           const now = new Date();
           const hour = now.getHours();
@@ -261,14 +286,12 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
         clockInterval = setInterval(updateTime, 1000);
         updateTime();
 
-        // --- 建站时长 ---
         const start = new Date(START_DATE);
         const diff = new Date() - start;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         animateValue("run-days", 0, days, 2000);
         document.getElementById("start-date-display").innerText = `Since ${START_DATE}`;
 
-        // --- 环境检测 ---
         const ua = navigator.userAgent;
         let os = "Unknown OS";
         if (ua.includes("Win")) os = "Windows";
@@ -287,12 +310,10 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
         document.getElementById("user-browser").innerText = browser;
         document.getElementById("user-screen").innerText = `${window.screen.width} × ${window.screen.height}`;
 
-        // --- 模拟网络Ping ---
         const updateNetwork = () => {
           const pingEl = document.getElementById("net-ping");
           const typeEl = document.getElementById("net-type");
           if(pingEl) {
-            // 模拟 12 ~ 35 之间的抖动延迟
             const ping = Math.floor(Math.random() * 23) + 12; 
             pingEl.innerText = ping;
             pingEl.className = ping > 30 
@@ -314,21 +335,23 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
       const initCharts = () => {
         const trafficDom = document.getElementById("traffic-chart");
         const radarDom = document.getElementById("radar-chart");
-        if (!trafficDom || !radarDom) return;
-
-        // --- 1. 双线流量图 (Inbound/Outbound) ---
-        const trafficChart = echarts.getInstanceByDom(trafficDom) || echarts.init(trafficDom);
+        const heatmapDom = document.getElementById("heatmap-chart"); // 获取热力图容器
         
-        // 生成初始数据
+        if (!trafficDom || !radarDom || !heatmapDom) return;
+
+        const isDark = document.documentElement.classList.contains('dark');
+
+        // --- 1. 双线流量图 ---
+        const trafficChart = echarts.getInstanceByDom(trafficDom) || echarts.init(trafficDom);
         let dataIn = Array.from({ length: 20 }, () => Math.floor(Math.random() * 50) + 20);
         let dataOut = Array.from({ length: 20 }, () => Math.floor(Math.random() * 30) + 10);
         
-        const trafficOption = {
+        trafficChart.setOption({
           grid: { top: 10, right: 0, bottom: 0, left: 0 },
           tooltip: { 
             trigger: "axis", 
-            backgroundColor: 'rgba(0,0,0,0.8)', 
-            textStyle: {color: '#fff'},
+            backgroundColor: isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.9)', 
+            textStyle: {color: isDark ? '#fff' : '#000'},
             borderWidth: 0,
             formatter: "请求: {c0} /s<br/>响应: {c1} /s" 
           },
@@ -336,97 +359,150 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
           yAxis: { type: "value", show: false, min: 0, max: 100 },
           series: [
             {
-              name: "Inbound",
-              type: "line",
-              smooth: 0.4,
-              symbol: 'none',
-              data: dataIn,
-              lineStyle: { width: 3, color: '#3b82f6' }, // Blue
+              name: "Inbound", type: "line", smooth: 0.4, symbol: 'none', data: dataIn,
+              lineStyle: { width: 3, color: '#3b82f6' },
               areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: "rgba(59, 130, 246, 0.4)" },
-                  { offset: 1, color: "rgba(59, 130, 246, 0.0)" }
+                  { offset: 0, color: "rgba(59, 130, 246, 0.4)" }, { offset: 1, color: "rgba(59, 130, 246, 0.0)" }
                 ])
               }
             },
             {
-              name: "Outbound",
-              type: "line",
-              smooth: 0.4,
-              symbol: 'none',
-              data: dataOut,
-              lineStyle: { width: 3, color: '#10b981' }, // Emerald
+              name: "Outbound", type: "line", smooth: 0.4, symbol: 'none', data: dataOut,
+              lineStyle: { width: 3, color: '#10b981' },
               areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: "rgba(16, 185, 129, 0.4)" },
-                  { offset: 1, color: "rgba(16, 185, 129, 0.0)" }
+                  { offset: 0, color: "rgba(16, 185, 129, 0.4)" }, { offset: 1, color: "rgba(16, 185, 129, 0.0)" }
                 ])
               }
             }
           ]
-        };
-        trafficChart.setOption(trafficOption);
+        });
 
-        // 动态更新数据
         if (chartInterval) clearInterval(chartInterval);
         chartInterval = setInterval(() => {
           if (!document.getElementById("traffic-chart")) return;
-          
-          dataIn.shift();
-          dataIn.push(Math.floor(Math.random() * 50) + 20);
-          
-          dataOut.shift();
-          dataOut.push(Math.floor(Math.random() * 30) + 10);
-          
-          trafficChart.setOption({ 
-            series: [
-              { data: dataIn },
-              { data: dataOut }
-            ] 
-          });
+          dataIn.shift(); dataIn.push(Math.floor(Math.random() * 50) + 20);
+          dataOut.shift(); dataOut.push(Math.floor(Math.random() * 30) + 10);
+          trafficChart.setOption({ series: [{ data: dataIn }, { data: dataOut }] });
         }, 2000);
 
         // --- 2. 科技感雷达图 ---
         const radarChart = echarts.getInstanceByDom(radarDom) || echarts.init(radarDom);
-        const isDark = document.documentElement.classList.contains('dark');
         const radarColor = isDark ? '#a1a1aa' : '#52525b';
         
-        const radarOption = {
-          tooltip: { show: true, backgroundColor: 'rgba(0,0,0,0.8)', textStyle: {color: '#fff'}, borderWidth: 0 },
+        radarChart.setOption({
+          tooltip: { show: true, backgroundColor: isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.9)', textStyle: {color: isDark ? '#fff' : '#000'}, borderWidth: 0 },
           radar: {
             indicator: [
-              { name: "硬核代码", max: 100 },
-              { name: "写作排版", max: 100 },
-              { name: "更新频率", max: 100 },
-              { name: "站点性能", max: 100 },
-              { name: "设计审美", max: 100 }
+              { name: "硬核代码", max: 100 }, { name: "写作排版", max: 100 }, { name: "更新频率", max: 100 },
+              { name: "站点性能", max: 100 }, { name: "设计审美", max: 100 }
             ],
-            radius: '65%',
-            splitNumber: 4,
+            radius: '65%', splitNumber: 4,
             axisName: { color: radarColor, fontSize: 11, fontWeight: 'bold' },
             splitLine: { lineStyle: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' } },
             splitArea: { show: false },
             axisLine: { lineStyle: { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' } }
           },
-          series: [
-            {
-              type: "radar",
-              symbol: 'circle',
-              symbolSize: 6,
-              itemStyle: { color: '#6366f1' }, // Indigo
-              lineStyle: { width: 2 },
-              areaStyle: { color: "rgba(99, 102, 241, 0.3)" },
-              data: [
-                { value: [90, 85, 75, 95, 88], name: "当前属性值" }
-              ]
-            }
-          ]
-        };
-        radarChart.setOption(radarOption);
+          series: [{
+            type: "radar", symbol: 'circle', symbolSize: 6,
+            itemStyle: { color: '#6366f1' }, lineStyle: { width: 2 },
+            areaStyle: { color: "rgba(99, 102, 241, 0.3)" },
+            data: [{ value: [90, 85, 75, 95, 88], name: "当前属性" }]
+          }]
+        });
 
+        // --- 3. 创作热力图 (GitHub Style) ---
+        const heatmapChart = echarts.getInstanceByDom(heatmapDom) || echarts.init(heatmapDom);
+        
+        // 生成模拟数据：过去 365 天的文章分布
+        const getHeatmapData = () => {
+            const data = [];
+            const endDate = new Date();
+            const startDate = new Date(endDate.getTime() - 365 * 24 * 3600 * 1000);
+            
+            for (let time = startDate.getTime(); time <= endDate.getTime(); time += 86400000) {
+                // 模拟数据：大约20%的日子有更新，更新数量在1-4之间
+                const count = Math.random() > 0.8 ? Math.floor(Math.random() * 4) + 1 : 0;
+                data.push([
+                    echarts.format.formatTime('yyyy-MM-dd', time),
+                    count
+                ]);
+            }
+            return data;
+        };
+
+        const startDateStr = echarts.format.formatTime('yyyy-MM-dd', new Date(new Date().getTime() - 365 * 24 * 3600 * 1000));
+        const endDateStr = echarts.format.formatTime('yyyy-MM-dd', new Date());
+        
+        // 配色方案适配深浅模式
+        const emptyCellColor = isDark ? '#27272a' : '#f4f4f5'; // zinc-800 / zinc-100
+        const borderColor = isDark ? '#18181b' : '#ffffff';    // 背景色作为边框分割
+        
+        heatmapChart.setOption({
+            tooltip: {
+                position: 'top',
+                formatter: function (p) {
+                    const count = p.data[1];
+                    const text = count === 0 ? 'No posts' : `${count} posts`;
+                    return `<div style="font-size:12px">${text} on ${p.data[0]}</div>`;
+                },
+                backgroundColor: isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.9)',
+                textStyle: { color: isDark ? '#fff' : '#000' },
+                borderWidth: 0,
+                padding: [4, 8]
+            },
+            visualMap: {
+                show: false,
+                min: 0,
+                max: 4,
+                inRange: {
+                    // 与 HTML 结构中展示的图例颜色保持一致 (Orange theme)
+                    color: isDark 
+                      ? [emptyCellColor, 'rgba(124, 45, 18, 0.4)', 'rgba(194, 65, 12, 0.6)', 'rgba(234, 88, 12, 0.8)', '#f97316'] 
+                      : [emptyCellColor, '#fbd38d', '#f6ad55', '#ed8936', '#f97316']
+                }
+            },
+            calendar: {
+                top: 20,
+                left: 30,
+                right: 10,
+                bottom: 10,
+                cellSize: ['auto', 14], // 高度固定，宽度自动以充满容器
+                range: [startDateStr, endDateStr],
+                itemStyle: {
+                    color: emptyCellColor,
+                    borderWidth: 3,
+                    borderColor: borderColor,
+                    borderRadius: 2
+                },
+                splitLine: { show: false }, // 不显示月份分割线，更像 GitHub
+                yearLabel: { show: false },
+                monthLabel: {
+                    nameMap: 'EN',
+                    color: isDark ? '#a1a1aa' : '#71717a',
+                    fontSize: 10,
+                    margin: 5
+                },
+                dayLabel: {
+                    firstDay: 1,
+                    nameMap: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                    color: isDark ? '#a1a1aa' : '#71717a',
+                    fontSize: 10
+                }
+            },
+            series: {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                data: getHeatmapData()
+            }
+        });
+
+        // 监听窗口大小变化重新渲染
         window.addEventListener("resize", () => {
           trafficChart.resize();
           radarChart.resize();
+          heatmapChart.resize();
         });
       };
 
@@ -446,4 +522,18 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
       loadECharts();
     }
   </script>
+  
+  <style>
+    /* 隐藏横向滚动条，但保留滚动功能（适配小屏幕） */
+    .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(156, 163, 175, 0.3);
+        border-radius: 10px;
+    }
+  </style>
 </MainGridLayout>
