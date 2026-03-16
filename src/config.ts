@@ -50,7 +50,7 @@ export const navBarConfig: NavBarConfig = {
     },
     LinkPreset.Dashboard,
     {
-      name: "项目案例",
+      name: "案例",
       url: "/projects/",
     },
     {
@@ -58,7 +58,7 @@ export const navBarConfig: NavBarConfig = {
       url: "/lab/",
     },
     {
-      name: "资源工坊",
+      name: "资源",
       url: "/resources/",
       external: true,
     },
@@ -67,7 +67,7 @@ export const navBarConfig: NavBarConfig = {
       url: "/red/",
     },
     {
-      name: "加入我们",
+      name: "加入",
       url: "/join/",
     },
     LinkPreset.About,
