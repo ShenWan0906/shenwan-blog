@@ -3,37 +3,129 @@ import { Icon } from "astro-icon/components";
 import { profileConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
+// 引入你的微信二维码图片
+import qrCodeImg from "../../constants/images/card.jpg"; 
 
 const config = profileConfig;
 ---
-<div class="card-base p-3">
-    <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
-            <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
-            </Icon>
+
+<div class="card-base p-0 w-full relative perspective-1000">
+  {/* 3D 翻转控制层 */}
+  <div id="profile-flipper" class="relative w-full transition-transform duration-700 transform-style-3d">
+    
+    {/* ================= 正面：原版动态名片 ================= */}
+    <div class="front backface-hidden w-full p-3 bg-[var(--card-bg)] rounded-[var(--radius-large)] z-10 flex flex-col">
+      <button 
+        onclick="toggleProfileFlip()"
+        aria-label="查看隐藏联系方式" 
+        class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3 max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95 cursor-pointer w-full"
+      >
+        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center">
+          <Icon name="fa6-solid:qrcode" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl drop-shadow-lg" />
         </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
-    </a>
-    <div class="px-2">
+        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0"></ImageWrapper>
+      </button>
+
+      <div class="px-2">
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
         <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
+        <div class="text-center text-neutral-400 mb-2.5 transition text-sm">{config.bio}</div>
+        
         <div class="flex flex-wrap gap-2 justify-center mb-1">
-            {config.links.length > 1 && config.links.map(item =>
-                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                    </a>
-            )}
-            {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={config.links[0].icon} class="text-[1.5rem]"></Icon>
-                {config.links[0].name}
-            </a>}
+          {config.links.length > 1 && config.links.map(item =>
+            <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90 flex items-center justify-center">
+              <Icon name={item.icon} class="text-[1.5rem]" />
+            </a>
+          )}
+          {config.links.length == 1 && (
+            <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank" class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95 flex items-center justify-center">
+              <Icon name={config.links[0].icon} class="text-[1.5rem]" />
+              {config.links[0].name}
+            </a>
+          )}
         </div>
+      </div>
     </div>
+
+    {/* ================= 背面：微信彩蛋 (优化排版版) ================= */}
+    <div onclick="toggleProfileFlip()" class="back absolute inset-0 backface-hidden rotate-y-180 bg-[var(--card-bg)] rounded-[var(--radius-large)] border border-emerald-500/20 shadow-xl flex flex-col items-center justify-between p-4 py-5 cursor-pointer group/back">
+      
+      {/* 1. 顶部标题区 */}
+      <div class="text-center relative z-10 w-full">
+        <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-widest mb-1.5 border border-emerald-200 dark:border-emerald-800/50">
+          LET'S CONNECT
+        </span>
+        <h2 class="text-base font-bold text-[var(--content)] flex items-center justify-center gap-1.5">
+          <Icon name="fa6-brands:weixin" class="text-[#07C160] text-lg" /> 主理人微信
+        </h2>
+      </div>
+
+      {/* 2. 中间二维码区 (使用 flex-1 占据所有剩余空间，并大幅放大图片) */}
+      <div class="relative z-10 flex-1 flex items-center justify-center w-full my-2">
+        <div class="absolute inset-4 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full blur-xl opacity-20"></div>
+        {/* 尺寸改为 w-full max-w-[170px]，几乎撑满整个卡片宽度 */}
+        <img src={qrCodeImg.src} alt="微信二维码" class="relative w-full max-w-[170px] aspect-square object-contain rounded-xl shadow-sm border-2 border-gray-100 dark:border-zinc-700 bg-white p-1" />
+      </div>
+
+      {/* 3. 底部操作区 (推到最底部) */}
+      <div class="w-full flex flex-col items-center z-10">
+        
+        {/* 复制微信号按钮 */}
+        <div class="w-full max-w-[180px] mb-3">
+          <button id="copy-btn" class="group/copy relative flex items-center gap-3 px-3 py-1.5 bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-zinc-700 rounded-lg hover:border-emerald-500 transition-all shadow-sm w-full justify-between overflow-hidden cursor-pointer" onclick="event.stopPropagation(); copyWechatId();">
+            <span class="font-mono font-bold text-xs text-[var(--content)] group-hover/copy:text-emerald-600 transition-colors">shenwan96</span>
+            <Icon name="fa6-solid:copy" class="text-gray-400 text-xs group-hover/copy:text-emerald-500 transition-colors" />
+            <div id="copy-success" class="absolute inset-0 bg-emerald-500 flex items-center justify-center text-white font-bold text-xs translate-y-full transition-transform duration-300">已复制 🎉</div>
+          </button>
+        </div>
+
+        {/* 翻回提示文字 */}
+        <div class="text-[10px] text-gray-400 opacity-50 group-hover/back:opacity-100 transition-opacity flex items-center gap-1">
+          <Icon name="fa6-solid:rotate-left" /> 点击卡片任意处翻回
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
+<script is:inline>
+  function toggleProfileFlip() {
+    const flipper = document.getElementById('profile-flipper');
+    if (flipper) {
+      flipper.classList.toggle('is-flipped');
+    }
+  }
+
+  function copyWechatId() {
+    const wechatId = "shenwan96"; // 你的微信号
+    navigator.clipboard.writeText(wechatId).then(() => {
+      const successToast = document.getElementById('copy-success');
+      successToast.classList.remove('translate-y-full');
+      setTimeout(() => {
+        successToast.classList.add('translate-y-full');
+      }, 1500);
+    });
+  }
+</script>
+
+<style>
+  /* 3D 翻转核心 CSS */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  .is-flipped {
+    transform: rotateY(180deg);
+  }
+</style>
