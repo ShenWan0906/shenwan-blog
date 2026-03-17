@@ -1,4 +1,5 @@
 ---
+// src/pages/projects.astro
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { projects } from "../constants/projects";
 import { Icon } from "astro-icon/components";
@@ -9,224 +10,62 @@ const description = "西瓜主管的项目经验与技术成果展示";
 ---
 
 <MainGridLayout title={title} description={description}>
-  
   {/* 1. 头部介绍 */}
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-6">
+  <div
+    class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-6"
+  >
     <div class="card-base z-10 px-6 md:px-9 pt-8 pb-8 relative w-full">
-        <Icon name="material-symbols:rocket-launch-rounded" 
-              class="absolute right-6 top-6 text-9xl -rotate-12 pointer-events-none text-[var(--primary)] opacity-10" />
-        <h1 class="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-3 text-[var(--primary)]">
-            <Icon name="material-symbols:track-changes-rounded" /> 项目工坊
-        </h1>
-        <p class="text-sm md:text-base leading-relaxed max-w-2xl text-slate-600 dark:text-gray-300">
-            聚合技术深耕与管理沉淀。点击卡片下钻查看 <span class="text-[var(--primary)] font-bold">详细架构</span> 与 <span class="text-[var(--primary)] font-bold">复盘数据</span>。
-        </p>
+      <Icon
+        name="material-symbols:rocket-launch-rounded"
+        class="absolute right-6 top-6 text-9xl -rotate-12 pointer-events-none text-[var(--primary)] opacity-10"
+      />
+      <h1
+        class="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-3 text-[var(--primary)]"
+      >
+        <Icon name="material-symbols:track-changes-rounded" /> 项目工坊
+      </h1>
+      <p
+        class="text-sm md:text-base leading-relaxed max-w-2xl text-slate-600 dark:text-gray-300"
+      >
+        聚合技术深耕与管理沉淀。点击卡片下钻查看 <span
+          class="text-[var(--primary)] font-bold">详细架构</span
+        > 与 <span class="text-[var(--primary)] font-bold">复盘数据</span>。
+      </p>
     </div>
   </div>
 
-  {/* 2. 项目卡片网格 */}
+  {/* 2. 项目卡片网格 (核心变化：用 <a> 标签替代 <button>) */}
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-8">
-    {projects.map((project, index) => (
-      <button 
-        onclick={`openProjectModal(${index})`}
-        class="group relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:-translate-y-1.5 text-left w-full"
-      >
-        <div class="card-base h-full flex flex-col overflow-hidden relative z-10 rounded-2xl transform-gpu transition-all duration-300 group-hover:shadow-xl group-hover:border-[var(--primary)]/30">
-            <div class="relative w-full aspect-[16/9] overflow-hidden bg-slate-100 dark:bg-slate-800">
-                <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    onerror={`this.onerror=null; this.src='${defaultCover.src}';`}
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+    {
+      projects.map((project, index) => (
+        <a
+          href={`/project/${index}/`}
+          class="group relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:-translate-y-1.5 text-left w-full"
+        >
+          <div class="card-base h-full flex flex-col overflow-hidden relative z-10 rounded-2xl transform-gpu transition-all duration-300 group-hover:shadow-xl group-hover:border-[var(--primary)]/30">
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <img
+                src={project.image}
+                alt={project.title}
+                onerror={`this.onerror=null; this.src='${defaultCover.src}';`}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
             </div>
 
             <div class="p-5 flex flex-col flex-1 relative">
-                <div class="mb-3">
-                    <span class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--primary)]/15">
-                        {project.role}
-                    </span>
-                </div>
-                <h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-gray-100 group-hover:text-[var(--primary)]">{project.title}</h3>
-                <p class="text-[14px] leading-relaxed text-slate-500 dark:text-gray-400 line-clamp-2">{project.description}</p>
-            </div>
-        </div>
-      </button>
-    ))}
-  </div>
-
-  {/* 3. 详情弹窗 (Modals) - 内容与装饰分离版 */}
-  {projects.map((project, index) => (
-    <dialog id={`dialog-${index}`} class="modal p-0 m-auto w-[92vw] max-w-5xl rounded-3xl border-none bg-white dark:bg-[#1a1b1e] shadow-2xl overflow-hidden no-scrollbar">
-      <div class="flex flex-col max-h-[90vh] relative overflow-hidden">
-        
-        {/* 悬浮关闭按钮 */}
-        <form method="dialog" class="absolute top-5 right-5 z-50">
-          <button onclick="closeProjectModal(this.closest('dialog'))" class="flex items-center justify-center w-10 h-10 rounded-full bg-white/90 dark:bg-black/40 text-slate-600 dark:text-white backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg transition-all hover:scale-110 active:scale-90">
-            <Icon name="material-symbols:close-rounded" class="text-xl" />
-          </button>
-        </form>
-
-        <div class="overflow-y-auto custom-scrollbar flex-1">
-          
-          {/* ✨ Banner 区：纯净展示图片，无任何遮挡 */}
-          <div class="relative w-full h-48 md:h-64 bg-slate-100 dark:bg-slate-900 border-b border-slate-100 dark:border-white/5">
-            <img 
-              src="/images/demo-banner.png" 
-              class="absolute inset-0 w-full h-full object-cover" 
-              alt="Project Banner" 
-              onerror={`this.onerror=null; this.src='${defaultCover.src}';`} 
-            />
-          </div>
-
-          {/* ✨ 独立标题区：干净、清晰、高对比度 */}
-          <div class="px-8 md:px-10 pt-8 pb-6 bg-white dark:bg-[#1a1b1e]">
-            <div class="flex flex-wrap items-center gap-3 mb-4">
-               <span class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest bg-[var(--primary)] text-white rounded-full shadow-sm">
+              <div class="mb-3">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--primary)]/15">
                   {project.role}
-               </span>
-               <span class="text-sm font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
-                  <Icon name="material-symbols:calendar-month-rounded" class="text-base" /> {project.year}
-               </span>
-            </div>
-            <h2 class="text-2xl md:text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-snug">
-               {project.title}
-            </h2>
-          </div>
-
-          <div class="px-8 md:px-10 pb-10 space-y-12">
-            
-            {/* 动态统计指标 */}
-            {project.details?.stats && (
-              <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
-                {project.details.stats.map(stat => (
-                  <div class="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 transition-colors hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md">
-                    <div class="text-2xl font-black text-[var(--primary)]">{stat.label === '服务器成本' ? '99.9%' : stat.value}</div>
-                    <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-1">
-                        {stat.label === '服务器成本' ? '系统可用性' : stat.label}
-                    </div>
-                  </div>
-                ))}
+                </span>
               </div>
-            )}
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-              <div class="lg:col-span-8 space-y-10">
-                <section>
-                  <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
-                    <div class="w-1 h-5 bg-[var(--primary)] rounded-full"></div> 项目背景
-                  </h3>
-                  <p class="text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-white/5 p-6 rounded-2xl">
-                    {project.details?.background}
-                  </p>
-                </section>
-
-                <section>
-                  <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-                    <div class="w-1 h-5 bg-[var(--primary)] rounded-full"></div> 核心职责
-                  </h3>
-                  <div class="space-y-4">
-                    {project.details?.responsibility.map((item, idx) => (
-                      <div class="flex gap-4 p-5 rounded-xl bg-slate-50/50 dark:bg-white/[0.02] border border-slate-100 dark:border-white/5">
-                        <span class="text-sm font-black text-[var(--primary)] opacity-40">0{idx + 1}</span>
-                        <p class="text-[14px] text-slate-600 dark:text-slate-300 leading-relaxed">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </div>
-
-              <div class="lg:col-span-4 space-y-8">
-                 <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                    <h4 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase mb-4 tracking-widest">关键技术栈</h4>
-                    <div class="flex flex-wrap gap-2">
-                      {/* ✨ 技术标签悬浮放大特效 */}
-                      {project.details?.tech.map(t => (
-                        <span class="text-[10px] font-bold px-3 py-2 rounded-lg bg-white dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-transform duration-300 hover:scale-110 cursor-default hover:text-[var(--primary)] hover:border-[var(--primary)]/30 shadow-sm">
-                            {t}
-                        </span>
-                      ))}
-                    </div>
-                 </div>
-                 
-                 {project.details?.metrics && (
-                   <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                      <h4 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase mb-5 tracking-widest">量化提升</h4>
-                      <div class="space-y-6">
-                        {project.details.metrics.map(metric => (
-                          <div>
-                            <div class="flex justify-between text-[11px] font-bold mb-2">
-                              <span class="text-slate-500 dark:text-slate-400">{metric.name}</span>
-                              <span class="text-[var(--primary)]">{metric.val}</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
-                              <div class="h-full bg-[var(--primary)] rounded-full transition-all duration-1000" style={`width: ${metric.width}`}></div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                   </div>
-                 )}
-              </div>
+              <h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-gray-100 group-hover:text-[var(--primary)]">
+                {project.title}
+              </h3>
+              <p class="text-[14px] leading-relaxed text-slate-500 dark:text-gray-400 line-clamp-4">{project.description}</p>
             </div>
           </div>
-        </div>
-      </div>
-    </dialog>
-  ))}
-</MainGridLayout>
-
-<script is:inline>
-  function lockScroll() {
-    document.documentElement.classList.add('modal-open');
-    document.body.classList.add('modal-open');
-  }
-  function unlockScroll() {
-    document.documentElement.classList.remove('modal-open');
-    document.body.classList.remove('modal-open');
-  }
-  window.openProjectModal = function(index) {
-    const dialog = document.getElementById(`dialog-${index}`);
-    if (dialog) {
-      lockScroll();
-      dialog.showModal();
-      const scrollContainer = dialog.querySelector('.overflow-y-auto');
-      if (scrollContainer) scrollContainer.scrollTop = 0;
+        </a>
+      ))
     }
-  }
-  window.closeProjectModal = function(dialog) {
-    unlockScroll();
-    dialog.close();
-  }
-  document.querySelectorAll('dialog').forEach(dialog => {
-    dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) {
-        unlockScroll();
-        dialog.close();
-      }
-    });
-    dialog.addEventListener('cancel', () => unlockScroll());
-  });
-</script>
-
-<style is:global>
-  html.modal-open, body.modal-open {
-    overflow: hidden !important;
-    height: 100vh !important;
-    overscroll-behavior: none !important;
-  }
-  dialog::backdrop {
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  dialog[open] {
-    animation: zoom-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  @keyframes zoom-in {
-    from { opacity: 0; transform: scale(0.95) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 10px; }
-</style>
+  </div>
+</MainGridLayout>
