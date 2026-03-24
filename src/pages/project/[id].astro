@@ -5,7 +5,6 @@ import { projects } from "../../constants/projects";
 import { Icon } from "astro-icon/components";
 import defaultCover from "../../constants/images/cover.jpeg";
 
-// 1. 生成所有动态路径，把项目数据作为 props 传给页面
 export async function getStaticPaths() {
   return projects.map((project, index) => ({
     params: { id: index.toString() },
@@ -13,7 +12,6 @@ export async function getStaticPaths() {
   }));
 }
 
-// 2. 接收当前页面的项目数据
 const { project } = Astro.props;
 ---
 
@@ -23,16 +21,14 @@ const { project } = Astro.props;
 >
   {/* 项目详情主体容器 */}
   <div
-    class="bg-white dark:bg-[#1a1b1e] rounded-[var(--radius-large)] overflow-hidden shadow-sm border border-slate-100 dark:border-white/5"
+    class="bg-white dark:bg-[#1a1b1e] rounded-[var(--radius-large)] overflow-hidden shadow-sm border border-slate-100 dark:border-white/5 pb-16"
   >
     {/* ✨ Banner 区 */}
-    <div
-      class="relative w-full h-48 md:h-72 bg-slate-100 dark:bg-slate-900 border-b border-slate-100 dark:border-white/5"
-    >
+    <div class="relative w-full h-56 md:h-80 bg-slate-100 dark:bg-slate-900">
       {/* 悬浮返回按钮 */}
       <a
         href="/projects/"
-        class="absolute top-4 left-4 md:top-6 md:left-6 z-20 group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/60 dark:bg-black/40 backdrop-blur-md border border-white/40 dark:border-white/10 text-slate-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-black/60 transition-all duration-300 font-bold text-sm shadow-sm hover:shadow-md"
+        class="absolute top-4 left-4 md:top-6 md:left-6 z-20 group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/70 dark:bg-black/50 backdrop-blur-md border border-white/50 dark:border-white/10 text-slate-800 dark:text-gray-200 hover:bg-white transition-all duration-300 font-bold text-sm shadow-sm"
       >
         <Icon
           name="material-symbols:arrow-back-rounded"
@@ -48,132 +44,178 @@ const { project } = Astro.props;
         alt="Project Banner"
         onerror={`this.onerror=null; this.src='${defaultCover.src}';`}
       />
-    </div>
-
-    {/* ✨ 独立标题区 */}
-    <div class="px-8 md:px-10 pt-8 pb-6">
-      <div class="flex flex-wrap items-center gap-3 mb-4">
-        <span
-          class="px-3 py-1 text-[11px] font-bold uppercase tracking-widest bg-[var(--primary)] text-white rounded-full shadow-sm"
-        >
-          {project.role}
-        </span>
-        <span
-          class="text-sm font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1.5"
-        >
-          <Icon
-            name="material-symbols:calendar-month-rounded"
-            class="text-base"
-          />
-          {project.year}
-        </span>
-      </div>
-      <h1
-        class="text-2xl md:text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-snug"
+      {/* 底部渐变遮罩，过渡到背景色 */}
+      <div
+        class="absolute inset-x-0 bottom-0 h-1/2 z-10 bg-gradient-to-t from-white dark:from-[#1a1b1e] to-transparent"
       >
-        {project.title}
-      </h1>
+      </div>
     </div>
 
-    <div class="px-8 md:px-10 pb-10 space-y-12">
-      {/* 动态统计指标 */}
-      {
-        project.details?.stats && (
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
-            {project.details.stats.map((stat: any) => (
-              <div class="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 transition-colors hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md">
-                <div class="text-2xl font-black text-[var(--primary)]">
-                  {stat.label === "服务器成本" ? "99.9%" : stat.value}
-                </div>
-                <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-1">
-                  {stat.label === "服务器成本" ? "系统可用性" : stat.label}
-                </div>
-              </div>
-            ))}
+    {/* ✨ 核心内容区 (单栏居中，限制最大宽度提升阅读体验) */}
+    <div class="max-w-4xl mx-auto px-6 md:px-10 relative z-20 -mt-16 md:-mt-20">
+      {/* 1. 顶部摘要卡片 (标题 + 角色 + 核心指标) */}
+      <div
+        class="bg-white dark:bg-[#1f2024] rounded-3xl p-6 md:p-10 shadow-xl shadow-slate-200/40 dark:shadow-none border border-slate-100 dark:border-white/5 mb-12"
+      >
+        {/* 标签与标题 */}
+        <div
+          class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8"
+        >
+          {/* 左侧：项目标题 */}
+          <h1
+            class="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-snug flex-1"
+          >
+            {project.title}
+          </h1>
+
+          {/* 右侧：角色与时间标签 */}
+          <div
+            class="flex flex-wrap items-center md:justify-end gap-3 shrink-0"
+          >
+            <span
+              class="px-3.5 py-1.5 text-[12px] font-bold bg-[#3b82f6] text-white rounded-full shadow-sm"
+            >
+              {project.role}
+            </span>
+            <span
+              class="text-[13px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1.5 bg-slate-100 dark:bg-white/10 px-3.5 py-1.5 rounded-full"
+            >
+              <Icon
+                name="material-symbols:calendar-month-rounded"
+                class="text-base"
+              />
+              {project.year}
+            </span>
           </div>
-        )
-      }
+        </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div class="lg:col-span-8 space-y-10">
-          <section>
-            <h3
-              class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2"
-            >
-              <div class="w-1 h-5 bg-[var(--primary)] rounded-full"></div> 项目背景
-            </h3>
-            <p
-              class="text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-white/5 p-6 rounded-2xl"
-            >
-              {project.details?.background}
-            </p>
-          </section>
-
-          <section>
-            <h3
-              class="text-lg font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2"
-            >
-              <div class="w-1 h-5 bg-[var(--primary)] rounded-full"></div> 核心职责
-            </h3>
-            <div class="space-y-4">
-              {
-                project.details?.responsibility?.map(
-                  (item: string, idx: number) => (
-                    <div class="flex gap-4 p-5 rounded-xl bg-slate-50/50 dark:bg-white/[0.02] border border-slate-100 dark:border-white/5">
-                      <span class="text-sm font-black text-[var(--primary)] opacity-40">
-                        0{idx + 1}
-                      </span>
-                      <p class="text-[14px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                        {item}
-                      </p>
-                    </div>
-                  ),
-                )
-              }
+        {/* 核心统计指标 (4宫格优化为横向通栏) */}
+        {
+          project.details?.stats && project.details.stats.length > 0 && (
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-slate-100 dark:border-white/10">
+              {project.details.stats.map((stat: any) => (
+                <div class="flex flex-col">
+                  <div class="text-2xl md:text-3xl font-black text-[#3b82f6] mb-1">
+                    {stat.value}
+                  </div>
+                  <div class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
-          </section>
-        </div>
+          )
+        }
+      </div>
 
-        <div class="lg:col-span-4 space-y-8">
-    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                <h4 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase mb-4 tracking-widest">关键技术栈</h4>
-                <div class="flex flex-col gap-3"> {/* 注意这里我换成了 flex-col 和 gap-3，更符合你截图里的上下排列布局 */}
-                  {project.details?.tech?.map((t: string) => (
-                    <div class="text-[13px] font-bold px-4 py-3 rounded-xl bg-white dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 cursor-default shadow-sm transition-all duration-300 hover:scale-[1.03] hover:-translate-y-0.5 hover:shadow-md hover:border-[var(--primary)]/30 hover:text-[var(--primary)] origin-left">
-                        {t}
-                    </div>
-                  ))}
-                </div>
+      {/* 2. 叙事主线 (背景 -> 架构 -> 职责 -> 成果) */}
+      <div class="space-y-12 md:space-y-16">
+        {/* 项目背景 */}
+        {
+          project.details?.background && (
+            <section>
+              <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-5 flex items-center gap-2">
+                <Icon
+                  name="material-symbols:format-quote-rounded"
+                  class="text-[#3b82f6] text-3xl opacity-50"
+                />
+                项目背景
+              </h3>
+              <p class="text-[15px] md:text-base leading-loose text-slate-600 dark:text-slate-300">
+                {project.details.background}
+              </p>
+            </section>
+          )
+        }
+
+        {/* 核心模块架构 */}
+        {
+          project.details?.modules && project.details.modules.length > 0 && (
+            <section>
+              <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                <Icon
+                  name="material-symbols:account-tree-rounded"
+                  class="text-[#3b82f6] text-2xl"
+                />
+                核心模块架构
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {project.details.modules.map((module: string) => (
+                  <div class="flex items-start gap-3 p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 hover:border-[#3b82f6]/30 transition-colors">
+                    <Icon
+                      name="material-symbols:check-circle-rounded"
+                      class="text-[#3b82f6] text-xl shrink-0 mt-0.5"
+                    />
+                    <span class="text-[14px] md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {module}
+                    </span>
+                  </div>
+                ))}
               </div>
+            </section>
+          )
+        }
 
-          {
-            project.details?.metrics && (
-              <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                <h4 class="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase mb-5 tracking-widest">
-                  量化提升
-                </h4>
-                <div class="space-y-6">
-                  {project.details.metrics.map((metric: any) => (
-                    <div>
-                      <div class="flex justify-between text-[11px] font-bold mb-2">
-                        <span class="text-slate-500 dark:text-slate-400">
-                          {metric.name}
+        {/* 核心职责 */}
+        {
+          project.details?.responsibility &&
+            project.details.responsibility.length > 0 && (
+              <section>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                  <Icon
+                    name="material-symbols:person-play-rounded"
+                    class="text-[#3b82f6] text-2xl"
+                  />
+                  核心职责
+                </h3>
+                <div class="space-y-4">
+                  {project.details.responsibility.map(
+                    (item: string, idx: number) => (
+                      <div class="flex items-start gap-4 p-5 rounded-2xl bg-white dark:bg-transparent border border-slate-200 dark:border-white/10 relative overflow-hidden group">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-slate-200 dark:bg-white/10 group-hover:bg-[#3b82f6] transition-colors" />
+                        <span class="text-base font-black text-slate-300 dark:text-slate-600 shrink-0 mt-0.5">
+                          0{idx + 1}
                         </span>
-                        <span class="text-[var(--primary)]">{metric.val}</span>
+                        <p class="text-[14px] md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                          {item}
+                        </p>
                       </div>
-                      <div class="h-1.5 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
-                        <div
-                          class="h-full bg-[var(--primary)] rounded-full"
-                          style={`width: ${metric.width}`}
-                        />
-                      </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
-              </div>
+              </section>
             )
-          }
-        </div>
+        }
+
+        {/* 业务成果与价值 */}
+        {
+          project.details?.results && project.details.results.length > 0 && (
+            <section>
+              <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                <Icon
+                  name="material-symbols:workspace-premium-rounded"
+                  class="text-amber-500 text-2xl"
+                />
+                业务成果与价值
+              </h3>
+              <div class="p-6 md:p-8 rounded-3xl bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30">
+                <ul class="space-y-5">
+                  {project.details.results.map((result: string) => (
+                    <li class="flex items-start gap-3">
+                      <Icon
+                        name="material-symbols:stars-rounded"
+                        class="text-amber-500 text-2xl shrink-0"
+                      />
+                      <span class="text-[15px] md:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                        {result}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )
+        }
       </div>
     </div>
   </div>

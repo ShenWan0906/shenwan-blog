@@ -6,35 +6,27 @@ import { Icon } from "astro-icon/components";
 import defaultCover from "../constants/images/cover.jpeg";
 
 const title = "项目作品集";
-const description = "西瓜主管的项目经验与技术成果展示";
+const description = "ShenWan的项目经验与技术成果展示"; // 稍微调整了下描述
 ---
 
 <MainGridLayout title={title} description={description}>
   {/* 1. 头部介绍 */}
-  <div
-    class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-6"
-  >
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-6">
     <div class="card-base z-10 px-6 md:px-9 pt-8 pb-8 relative w-full">
       <Icon
         name="material-symbols:rocket-launch-rounded"
         class="absolute right-6 top-6 text-9xl -rotate-12 pointer-events-none text-[var(--primary)] opacity-10"
       />
-      <h1
-        class="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-3 text-[var(--primary)]"
-      >
+      <h1 class="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-3 text-[var(--primary)]">
         <Icon name="material-symbols:track-changes-rounded" /> 项目工坊
       </h1>
-      <p
-        class="text-sm md:text-base leading-relaxed max-w-2xl text-slate-600 dark:text-gray-300"
-      >
-        聚合技术深耕与管理沉淀。点击卡片下钻查看 <span
-          class="text-[var(--primary)] font-bold">详细架构</span
-        > 与 <span class="text-[var(--primary)] font-bold">复盘数据</span>。
+      <p class="text-sm md:text-base leading-relaxed max-w-2xl text-slate-600 dark:text-gray-300">
+        聚合技术深耕与管理沉淀。点击卡片下钻查看 <span class="text-[var(--primary)] font-bold">详细架构</span> 与 <span class="text-[var(--primary)] font-bold">复盘数据</span>。
       </p>
     </div>
   </div>
 
-  {/* 2. 项目卡片网格 (核心变化：用 <a> 标签替代 <button>) */}
+  {/* 2. 项目卡片网格 */}
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-8">
     {
       projects.map((project, index) => (
@@ -43,6 +35,8 @@ const description = "西瓜主管的项目经验与技术成果展示";
           class="group relative flex flex-col h-full rounded-2xl transition-all duration-300 hover:-translate-y-1.5 text-left w-full"
         >
           <div class="card-base h-full flex flex-col overflow-hidden relative z-10 rounded-2xl transform-gpu transition-all duration-300 group-hover:shadow-xl group-hover:border-[var(--primary)]/30">
+            
+            {/* 封面图 & 年份角标 */}
             <div class="relative w-full aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800">
               <img
                 src={project.image}
@@ -50,18 +44,41 @@ const description = "西瓜主管的项目经验与技术成果展示";
                 onerror={`this.onerror=null; this.src='${defaultCover.src}';`}
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
+              {/* 年份标签 */}
+              <div class="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-white/90 text-xs font-bold px-2.5 py-1 rounded-lg border border-white/10">
+                {project.year}
+              </div>
             </div>
 
-            <div class="p-5 flex flex-col flex-1 relative">
+           <div class="p-5 flex flex-col flex-1 relative">
+              {/* 👇 只保留原有的蓝色角色标签，彻底删除了违和的 stats 标签 */}
               <div class="mb-3">
                 <span class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--primary)]/15">
                   {project.role}
                 </span>
               </div>
-              <h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-gray-100 group-hover:text-[var(--primary)]">
+              
+              <h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-gray-100 group-hover:text-[var(--primary)] transition-colors">
                 {project.title}
               </h3>
-              <p class="text-[14px] leading-relaxed text-slate-500 dark:text-gray-400 line-clamp-4">{project.description}</p>
+              
+              <p class="text-[14px] leading-relaxed text-slate-500 dark:text-gray-400 line-clamp-3 mb-4">
+                {project.description}
+              </p>
+
+              {/* 底部技术标签 (Tags) */}
+              <div class="mt-auto flex flex-wrap gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+                {project.tags.slice(0, 3).map((tag) => (
+                  <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2 py-1 rounded-md">
+                    #{tag}
+                  </span>
+                ))}
+                {project.tags.length > 3 && (
+                  <span class="text-xs font-medium text-slate-400 dark:text-slate-500 px-1 py-1">
+                    +{project.tags.length - 3}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </a>
