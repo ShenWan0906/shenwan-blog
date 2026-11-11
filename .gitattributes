@@ -1,0 +1,2 @@
+/sync-workspace.sh text eol=lf
+/scripts/test-workspace-sync.sh text eol=lf

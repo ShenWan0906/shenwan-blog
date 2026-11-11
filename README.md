@@ -4,6 +4,40 @@
 
 **[在线预览 Live Demo](https://shenwan.life/)** | **[报告 Bug](https://github.com/ShenWan0906/shenwan-blog/issues)**
 
+## 工作区一键获取与更新
+
+仓库根目录的 [`sync-workspace.sh`](sync-workspace.sh) 统一管理六个独立仓库：`shenwan-blog`、`blog-admin`、`Homepage`、`FoodDiary`、`Merger-Plus`、`MyBlog`。Windows 使用 Git Bash，macOS/Linux 使用 Bash。脚本按**执行命令时的当前目录**决定位置，可单独下载后使用。
+
+在任意父目录运行，会创建 `ShenWan_Studio` 并克隆缺少的仓库。例如在 Git Bash 中：
+
+```bash
+cd /d/git_project
+bash /d/git_project/ShenWan_Studio/shenwan-blog/sync-workspace.sh
+```
+
+在 `ShenWan_Studio` 内运行，会更新已有仓库并补齐缺少的仓库；从工作区内的项目子目录运行也会识别所属工作区：
+
+```bash
+cd /d/git_project/ShenWan_Studio
+bash ./shenwan-blog/sync-workspace.sh
+
+# 仅查看计划，不创建目录、不连接网络
+bash ./shenwan-blog/sync-workspace.sh --dry-run
+```
+
+PowerShell 也可调用 Git Bash：
+
+```powershell
+cd D:\git_project\ShenWan_Studio
+& 'C:\Program Files\Git\bin\bash.exe' ./shenwan-blog/sync-workspace.sh
+```
+
+已有仓库沿当前分支的 `origin` 上游执行 `git pull --ff-only --no-rebase`，不自动切换分支。存在未提交或未跟踪文件、远程地址不匹配、没有上游或处于 detached HEAD 的仓库会跳过；分叉和网络失败会记录后继续处理其他项目，末尾汇总结果。全部成功时退出码为 0，有跳过或失败时为 1，参数错误为 2。脚本不自动提交、stash、重置、删除或推送，也不安装依赖、不复制 `.env` 和数据库；`D:\git_project\shiguang` 不在本工作区范围。
+
+私有仓库需要 Git 已登录有权限的 GitHub 账号。若 Git 提示 `unsafe repository`，确认目录可信后按 Git 给出的具体路径设置 `safe.directory`；脚本不会修改全局安全配置。新电脑上的后台还需按 `blog-admin/README.md` 安装依赖并配置环境变量。
+
+维护脚本时可运行 `bash scripts/test-workspace-sync.sh`，使用临时本地 Git 仓库验证克隆、快进更新、目录识别、本地改动保护和分叉等情况，不访问 GitHub、不改动真实项目。
+
 * * *
 
 ## ✨ 核心亮点 (Features)
